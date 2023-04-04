@@ -23,6 +23,9 @@ public class PostInfo {
     private String updated;
     private String keywords;
     private String description;
+
+    private String htmlContent;
+
     public String getTitle() {
         return title;
     }
@@ -125,5 +128,13 @@ public class PostInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getHtmlContent() {
+        return htmlContent;
+    }
+
+    public void setHtmlContent(String htmlContent) {
+        this.htmlContent = htmlContent;
     }
 }

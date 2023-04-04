@@ -28,6 +28,15 @@ public class PostTemplateUtil {
         postInfo.setMarkdownContent(md);
         postInfo.setFilePath(path);
         postInfo.setFilePathString(path.toString());
+        // URL 归一化
+        String link = postInfo.getPermalink().trim();
+        if (!link.startsWith("/")) {
+            link = "/" + link;
+        }
+        if (!link.endsWith("/")) {
+            link = link + "/";
+        }
+        postInfo.setPermalink(link);
         return postInfo;
     }
 
