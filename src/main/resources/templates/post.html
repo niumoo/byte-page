@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="statc/prism.css" />
+</head>
+<style>
+    body{
+        max-width: 1300px;
+        margin: 0px auto;
+    }
+    img {
+        max-width: 100%;
+    }
+</style>
+<body>
+
+<div>
+    <div class="w3-bar  w3-green" >
+        <a href="#" class="w3-bar-item w3-button">首页</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small">Java 基础</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small">Java 集合</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small">Java I/O</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small">Java 多线程</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small">Java 虚拟机</a>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+    </div>
+    <div id="demo" class="w3-bar-block w3-red w3-hide w3-hide-large w3-hide-medium">
+        <a href="#" class="w3-bar-item w3-button">Link 1</a>
+        <a href="#" class="w3-bar-item w3-button">Link 2</a>
+        <a href="#" class="w3-bar-item w3-button">Link 3</a>
+    </div>
+</div>
+<div class="w3-sidebar-div">
+    <div class="w3-sidebar w3-bar-block w3-border-right" style="width:200px;max-width: 900px">
+        <a href="#" class="w3-bar-item w3-button">Link 1</a>
+        <a href="#" class="w3-bar-item w3-button">Link 2</a>
+        <a href="#" class="w3-bar-item w3-button">Link 3</a>
+    </div>
+</div>
+
+<div class="w3-container" style="margin-left:200px;max-width: 900px;margin: 10px auto">
+    [(${post_content})]
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("demo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+<script src="statc/prism.js"></script>
+</body>
+
+</html>
