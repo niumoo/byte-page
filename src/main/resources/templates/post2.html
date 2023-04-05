@@ -14,7 +14,7 @@
 <body>
 <!-- START Top -->
 <div class="w3-top">
-    <div class="w3-card w3-bar w3-theme w3-large" style="z-index:4;">
+    <div class="w3-bar w3-theme w3-large" style="z-index:4;">
         <a class="w3-bar-item w3-button w3-left w3-hide-large w3-hover-white w3-large w3-theme w3-padding-16" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-white w3-padding-16" href="/">未读代码</a>
         <div th:each="child:${rootNode.getChildren()}">
@@ -22,6 +22,16 @@
         </div>
     </div>
 </div>
+<!--<div class="w3-top">-->
+<!--    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">-->
+<!--        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>-->
+<!--        <a class="w3-bar-item w3-button w3-theme-l1" href="/">未读代码</a>-->
+<!--        <div th:each="child:${rootNode.getChildren()}">-->
+<!--            <a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-hide-small w3-hover-white" th:text="${child.getName()}">Learn</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
 <!-- END Top -->
 <!-- START Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-collapse w3-border-right" style="z-index:3;width:300px" id="mySidebar">
@@ -43,7 +53,7 @@
 <div class="w3-main" style="margin-left:300px;margin-top:60px;">
     <!-- START MAIN -->
     <div class="w3-container w3-padding-large w3-border-right byte-post-content ">
-        <h1 class="w3-xxlarge" th:text="${postInfo.getTitle()}">标题</h1>
+        <h1 th:text="${postInfo.getTitle()}">标题</h1>
         [(${postInfo.getHtmlContent()})]
         <br/> <br/>
     </div>
