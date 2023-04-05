@@ -23,16 +23,18 @@ import org.thymeleaf.context.Context;
  * @date 2023/04/04
  */
 public class DocPage {
-    static String ROOT_PATH = "/Users/darcy/Downloads/doc";
+    //static String ROOT_PATH = "/Users/darcy/Downloads/doc";
+    static String ROOT_PATH = "/Users/darcy/develop/voding/docs2";
 
     static Map<String, TreeNode<PostInfo>> postInfoMap = new HashMap<>();
 
-    public static void main(String[] args) throws IOException {
-        TreeNode<PostInfo> rootNode = new TreeNode<>("root", null, null);
-        toFileTree(rootNode, Paths.get(ROOT_PATH));
+    static TreeNode<PostInfo> rootNode;
 
-        String currentFilePath = "/Users/darcy/Downloads/doc/01.Java 基础/10.Java 基础/05.java-array.md";
-        List<Path> pathList = FileUtil.listFiles("/Users/darcy/Downloads/doc/", ".md");
+    public static void main(String[] args) throws IOException {
+        rootNode = new TreeNode<>("root", null, null);
+        toFileTree(rootNode, Paths.get(ROOT_PATH));
+        rootNode = rootNode.getChildren().get(0);
+        List<Path> pathList = FileUtil.listFiles("/Users/darcy/develop/voding/docs2", ".md");
         for (Path path : pathList) {
             generatorPostHtml(path.toString());
         }
@@ -47,6 +49,7 @@ public class DocPage {
         // 定义数据模型
         Context context = new Context();
         context.setVariable("postInfo", treeNode.getData());
+        context.setVariable("rootNode", rootNode);
         context.setVariable("menuNode", menuNode);
         // 输出到流（文件）
         String saveFilePath = String.format("dist%s", treeNode.getData().getPermalink());

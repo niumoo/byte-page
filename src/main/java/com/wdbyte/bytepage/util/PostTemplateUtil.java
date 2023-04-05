@@ -3,8 +3,11 @@ package com.wdbyte.bytepage.util;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import com.wdbyte.bytepage.module.PostInfo;
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  * @author niulang
@@ -37,6 +40,18 @@ public class PostTemplateUtil {
             link = link + "/";
         }
         postInfo.setPermalink(link);
+        List<LinkedHashMap<String, String>> metaList = postInfo.getMeta();
+        if (CollectionUtils.isNotEmpty(metaList)) {
+            for (LinkedHashMap<String, String> metaMap : metaList) {
+                if (metaMap.get("name").equals("description")) {
+                    postInfo.setDescription(metaMap.get("content"));
+                }
+                if (metaMap.get("name").equals("keywords")) {
+                    postInfo.setKeywords(metaMap.get("content"));
+                }
+            }
+        }
+
         return postInfo;
     }
 
