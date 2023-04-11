@@ -8,10 +8,7 @@
     <meta name="description" content="网站提供 Java 相关教程，Java 进阶知识，以及 Java 相关的其他知识，如数据结构，算法，计算机组成原理，操作系统等。让编程简单有趣">
     <meta name="keywords" content="Java, Java 开发, Java 教程, Java 新特性, Spring Boot">
     <link rel="icon" href="/static/fav.png">
-    <link rel="stylesheet" href="/static/byte-style.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/w3-css/4.1.0/w3.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
@@ -39,18 +36,11 @@
     </div>
 </div>
 
-<!-- Header -->
-<header class="w3-container w3-green w3-center" style="padding:128px 16px">
-    <h1 class="w3-margin w3-jumbo">未读代码</h1>
-    <p class="w3-xlarge">结构化 Java 系列文档，再来点数据结构与算法！</p>
-    <button id="xuancai-button" class="w3-padding-large w3-margin-top"><a href="/java-notes/" style="text-decoration: none;">开始浏览</a></button>
-</header>
-
 <!-- First Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
     <div class="w3-content">
         <div class="w3-twothird">
-            <h1>最新文章</h1>
+            <h1>文章归档</h1>
             <ul class="w3-ul">
                 <li th:each="postInfo:${postInfoList}">
                     <a th:href="${postInfo.getPermalink()}" style="font-size: 16px;text-decoration: none" th:text="${postInfo.getTitle()}">文章标题</a>

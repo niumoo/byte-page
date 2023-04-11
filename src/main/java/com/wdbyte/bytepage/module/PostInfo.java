@@ -16,15 +16,13 @@ public class PostInfo {
     private List<String> tags;
     private List<LinkedHashMap<String, String>> meta;
     private LinkedHashMap<String, String> feed;
-    private String markdownContent;
-
     private Path filePath;
     private String filePathString;
     private String updated;
     private String keywords;
     private String description;
-
     private String htmlContent;
+    private String markdownContent;
 
     public String getTitle() {
         return title;
@@ -136,5 +134,25 @@ public class PostInfo {
 
     public void setHtmlContent(String htmlContent) {
         this.htmlContent = htmlContent;
+    }
+
+    @Override
+    public String toString() {
+        return "PostInfo{" +
+            "title='" + title + '\'' +
+            ", date='" + date + '\'' +
+            ", permalink='" + permalink + '\'' +
+            ", categories=" + categories +
+            ", tags=" + tags +
+            ", meta=" + meta +
+            ", feed=" + feed +
+            ", filePath=" + filePath +
+            ", filePathString='" + filePathString + '\'' +
+            ", updated='" + updated + '\'' +
+            ", keywords='" + keywords + '\'' +
+            ", description='" + description + '\'' +
+            ", htmlContent='" + htmlContent + '\'' +
+            ", markdownContent='" + markdownContent + '\'' +
+            '}';
     }
 }

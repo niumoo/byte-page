@@ -30,11 +30,11 @@ public class BytePage {
         context.setVariable("twoList", Arrays.asList("JDK、JRE、JVM 的区别","Java 数据类型","Java 流程控制","Java String 字符串","Java Array 数组","Java 多维数组","Java StringBuilder","Java 继承"));
 
         // 渲染模板 (输出到变量（控制台）)
-        String processRes = ThymeleafHtmlUtil.processHtml("post2", context);
+        String processRes = ThymeleafHtmlUtil.processHtml("post", context);
         System.out.println(processRes);
 
         // 输出到流（文件）
-        ThymeleafHtmlUtil.processHtmlWriteFile("dist/post2.html", "post2", context);
+        ThymeleafHtmlUtil.processHtmlWriteFile("dist/post.html", "post", context);
     }
 
 }

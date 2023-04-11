@@ -51,7 +51,9 @@ public class PostTemplateUtil {
                 }
             }
         }
-
+        if (postInfo.getUpdated() == null) {
+            postInfo.setUpdated(postInfo.getDate());
+        }
         return postInfo;
     }
 

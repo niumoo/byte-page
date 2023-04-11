@@ -10,6 +10,7 @@ import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TableBlock;
 import org.commonmark.ext.gfm.tables.TablesExtension;
 import org.commonmark.ext.heading.anchor.HeadingAnchorExtension;
+import org.commonmark.node.Heading;
 import org.commonmark.node.Link;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -46,10 +47,8 @@ public class MarkdownUtil {
      */
     public static String markdownToHtmlExtensions(String markdown) {
         //h标题生成id
-        //Set<Extension> headingAnchorExtensions = Collections.singleton(HeadingAnchorExtension.create());
         //转换table的HTML
         List<Extension> tableExtension = Arrays.asList(TablesExtension.create(),HeadingAnchorExtension.create());
-        //List<Extension> tableExtension = Collections.singletonList(TablesExtension.create());
         Parser parser = Parser.builder()
             .extensions(tableExtension)
             .build();
@@ -78,6 +77,8 @@ public class MarkdownUtil {
             }
             if (node instanceof TableBlock) {
                 attributes.put("class", "ui celled table");
+            }
+            if (node instanceof Heading){
             }
         }
     }

@@ -17,6 +17,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 public class ThymeleafHtmlUtil {
 
     private static TemplateEngine templateEngine;
+    private static TemplateEngine xmlTemplateEngine;
 
     static {
         // 定义、设置模板解析器
@@ -26,9 +27,22 @@ public class ThymeleafHtmlUtil {
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setPrefix("/templates/");
         templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8");
         // 定义模板引擎
         templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
+
+        // 定义、设置模板解析器
+        ClassLoaderTemplateResolver xmlTemplateResolver = new ClassLoaderTemplateResolver();
+        // 设置模板类型 # https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#what-is-thymeleaf
+        // HTML、XML、TEXT、JAVASCRIPT、CSS、RAW
+        xmlTemplateResolver.setTemplateMode(TemplateMode.XML);
+        xmlTemplateResolver.setPrefix("/templates/");
+        xmlTemplateResolver.setSuffix(".xml");
+        xmlTemplateResolver.setCharacterEncoding("UTF-8");
+        // 定义模板引擎
+        xmlTemplateEngine = new TemplateEngine();
+        xmlTemplateEngine.setTemplateResolver(xmlTemplateResolver);
     }
 
     public static String processHtml(String templateName, Context context) {
@@ -39,6 +53,13 @@ public class ThymeleafHtmlUtil {
         File file = new File(path);
         Writer write = new FileWriter(file);
         templateEngine.process(templateName, context, write);
+        return file.getAbsolutePath();
+    }
+
+    public static String processXmlWriteFile(String path, String templateName, Context context) throws IOException {
+        File file = new File(path);
+        Writer write = new FileWriter(file);
+        xmlTemplateEngine.process(templateName, context, write);
         return file.getAbsolutePath();
     }
 
