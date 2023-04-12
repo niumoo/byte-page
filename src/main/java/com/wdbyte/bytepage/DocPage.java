@@ -41,7 +41,7 @@ public class DocPage {
         rootNode = rootNode.getChildren().get(0);
         List<Path> pathList = FileUtil.listFiles("/Users/darcy/develop/voding/docs2", ".md");
         for (Path path : pathList) {
-            generatorPostHtml(path.toString(), generatorSavePath(path.toString()), "post");
+            generatorPostHtml(path.toString(), generatorSavePath(path.toString()));
         }
         generatorIndexHtml();
         generatorArchivesHtml();
@@ -49,7 +49,7 @@ public class DocPage {
         copyStaticFile();
     }
 
-    private static void generatorPostHtml(String currentFilePath, String saveFilePath, String template)
+    private static void generatorPostHtml(String currentFilePath, String saveFilePath)
         throws IOException {
         // 给定一个文件路径，向上取两级分类
         TreeNode<PostInfo> treeNode = postInfoMap.get(currentFilePath);
@@ -62,7 +62,7 @@ public class DocPage {
         context.setVariable("rootNode", rootNode);
         context.setVariable("menuNode", menuNode);
         // 输出到流（文件）
-        ThymeleafHtmlUtil.processHtmlWriteFile(saveFilePath, template, context);
+        ThymeleafHtmlUtil.processHtmlWriteFile(saveFilePath, "post", context);
     }
 
     private static void generatorIndexHtml() throws IOException {
