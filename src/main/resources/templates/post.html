@@ -17,11 +17,9 @@
 <!-- START Top -->
 <div class="w3-top">
     <div class="w3-bar w3-theme w3-large" style="z-index:4;">
-        <a class="w3-bar-item w3-button w3-left w3-hide-large w3-hover-white w3-large w3-theme w3-padding-16" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
-        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-white w3-padding-16" href="/">未读代码</a>
-        <div th:each="child:${rootNode.getChildren()}">
-            <a class="w3-bar-item w3-button w3-hide-medium w3-hover-white w3-padding-16" th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" th:text="${child.getName()}">Learn</a>
-        </div>
+        <a class="w3-bar-item w3-button w3-left w3-hide-large w3-hover-white w3-large w3-theme" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-white" style="padding-top: 12px;padding-bottom: 12px;" href="/">未读代码</a>
+        <div th:each="child:${rootNode.getChildren()}"><a class="w3-bar-item w3-button w3-hide-medium w3-hover-white"style="padding-top: 12px;padding-bottom: 12px;" th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" th:text="${child.getName()}">Learn</a></div>
     </div>
 </div>
 <!-- END Top -->
@@ -34,9 +32,7 @@
     <div id="menuTut" class="myMenu">
         <div th:each="menu:${menuNode.getChildren()}" class="w3-container">
             <h3 th:text="${menu.getName()}">Tutorials</h3>
-            <div th:each="subMenu:${menu.getChildren()}">
-                <a class="w3-bar-item w3-button byte-sidebar-link w3-hover-green" th:href="${subMenu.getData().getPermalink()}" th:text="${subMenu.getData().getTitle()}">Learn</a>
-            </div>
+            <div th:each="subMenu:${menu.getChildren()}"><a class="w3-bar-item w3-button byte-sidebar-link w3-hover-green" th:href="${subMenu.getData().getPermalink()}" th:text="${subMenu.getData().getTitle()}">Learn</a></div>
         </div>
     </div>
 </div>
@@ -49,25 +45,21 @@
         [(${postInfo.getHtmlContent()})]
         <br/> <br/>
     </div>
-    <div class="w3-container w3-padding-large w3-border-right byte-post-content ">
-        <div id="vssue"></div>
-    </div>
+    <div class="w3-container w3-padding-large w3-border-right byte-post-content "><div id="vssue"></div></div>
     <!-- END MAIN -->
     <div th:include="footer::common_footer"></div>
 </div>
-
+<button onclick="topFunction()" id="myBtn" title="Go to top">顶部</button>
 <script>
     // Script to open and close the sidebar
     function w3_open() {
         document.getElementById("mySidebar").style.display = "block";
         document.getElementById("myOverlay").style.display = "block";
     }
-
     function w3_close() {
         document.getElementById("mySidebar").style.display = "none";
         document.getElementById("myOverlay").style.display = "none";
     }
-
     function w3_show_nav(name) {
         document.getElementById("menuTut").style.display = "none";
         document.getElementById(name).style.display = "block";
@@ -77,10 +69,12 @@
 <script src="/static/prism.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
 <script>
+    // 文字格式化
     pangu.spacingElementByClassName('byte-post-content');
     document.addEventListener('DOMContentLoaded', () => {
         pangu.autoSpacingPage();
     });
+    // 百度统计
     var _hmt = _hmt || [];
     (function() {
         var hm = document.createElement("script");
@@ -88,6 +82,23 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
+    // 回到顶部
+    // Get the button
+    let mybutton = document.getElementById("myBtn");
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 </script>
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.runtime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.github-v4.min.js"></script>

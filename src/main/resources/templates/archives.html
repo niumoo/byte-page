@@ -23,16 +23,12 @@
     <div class="w3-bar w3-green w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-green" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
         <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-white">未读代码</a>
-        <div th:each="child:${rootNode.getChildren()}">
-            <a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" th:text="${child.getName()}">Link 1</a>
-        </div>
+        <div th:each="child:${rootNode.getChildren()}"><a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" th:text="${child.getName()}">Link 1</a></div>
     </div>
 
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-        <div th:each="child:${rootNode.getChildren()}">
-            <a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-padding-large" th:text="${child.getName()}">Link 1</a>
-        </div>
+        <div th:each="child:${rootNode.getChildren()}"><a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-padding-large" th:text="${child.getName()}">Link 1</a></div>
     </div>
 </div>
 

@@ -1,0 +1,181 @@
+.w3-theme {
+    color: #fff !important;
+    /*background-color: #4CAF50 !important;*/
+    background-color: #63b175 !important;
+}
+
+#mySidebar {
+    background-color: #fafafa !important;
+}
+
+#mySidebar h3{
+    font-size: 20px !important;
+}
+
+.myMenu {
+    margin-bottom: 150px
+}
+
+.byte-sidebar-link {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    color: #313030;
+}
+
+.byte-post-content{
+    max-width: 1100px;
+    line-height: 1.8;
+    color: #262626;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+}
+.byte-post-content p strong, .byte-post-content li strong{
+    color: #348637;
+}
+.byte-post-content p a,.byte-post-content li a, .byte-post-content table tr td a, .byte-post-content table tr th a{
+    color: #0645ad;
+    text-decoration: none;
+}
+.byte-post-content li p {
+    line-height: 1.5;
+}
+
+.byte-post-content p img {
+    display: block;
+    margin: 0 auto;
+    max-width: 95%;
+    border-radius:7px;
+}
+.byte-post-content p code{
+    padding-left: 5px;
+    background-color: #8787872e;
+    padding: 0px 7px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+    border-radius: 5px;
+}
+.byte-post-content pre{
+    font-size: 14px;
+}
+
+.byte-post-content h1{
+    font-size: 32px;
+}
+.byte-post-content h2{
+    font-size: 24px;
+}
+.byte-post-content h3{
+    font-size: 20px;
+}
+.byte-post-content h4{
+    font-size: 18px;
+}
+.byte-post-content h2, .byte-post-content h3 {
+    margin-top: 15px;
+    margin-bottom: 0px !important;
+}
+.byte-post-content blockquote{
+    background-color: #f4f4f4;
+    padding: 1px 10px;
+    border-left: 4px solid #60ab71;
+    line-height: 1;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 10px;
+}
+
+/* Table Head */
+.byte-post-content table {
+    background-color: #f8f9fa;
+    color: #202122;
+    margin: 1em;
+    border: 1px solid #a2a9b1;
+    border-collapse: collapse;
+}
+.byte-post-content table tr th {
+    background-color: #eaecf0;
+    text-align: center;
+}
+.byte-post-content table tr td, .byte-post-content table tr th{
+    border: 1px solid #a2a9b1;
+    padding: 0.2em 0.4em;
+}
+
+
+/* this button is inspired from this -- https://www.newline.co/pricing */
+#xuancai-button {
+    --width: 150px;
+    --timing: 2s;
+    border: 0;
+    width: var(--width);
+    padding-block: 1em;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1em;
+    background: black;
+    transition: all 0.2s;
+    border-radius: 3px;
+}
+
+#xuancai-button:hover {
+    background-image: linear-gradient(
+            to right,
+            rgb(250, 82, 82),
+            rgb(250, 82, 82) 16.65%,
+            rgb(190, 75, 219) 16.65%,
+            rgb(190, 75, 219) 33.3%,
+            rgb(76, 110, 245) 33.3%,
+            rgb(76, 110, 245) 49.95%,
+            rgb(64, 192, 87) 49.95%,
+            rgb(64, 192, 87) 66.6%,
+            rgb(250, 176, 5) 66.6%,
+            rgb(250, 176, 5) 83.25%,
+            rgb(253, 126, 20) 83.25%,
+            rgb(253, 126, 20) 100%,
+            rgb(250, 82, 82) 100%
+    );
+    animation: var(--timing) linear dance6123 infinite;
+    transform: scale(1.1) translateY(-1px);
+    color: #fff;
+}
+
+@keyframes dance6123 {
+    to {
+        background-position: var(--width);
+    }
+}
+
+/* width */
+#mySidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Handle */
+#mySidebar::-webkit-scrollbar-thumb {
+    background: rgba(99, 177, 117, 0.53);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+#mySidebar::-webkit-scrollbar-thumb:hover {
+    background: #63b175;
+}
+/* 回到顶部*/
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #63b175;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+#myBtn:hover {
+    background-color: green;
+}

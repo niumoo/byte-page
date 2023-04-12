@@ -2,9 +2,11 @@ package com.wdbyte.bytepage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -44,6 +46,7 @@ public class DocPage {
         generatorIndexHtml();
         generatorArchivesHtml();
         generatorSitemapXml();
+        copyStaticFile();
     }
 
     private static void generatorPostHtml(String currentFilePath, String saveFilePath, String template)
@@ -77,7 +80,6 @@ public class DocPage {
         ThymeleafHtmlUtil.processHtmlWriteFile("dist/index.html", "index", context);
     }
 
-
     private static void generatorSitemapXml() throws IOException {
         // 定义数据模型
         Context context = new Context();
@@ -105,7 +107,7 @@ public class DocPage {
             .collect(Collectors.toList());
         context.setVariable("postInfoList", postInfoList);
         File file = new File("dist/archives/");
-        if (!file.exists()){
+        if (!file.exists()) {
             file.mkdirs();
         }
         // 输出到流（文件）
@@ -119,7 +121,7 @@ public class DocPage {
         if (!file.exists()) {
             file.mkdirs();
         }
-       return saveFilePath + "index.html";
+        return saveFilePath + "index.html";
     }
 
     public static void toFileTree(TreeNode<PostInfo> treeNode, Path path) throws IOException {
@@ -136,6 +138,25 @@ public class DocPage {
         List<Path> pathList = FileUtil.listDirAndMdFile(path);
         for (Path pathTemp : pathList) {
             toFileTree(subNode, pathTemp);
+        }
+    }
+
+    public static void copyStaticFile() throws IOException {
+        File file = new File("dist/static");
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        ClassLoader classLoader = DocPage.class.getClassLoader();
+        URL url = classLoader.getResource("static");
+        File sourceFile = new File(url.getFile());
+        for (File source : sourceFile.listFiles()) {
+            File targetFolder = new File("dist/static/");
+            if (!targetFolder.exists()) {
+                targetFolder.mkdirs();
+            }
+            File targetFile = new File(targetFolder, source.getName());
+            Files.copy(source.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println(String.format("copy static file,src:%s,target:%s", source, targetFile));
         }
     }
 }

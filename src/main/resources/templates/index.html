@@ -10,13 +10,10 @@
     <link rel="icon" href="/static/fav.png">
     <link rel="stylesheet" href="/static/byte-style.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/w3-css/4.1.0/w3.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-        .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
         .fa-anchor,.fa-coffee {font-size:200px}
+        .byte-post-content{margin: 0 auto}
     </style>
 </head>
 <body>
@@ -26,16 +23,12 @@
     <div class="w3-bar w3-green w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-green" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
         <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-white">未读代码</a>
-        <div th:each="child:${rootNode.getChildren()}">
-            <a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" th:text="${child.getName()}">Link 1</a>
-        </div>
+        <div th:each="child:${rootNode.getChildren()}"><a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" th:text="${child.getName()}">Link 1</a></div>
     </div>
 
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-        <div th:each="child:${rootNode.getChildren()}">
-            <a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-padding-large" th:text="${child.getName()}">Link 1</a>
-        </div>
+        <div th:each="child:${rootNode.getChildren()}"><a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-padding-large" th:text="${child.getName()}">Link 1</a></div>
     </div>
 </div>
 
@@ -52,9 +45,7 @@
         <div class="w3-twothird">
             <h1>最新文章</h1>
             <ul class="w3-ul">
-                <li th:each="postInfo:${postInfoList}">
-                    <a th:href="${postInfo.getPermalink()}" style="font-size: 16px;text-decoration: none" th:text="${postInfo.getTitle()}">文章标题</a>
-                </li>
+                <li th:each="postInfo:${postInfoList}"><a th:href="${postInfo.getPermalink()}" style="font-size: 16px;text-decoration: none" th:text="${postInfo.getTitle()}">文章标题</a></li>
             </ul>
         </div>
 
