@@ -12,6 +12,25 @@
     <link rel="stylesheet" href="/static/byte-style.css" />
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        <!-- baidu-->
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?95fc5fbbc05e1ddccdeb992adfe12ded";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        <!-- end baidu-->
+        <!-- Google Analytics -->
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-130656610-2', 'auto');
+        ga('send', 'pageview');
+        <!-- End Google Analytics -->
+    </script>
 </head>
 <body>
 <!-- START Top -->
@@ -74,14 +93,6 @@
     document.addEventListener('DOMContentLoaded', () => {
         pangu.autoSpacingPage();
     });
-    // 百度统计
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?95fc5fbbc05e1ddccdeb992adfe12ded";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
     // 回到顶部
     // Get the button
     let mybutton = document.getElementById("myBtn");
