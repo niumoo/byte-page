@@ -36,17 +36,22 @@ public class DocPage {
     static TreeNode<PostInfo> rootNode;
 
     public static void main(String[] args) throws IOException {
+        if (args == null || args.length == 0) {
+            System.out.println("请传入文件夹路径");
+            return;
+        }
+        ROOT_PATH = args[0];
         rootNode = new TreeNode<>("root", null, null);
         toFileTree(rootNode, Paths.get(ROOT_PATH));
         rootNode = rootNode.getChildren().get(0);
-        List<Path> pathList = FileUtil.listFiles("/Users/darcy/develop/voding/docs2", ".md");
+        List<Path> pathList = FileUtil.listFiles(ROOT_PATH, ".md");
         for (Path path : pathList) {
             generatorPostHtml(path.toString(), generatorSavePath(path.toString()));
         }
         generatorIndexHtml();
         generatorArchivesHtml();
         generatorSitemapXml();
-        copyStaticFile();
+        //copyStaticFile();
     }
 
     private static void generatorPostHtml(String currentFilePath, String saveFilePath)
