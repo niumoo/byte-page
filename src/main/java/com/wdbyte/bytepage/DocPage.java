@@ -29,7 +29,7 @@ import org.thymeleaf.context.Context;
  * @date 2023/04/04
  */
 public class DocPage {
-    static String ROOT_PATH = "/Users/darcy/develop/voding/docs2";
+    static String ROOT_PATH = null;
 
     static Map<String, TreeNode<PostInfo>> postInfoMap = new HashMap<>();
 
@@ -51,6 +51,7 @@ public class DocPage {
         generatorIndexHtml();
         generatorArchivesHtml();
         generatorSitemapXml();
+        generatorLimit20Url();
         //copyStaticFile();
     }
 
@@ -98,6 +99,16 @@ public class DocPage {
         context.setVariable("currentDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         // 输出到流（文件）
         ThymeleafHtmlUtil.processXmlWriteFile("dist/sitemap.xml", "sitemap", context);
+    }
+
+    private static void generatorLimit20Url() throws IOException {
+        // 抽取最近20条url
+        List<String> postUrlList = postInfoMap.values().stream()
+            .map(TreeNode::getData)
+            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
+            .map(postInfo -> "https://www.wdbyte.com" + postInfo.getPermalink())
+            .limit(20).collect(Collectors.toList());
+        Files.write(Paths.get("urls.txt"), postUrlList);
     }
 
     private static void generatorArchivesHtml() throws IOException {
