@@ -36,6 +36,7 @@
 .byte-post-content p a,.byte-post-content li a, .byte-post-content table tr td a, .byte-post-content table tr th a{
     color: #0645ad;
     text-decoration: none;
+    word-wrap: break-word;
 }
 .byte-post-content li p {
     line-height: 1.5;
