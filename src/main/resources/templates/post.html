@@ -36,19 +36,19 @@
 <!-- START Top -->
 <div class="w3-top">
     <div class="w3-bar w3-theme w3-large" style="z-index:4;">
-        <a class="w3-bar-item w3-button w3-left w3-hide-large w3-hover-white w3-large w3-theme" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
-        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-white" style="padding-top: 12px;padding-bottom: 12px;" href="/">未读代码</a>
-        <div th:each="child:${rootNode.getChildren()}"><a class="w3-bar-item w3-button w3-hide-medium w3-hover-white"style="padding-top: 12px;padding-bottom: 12px;" th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" th:text="${child.getName()}">Learn</a></div>
+        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
+        <a class="w3-bar-item w3-button w3-hover-white" style="padding-top: 12px;padding-bottom: 12px;" href="/">未读代码</a>
+        <div th:each="child:${rootNode.getChildren()}"><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-white"style="padding-top: 12px;padding-bottom: 12px;" th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" th:text="${child.getName()}">Learn</a></div>
     </div>
 </div>
 <!-- END Top -->
 <!-- START Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-collapse w3-border-right" style="z-index:3;width:300px" id="mySidebar">
-    <div class="w3-bar w3-hide-large w3-large">
-        <a href="javascript:void(0)" onclick="w3_show_nav('menuTut')" class="w3-bar-item w3-button w3-theme w3-hover-white w3-padding-16" style="width:50%">Tutorials</a>
+<div class="w3-sidebar w3-collapse w3-border-right" style="z-index:3;width:300px" id="mySidebar">
+    <div class="w3-bar w3-hide-large w3-large w3-theme">
+        <a href="javascript:void(0)" onclick="w3_show_nav('menuTut')" class="w3-bar-item w3-button w3-hover-white w3-padding" >教程目录</a>
+        <a href="javascript:void(0)" onclick="w3_close()"             class="w3-bar-item w3-button w3-hover-white w3-padding w3-right" title="Close Menu">&times;</a>
     </div>
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-right w3-xlarge w3-hide-large" title="Close Menu">&times;</a>
-    <div id="menuTut" class="myMenu">
+    <div id="menuTut" class="w3-bar-block myMenu">
         <div th:each="menu:${menuNode.getChildren()}" class="w3-container">
             <h3 th:text="${menu.getName()}">Tutorials</h3>
             <div th:each="subMenu:${menu.getChildren()}"><a class="w3-bar-item w3-button byte-sidebar-link w3-hover-green" th:href="${subMenu.getData().getPermalink()}" th:text="${subMenu.getData().getTitle()}">Learn</a></div>

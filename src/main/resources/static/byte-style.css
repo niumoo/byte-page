@@ -56,6 +56,8 @@
 }
 .byte-post-content pre{
     font-size: 14px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .byte-post-content h1{
