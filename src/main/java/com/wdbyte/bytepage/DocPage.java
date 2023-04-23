@@ -46,7 +46,12 @@ public class DocPage {
         rootNode = rootNode.getChildren().get(0);
         List<Path> pathList = FileUtil.listFiles(ROOT_PATH, ".md");
         for (Path path : pathList) {
-            generatorPostHtml(path.toString(), generatorSavePath(path.toString()));
+            try {
+                generatorPostHtml(path.toString(), generatorSavePath(path.toString()));
+            } catch (Exception e) {
+                System.out.printf(String.format("文章生成失败,path:%s,msg:%s", path.toString(), e.getMessage()));
+                e.printStackTrace();
+            }
         }
         generatorIndexHtml();
         generatorArchivesHtml();
@@ -69,6 +74,7 @@ public class DocPage {
         context.setVariable("menuNode", menuNode);
         // 输出到流（文件）
         ThymeleafHtmlUtil.processHtmlWriteFile(saveFilePath, "post", context);
+        //System.out.println("生成文章详情：" + treeNode.getData().getTitle());
     }
 
     private static void generatorIndexHtml() throws IOException {
