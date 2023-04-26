@@ -82,13 +82,14 @@
     margin-bottom: 0px !important;
 }
 .byte-post-content blockquote{
-    background-color: #f4f4f4;
+    background-color: #4caf5021;
     padding: 1px 10px;
     border-left: 4px solid #60ab71;
     line-height: 1;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 10px;
+    color: #434343;
 }
 
 /* Table Head */
