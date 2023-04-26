@@ -56,8 +56,8 @@ public class DocPage {
         generatorIndexHtml();
         generatorArchivesHtml();
         generatorSitemapXml();
-        generatorLimit20Url();
-        //copyStaticFile();
+        generatorLimit5Url();
+        copyStaticFile();
     }
 
     private static void generatorPostHtml(String currentFilePath, String saveFilePath)
@@ -107,13 +107,13 @@ public class DocPage {
         ThymeleafHtmlUtil.processXmlWriteFile("dist/sitemap.xml", "sitemap", context);
     }
 
-    private static void generatorLimit20Url() throws IOException {
+    private static void generatorLimit5Url() throws IOException {
         // 抽取最近20条url
         List<String> postUrlList = postInfoMap.values().stream()
             .map(TreeNode::getData)
-            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
+            .sorted(Comparator.comparing(PostInfo::getUpdated).reversed())
             .map(postInfo -> "https://www.wdbyte.com" + postInfo.getPermalink())
-            .limit(20).collect(Collectors.toList());
+            .limit(5).collect(Collectors.toList());
         Files.write(Paths.get("urls.txt"), postUrlList);
     }
 
@@ -150,10 +150,16 @@ public class DocPage {
         String pathName = FileUtil.getPathNameByIndex(path, 1);
         pathName = StringUtils.substringAfter(pathName, ".");
         if (path.toString().endsWith(".md") && !Files.isDirectory(path)) {
-            TreeNode<PostInfo> subNode = new TreeNode<>(pathName, PostTemplateUtil.convert2PostInfo(path), treeNode);
-            treeNode.addChild(subNode);
-            postInfoMap.put(path.toString(), subNode);
-            return;
+            try {
+                TreeNode<PostInfo> subNode = new TreeNode<>(pathName, PostTemplateUtil.convert2PostInfo(path), treeNode);
+                treeNode.addChild(subNode);
+                postInfoMap.put(path.toString(), subNode);
+                return;
+            } catch (Exception e) {
+                System.out.println("error path:" + path.toString());
+                e.printStackTrace();
+                throw e;
+            }
         }
         TreeNode<PostInfo> subNode = new TreeNode<>(pathName, null, treeNode);
         treeNode.addChild(subNode);
