@@ -31,6 +31,8 @@ import org.thymeleaf.context.Context;
 public class DocPage {
     static String ROOT_PATH = null;
 
+    private static String WEBSITE = "https://www.wdbyte.com";
+
     static Map<String, TreeNode<PostInfo>> postInfoMap = new HashMap<>();
 
     static TreeNode<PostInfo> rootNode;
@@ -115,6 +117,12 @@ public class DocPage {
             .map(postInfo -> "https://www.wdbyte.com" + postInfo.getPermalink())
             .limit(5).collect(Collectors.toList());
         Files.write(Paths.get("urls.txt"), postUrlList);
+
+        // bing urls
+        String urls = postUrlList.stream().collect(Collectors.joining("\",\""));
+        urls = "\"" + urls + "\"";
+        urls = "{\"siteUrl\":\"" + WEBSITE + "\", \"urlList\":[" + urls + "]}";
+        Files.write(Paths.get("urls_bing.txt"), urls.getBytes());
     }
 
     private static void generatorArchivesHtml() throws IOException {
