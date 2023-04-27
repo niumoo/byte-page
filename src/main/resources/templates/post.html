@@ -60,12 +60,12 @@
 <div class="w3-main" style="margin-left:300px;margin-top:51px;">
     <!-- START MAIN -->
     <div class="byte-post-toc w3-hide-small w3-hide-medium">
-        <div class="w3-center w3-margin-bottom"><b>目录</b> <a id="toc-hidden">隐藏</a></div>
+        <div class="w3-center w3-margin-bottom"><b>目录</b> <a href="#" id="toc-hidden">[隐藏]</a></div>
         <div th:each="tocInfo:${tocInfoList}"><a th:style="'margin: ' + ${tocInfo.getLeft()} + 'px;'" th:href="${'#'+tocInfo.getMiddle()}" th:text="${tocInfo.getRight()}"></a></div>
     </div>
     <div class="w3-container w3-padding-large w3-border-right byte-post-content ">
-        <h1 th:text="${postInfo.getTitle()}">标题</h1>
-        [(${postInfo.getHtmlContent()})]
+        <div><h1 th:text="${postInfo.getTitle()}">标题</h1><span class="w3-right">编辑</span></div>
+        <div>[(${postInfo.getHtmlContent()})]</div>
         <br/> <br/>
     </div>
     <div class="w3-container w3-padding-large w3-border-right byte-post-content "><div id="vssue"></div></div>
