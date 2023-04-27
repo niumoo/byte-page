@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import com.wdbyte.bytepage.module.PostInfo;
 import com.wdbyte.bytepage.module.TreeNode;
 import com.wdbyte.bytepage.util.FileUtil;
+import com.wdbyte.bytepage.util.HtmlParser;
 import com.wdbyte.bytepage.util.MarkdownUtil;
 import com.wdbyte.bytepage.util.PostTemplateUtil;
 import com.wdbyte.bytepage.util.ThymeleafHtmlUtil;
@@ -43,9 +44,45 @@ public class DocPage {
             return;
         }
         ROOT_PATH = args[0];
+        initRootNode();
+        generatorPostHtmlForEach();
+        generatorIndexHtml();
+        generatorArchivesHtml();
+        generatorSitemapXml();
+        generatorLimit5Url();
+        //copyStaticFile();
+    }
+
+    private static void initRootNode() throws IOException {
         rootNode = new TreeNode<>("root", null, null);
         toFileTree(rootNode, Paths.get(ROOT_PATH));
         rootNode = rootNode.getChildren().get(0);
+    }
+
+    public static void toFileTree(TreeNode<PostInfo> treeNode, Path path) throws IOException {
+        String pathName = FileUtil.getPathNameByIndex(path, 1);
+        pathName = StringUtils.substringAfter(pathName, ".");
+        if (path.toString().endsWith(".md") && !Files.isDirectory(path)) {
+            try {
+                TreeNode<PostInfo> subNode = new TreeNode<>(pathName, PostTemplateUtil.convert2PostInfo(path), treeNode);
+                treeNode.addChild(subNode);
+                postInfoMap.put(path.toString(), subNode);
+                return;
+            } catch (Exception e) {
+                System.out.println("error path:" + path.toString());
+                e.printStackTrace();
+                throw e;
+            }
+        }
+        TreeNode<PostInfo> subNode = new TreeNode<>(pathName, null, treeNode);
+        treeNode.addChild(subNode);
+        List<Path> pathList = FileUtil.listDirAndMdFile(path);
+        for (Path pathTemp : pathList) {
+            toFileTree(subNode, pathTemp);
+        }
+    }
+
+    private static void generatorPostHtmlForEach() throws IOException {
         List<Path> pathList = FileUtil.listFiles(ROOT_PATH, ".md");
         for (Path path : pathList) {
             try {
@@ -55,11 +92,6 @@ public class DocPage {
                 e.printStackTrace();
             }
         }
-        generatorIndexHtml();
-        generatorArchivesHtml();
-        generatorSitemapXml();
-        generatorLimit5Url();
-        //copyStaticFile();
     }
 
     private static void generatorPostHtml(String currentFilePath, String saveFilePath)
@@ -74,6 +106,7 @@ public class DocPage {
         context.setVariable("postInfo", treeNode.getData());
         context.setVariable("rootNode", rootNode);
         context.setVariable("menuNode", menuNode);
+        context.setVariable("tocInfoList", HtmlParser.getHeadList(postContent));
         // 输出到流（文件）
         ThymeleafHtmlUtil.processHtmlWriteFile(saveFilePath, "post", context);
         //System.out.println("生成文章详情：" + treeNode.getData().getTitle());
@@ -110,7 +143,7 @@ public class DocPage {
     }
 
     private static void generatorLimit5Url() throws IOException {
-        // 抽取最近20条url
+        // 抽取最近5条url
         List<String> postUrlList = postInfoMap.values().stream()
             .map(TreeNode::getData)
             .sorted(Comparator.comparing(PostInfo::getUpdated).reversed())
@@ -152,29 +185,6 @@ public class DocPage {
             file.mkdirs();
         }
         return saveFilePath + "index.html";
-    }
-
-    public static void toFileTree(TreeNode<PostInfo> treeNode, Path path) throws IOException {
-        String pathName = FileUtil.getPathNameByIndex(path, 1);
-        pathName = StringUtils.substringAfter(pathName, ".");
-        if (path.toString().endsWith(".md") && !Files.isDirectory(path)) {
-            try {
-                TreeNode<PostInfo> subNode = new TreeNode<>(pathName, PostTemplateUtil.convert2PostInfo(path), treeNode);
-                treeNode.addChild(subNode);
-                postInfoMap.put(path.toString(), subNode);
-                return;
-            } catch (Exception e) {
-                System.out.println("error path:" + path.toString());
-                e.printStackTrace();
-                throw e;
-            }
-        }
-        TreeNode<PostInfo> subNode = new TreeNode<>(pathName, null, treeNode);
-        treeNode.addChild(subNode);
-        List<Path> pathList = FileUtil.listDirAndMdFile(path);
-        for (Path pathTemp : pathList) {
-            toFileTree(subNode, pathTemp);
-        }
     }
 
     public static void copyStaticFile() throws IOException {

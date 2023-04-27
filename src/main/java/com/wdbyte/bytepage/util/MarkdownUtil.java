@@ -1,10 +1,8 @@
 package com.wdbyte.bytepage.util;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TableBlock;
@@ -48,7 +46,7 @@ public class MarkdownUtil {
     public static String markdownToHtmlExtensions(String markdown) {
         //h标题生成id
         //转换table的HTML
-        List<Extension> tableExtension = Arrays.asList(TablesExtension.create(),HeadingAnchorExtension.create());
+        List<Extension> tableExtension = Arrays.asList(TablesExtension.create(), HeadingAnchorExtension.create());
         Parser parser = Parser.builder()
             .extensions(tableExtension)
             .build();
@@ -78,7 +76,7 @@ public class MarkdownUtil {
             if (node instanceof TableBlock) {
                 attributes.put("class", "ui celled table");
             }
-            if (node instanceof Heading){
+            if (node instanceof Heading) {
             }
         }
     }

@@ -11,6 +11,7 @@ import java.util.List;
 public class PostInfo {
     private String title;
     private String date;
+    private String updated;
     private String permalink;
     private List<String> categories;
     private List<String> tags;
@@ -18,7 +19,6 @@ public class PostInfo {
     private LinkedHashMap<String, String> feed;
     private Path filePath;
     private String filePathString;
-    private String updated;
     private String keywords;
     private String description;
     private String htmlContent;
