@@ -97,9 +97,11 @@
     margin-bottom: 0px !important;
 }
 .byte-post-content blockquote{
-    background-color: #4caf5021;
-    padding: 1px 10px;
+    /*background-color: #4caf5021;*/
+    background-color: #f8f9fa;
+    border: 1px solid #a2a9b1;
     border-left: 4px solid #60ab71;
+    padding: 1px 10px;
     line-height: 1;
     margin-block-start: 1em;
     margin-block-end: 1em;
