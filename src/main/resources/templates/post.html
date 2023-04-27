@@ -64,7 +64,7 @@
         <div th:each="tocInfo:${tocInfoList}"><a th:style="'margin: ' + ${tocInfo.getLeft()} + 'px;'" th:href="${'#'+tocInfo.getMiddle()}" th:text="${tocInfo.getRight()}"></a></div>
     </div>
     <div class="w3-container w3-padding-large w3-border-right byte-post-content ">
-        <div><h1 th:text="${postInfo.getTitle()}">标题</h1><span class="w3-right">编辑</span></div>
+        <div><h1 th:text="${postInfo.getTitle()}">标题</h1></div>
         <div>[(${postInfo.getHtmlContent()})]</div>
         <br/> <br/>
     </div>
