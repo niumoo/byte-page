@@ -98,11 +98,12 @@
 }
 .byte-post-content blockquote{
     /*background-color: #4caf5021;*/
+    font-style: italic;
     background-color: #f8f9fa;
     border: 1px solid #a2a9b1;
     border-left: 4px solid #60ab71;
     padding: 1px 10px;
-    line-height: 1;
+    line-height: 1.3;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 10px;
