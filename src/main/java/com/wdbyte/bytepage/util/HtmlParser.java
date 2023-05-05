@@ -10,6 +10,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class HtmlParser {
+    /**
+     * 获取HTML内容中的指定标签
+     *
+     * @param html List Triple (margin,id,titleValue)
+     * @return
+     */
     public static List<Triple<Integer, String, String>> getHeadList(String html) {
         Document doc = Jsoup.parse(html);
         Elements headings = doc.select("h1, h2, h3, h4, h5, h6");

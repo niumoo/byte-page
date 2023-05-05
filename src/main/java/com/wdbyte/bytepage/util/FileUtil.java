@@ -16,35 +16,42 @@ import java.util.stream.Stream;
  */
 public class FileUtil {
 
+    /**
+     * 列出指定后缀的文件
+     *
+     * @param path
+     * @param endsWith
+     * @return
+     * @throws IOException
+     */
     public static List<Path> listFiles(String path, String endsWith) throws IOException {
         Path start = Paths.get(path);
-        Stream<Path> paths = Files.walk(start);
-        return paths.filter(Files::isRegularFile)
-            .filter(path1 -> path1.toString().endsWith(endsWith))
-            .collect(Collectors.toList());
+        try (Stream<Path> paths = Files.walk(start);) {
+            return paths.filter(Files::isRegularFile)
+                .filter(path1 -> path1.toString().endsWith(endsWith))
+                .collect(Collectors.toList());
+        }
     }
 
-    public static List<Path> listDir(Path path) throws IOException {
-        Stream<Path> pathStream = Files.list(path);
-        List<Path> dirList = pathStream
-            .filter(Files::isDirectory)
-            .sorted(Comparator.comparing(Path::getFileName))
-            .collect(Collectors.toList());
-        pathStream.close();
-        return dirList;
-    }
-
-    public static List<Path> listDirAndMdFile(Path path) throws IOException {
-        if (!Files.isDirectory(path)){
+    /**
+     * 列出指定路径中的文件夹和指定后缀的文件
+     *
+     * @param path
+     * @return
+     * @throws IOException
+     */
+    public static List<Path> listDirAndMdFile(Path path, String endsWith) throws IOException {
+        if (!Files.isDirectory(path)) {
             return new ArrayList<>(0);
         }
-        Stream<Path> pathStream = Files.list(path);
-        List<Path> dirList = pathStream
-            .filter(pathTemp -> Files.isDirectory(pathTemp) || pathTemp.toString().endsWith(".md"))
-            .sorted(Comparator.comparing(Path::getFileName))
-            .collect(Collectors.toList());
-        pathStream.close();
-        return dirList;
+        try (Stream<Path> pathStream = Files.list(path);) {
+            List<Path> dirList = pathStream
+                .filter(pathTemp -> Files.isDirectory(pathTemp) || pathTemp.toString().endsWith(endsWith))
+                .sorted(Comparator.comparing(Path::getFileName))
+                .collect(Collectors.toList());
+            pathStream.close();
+            return dirList;
+        }
     }
 
     /**

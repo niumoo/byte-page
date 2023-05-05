@@ -14,7 +14,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
  * @author niulang
  * @date 2023/03/31
  */
-public class ThymeleafHtmlUtil {
+public class ThymeleafUtil {
 
     private static TemplateEngine templateEngine;
     private static TemplateEngine xmlTemplateEngine;
@@ -49,6 +49,15 @@ public class ThymeleafHtmlUtil {
         return templateEngine.process(templateName, context);
     }
 
+    /**
+     * 生成 HTML 写入指定位置
+     *
+     * @param path          文件生成保存位置
+     * @param templateName  模板名称
+     * @param context       模版中用到的变量
+     * @return
+     * @throws IOException
+     */
     public static String processHtmlWriteFile(String path, String templateName, Context context) throws IOException {
         File file = new File(path);
         Writer write = new FileWriter(file);
@@ -56,6 +65,15 @@ public class ThymeleafHtmlUtil {
         return file.getAbsolutePath();
     }
 
+    /**
+     * 生成 XML 写入指定位置
+     *
+     * @param path          文件生成保存位置
+     * @param templateName  模板名称
+     * @param context       模版中用到的变量
+     * @return
+     * @throws IOException
+     */
     public static String processXmlWriteFile(String path, String templateName, Context context) throws IOException {
         File file = new File(path);
         Writer write = new FileWriter(file);

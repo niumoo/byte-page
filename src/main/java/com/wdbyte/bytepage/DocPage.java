@@ -21,7 +21,7 @@ import com.wdbyte.bytepage.util.FileUtil;
 import com.wdbyte.bytepage.util.HtmlParser;
 import com.wdbyte.bytepage.util.MarkdownUtil;
 import com.wdbyte.bytepage.util.PostTemplateUtil;
-import com.wdbyte.bytepage.util.ThymeleafHtmlUtil;
+import com.wdbyte.bytepage.util.ThymeleafUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.thymeleaf.context.Context;
 
@@ -76,7 +76,7 @@ public class DocPage {
         }
         TreeNode<PostInfo> subNode = new TreeNode<>(pathName, null, treeNode);
         treeNode.addChild(subNode);
-        List<Path> pathList = FileUtil.listDirAndMdFile(path);
+        List<Path> pathList = FileUtil.listDirAndMdFile(path,".md");
         for (Path pathTemp : pathList) {
             toFileTree(subNode, pathTemp);
         }
@@ -103,18 +103,23 @@ public class DocPage {
         treeNode.getData().setHtmlContent(postContent);
         // 定义数据模型
         Context context = new Context();
+        // 文章内容
         context.setVariable("postInfo", treeNode.getData());
+        // 顶部菜单
         context.setVariable("rootNode", rootNode);
+        // 侧边菜单
         context.setVariable("menuNode", menuNode);
+        // 文章目录
         context.setVariable("tocInfoList", HtmlParser.getHeadList(postContent));
         // 输出到流（文件）
-        ThymeleafHtmlUtil.processHtmlWriteFile(saveFilePath, "post", context);
+        ThymeleafUtil.processHtmlWriteFile(saveFilePath, "post", context);
         //System.out.println("生成文章详情：" + treeNode.getData().getTitle());
     }
 
     private static void generatorIndexHtml() throws IOException {
         // 定义数据模型
         Context context = new Context();
+        // 用于生成顶部菜单
         context.setVariable("rootNode", rootNode);
         // 用于文章列表
         List<PostInfo> postInfoList = postInfoMap.values().stream()
@@ -124,7 +129,7 @@ public class DocPage {
             .collect(Collectors.toList());
         context.setVariable("postInfoList", postInfoList);
         // 输出到流（文件）
-        ThymeleafHtmlUtil.processHtmlWriteFile("dist/index.html", "index", context);
+        ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
     }
 
     private static void generatorSitemapXml() throws IOException {
@@ -139,7 +144,7 @@ public class DocPage {
         context.setVariable("postInfoList", postInfoList);
         context.setVariable("currentDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         // 输出到流（文件）
-        ThymeleafHtmlUtil.processXmlWriteFile("dist/sitemap.xml", "sitemap", context);
+        ThymeleafUtil.processXmlWriteFile("dist/sitemap.xml", "sitemap", context);
     }
 
     private static void generatorLimit5Url() throws IOException {
@@ -149,9 +154,9 @@ public class DocPage {
             .sorted(Comparator.comparing(PostInfo::getUpdated).reversed())
             .map(postInfo -> "https://www.wdbyte.com" + postInfo.getPermalink())
             .limit(5).collect(Collectors.toList());
+        // 百度提交 URL 格式
         Files.write(Paths.get("urls.txt"), postUrlList);
-
-        // bing urls
+        // Bing 提交 URL 格式
         String urls = postUrlList.stream().collect(Collectors.joining("\",\""));
         urls = "\"" + urls + "\"";
         urls = "{\"siteUrl\":\"" + WEBSITE + "\", \"urlList\":[" + urls + "]}";
@@ -161,20 +166,20 @@ public class DocPage {
     private static void generatorArchivesHtml() throws IOException {
         // 定义数据模型
         Context context = new Context();
-        // 用于一级菜单
-        context.setVariable("rootNode", rootNode);
-        // 用于文章列表
         List<PostInfo> postInfoList = postInfoMap.values().stream()
             .map(TreeNode::getData)
             .sorted(Comparator.comparing(PostInfo::getDate).reversed())
             .collect(Collectors.toList());
+        // 用于文章列表
         context.setVariable("postInfoList", postInfoList);
+        // 用于一级菜单
+        context.setVariable("rootNode", rootNode);
         File file = new File("dist/archives/");
         if (!file.exists()) {
             file.mkdirs();
         }
         // 输出到流（文件）
-        ThymeleafHtmlUtil.processHtmlWriteFile("dist/archives/index.html", "archives", context);
+        ThymeleafUtil.processHtmlWriteFile("dist/archives/index.html", "archives", context);
     }
 
     public static String generatorSavePath(String currentFilePath) {
