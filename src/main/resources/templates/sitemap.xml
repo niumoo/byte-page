@@ -7,7 +7,7 @@
     </url>
     <url th:each="postInfo:${postInfoList}">
         <loc th:text="${'https://www.wdbyte.com'+postInfo.getPermalink()}"></loc>
-        <lastmod th:text="${postInfo.getUpdated()}"></lastmod>
+        <lastmod th:text="${postInfo.getUpdated().substring(0,10)}"></lastmod>
         <changefreq>daily</changefreq>
     </url>
 </urlset>
