@@ -21,7 +21,7 @@
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
     color: #313030;
-    padding: 5px 16px !important;
+    padding: 6px 16px !important;
 }
 
 .byte-post-content{
@@ -81,15 +81,15 @@
 
 .byte-post-content h1{
     font-size: 32px;
-    font-weight: 700;
+    /*font-weight: 700;*/
 }
 .byte-post-content h2{
     font-size: 24px;
-    font-weight: 700;
+    /*font-weight: 700;*/
 }
 .byte-post-content h3{
     font-size: 20px;
-    font-weight: 700;
+    /*font-weight: 700;*/
 }
 .byte-post-content h4{
     font-size: 18px;
