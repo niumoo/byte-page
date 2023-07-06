@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/w3-css/4.1.0/w3.min.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        .fa-anchor,.fa-coffee {font-size:200px}
+        .fa-anchor,.w3-center .fa-coffee {font-size:200px}
         .byte-post-content{margin: 0 auto}
     </style>
     <script>
@@ -39,11 +39,25 @@
 
 <!-- Navbar -->
 <div class="w3-top">
-    <div class="w3-bar w3-green w3-left-align w3-large">
+    <!--<div class="w3-bar w3-green w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-green" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
         <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-white">未读代码</a>
         <div th:each="child:${rootNode.getChildren()}"><a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" th:text="${child.getName()}">Link 1</a></div>
+    </div>-->
+
+    <div class="w3-bar w3-green w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-light-grey w3-large w3-green" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-light-grey"><i class="fa fa-fw fa-home"></i> 未读代码</a>
+        <div><a href="/java/jdk-jre-jvm/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-grey"><i class="fa fa-coffee"></i> Java 基础</a></div>
+        <div><a href="/java-feature/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-grey"><i class="fa fa-flask"></i> Java 新特性</a></div>
+        <div><a href="/java/junit5/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-grey"><i class="fa fa-cubes"></i> 开发工具</a></div>
+        <div><a href="/2020/03/jdk/hashmap/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-grey"><i class="fa fa-rocket"></i> Java 进阶</a></div>
+        <div><a href="/java/performance/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-grey"><i class="fa fa-line-chart"></i> 性能分析</a></div>
+        <div><a href="/java/index/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-grey"><i class="fa fa-gear"></i> Java 开发</a></div>
+        <div><a href="/2019/01/springboot/springboot01-quick-start/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-grey"><i class="fa fa-leaf"></i> SpringBoot</a></div>
+        <div><a href="/2021/01/2020-end/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-grey">其他记录</a></div>
     </div>
+
 
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">

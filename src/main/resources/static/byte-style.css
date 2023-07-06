@@ -70,7 +70,7 @@
     border-radius:7px;
 }
 
-.byte-post-content p code, .byte-post-content li code{
+.byte-post-content p code, .byte-post-content li p code{
     color: #202020;
     padding: .2em .4em;
     margin: 0;
