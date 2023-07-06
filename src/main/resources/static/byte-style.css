@@ -21,7 +21,8 @@
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
     color: #313030;
-    padding: 6px 16px !important;
+    padding: 6px 8px!important;
+    border-radius: 6px;
 }
 
 .byte-post-content{
@@ -54,6 +55,9 @@
     color: #0645ad;
     text-decoration: none;
     word-wrap: break-word;
+}
+.byte-post-content p a:hover,.byte-post-content li a:hover,.byte-post-content table tr td a:hover,.byte-post-content table tr th a:hover {
+    text-decoration:underline;
 }
 .byte-post-content li p {
     line-height: 1.5;
