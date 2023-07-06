@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.wdbyte.bytepage.module.PostInfo;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author niulang
@@ -31,6 +32,9 @@ public class PostTemplateUtil {
         postInfo.setMarkdownContent(md);
         postInfo.setFilePath(path);
         postInfo.setFilePathString(path.toString());
+        String githubPath = StringUtils.substringBefore(path.toString(),"md/");
+        githubPath = StringUtils.replace(path.toString(),githubPath,"https://github.com/niumoo/byte-notes/blob/main/");
+        postInfo.setGithubPath(githubPath);
         // URL 归一化
         String link = postInfo.getPermalink().trim();
         if (!link.startsWith("/")) {

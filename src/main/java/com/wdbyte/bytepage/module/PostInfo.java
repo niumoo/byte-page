@@ -19,6 +19,7 @@ public class PostInfo {
     private LinkedHashMap<String, String> feed;
     private Path filePath;
     private String filePathString;
+    private String githubPath;
     private String keywords;
     private String description;
     private String htmlContent;
@@ -134,6 +135,14 @@ public class PostInfo {
 
     public void setHtmlContent(String htmlContent) {
         this.htmlContent = htmlContent;
+    }
+
+    public String getGithubPath() {
+        return githubPath;
+    }
+
+    public void setGithubPath(String githubPath) {
+        this.githubPath = githubPath;
     }
 
     @Override

@@ -34,11 +34,25 @@
 </head>
 <body>
 <!-- START Top -->
-<div class="w3-top">
+<!--<div class="w3-top">
     <div class="w3-bar w3-theme w3-large" style="z-index:4;">
         <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
         <a class="w3-bar-item w3-button w3-hover-white" style="padding-top: 12px;padding-bottom: 12px;" href="/">未读代码</a>
         <div th:each="child:${rootNode.getChildren()}"><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-white"style="padding-top: 12px;padding-bottom: 12px;" th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" th:text="${child.getName()}">Learn</a></div>
+    </div>
+</div>-->
+<div class="w3-top">
+    <div class="w3-bar w3-theme w3-large" style="z-index:4;">
+        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-light-grey w3-large w3-theme" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
+        <a class="w3-bar-item w3-button w3-hover-light-grey" style="" href="/"><i class="fa fa-fw fa-home"></i> 未读代码</a>
+        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java/jdk-jre-jvm/"><i class="fa fa-coffee"></i> Java 基础</a></div>
+        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java-feature/"><i class="fa fa-flask"></i> Java 新特性</a></div>
+        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java/junit5/"><i class="fa fa-cubes"></i> 开发工具</a></div>
+        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/2020/03/jdk/hashmap/"><i class="fa fa-rocket"></i> Java 进阶</a></div>
+        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java/performance/"><i class="fa fa-line-chart"></i> 性能分析</a></div>
+        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java/index/"><i class="fa fa-gear"></i> Java 开发</a></div>
+        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/2019/01/springboot/springboot01-quick-start/"><i class="fa fa-leaf"></i> SpringBoot</a></div>
+        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/2021/01/2020-end/">其他记录</a></div>
     </div>
 </div>
 <!-- END Top -->
@@ -57,7 +71,7 @@
 </div>
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 <!-- END Sidebar -->
-<div class="w3-main" style="margin-left:300px;margin-top:51px;">
+<div class="w3-main" style="margin-left:300px;margin-top:44px;">
     <!-- START MAIN -->
     <div class="byte-post-toc w3-hide-small w3-hide-medium">
         <div class="w3-center w3-margin-bottom"><b>目录</b> <a href="#" id="toc-hidden">[隐藏]</a></div>
@@ -66,6 +80,10 @@
     <div class="w3-container w3-padding-large w3-border-right byte-post-content ">
         <div><h1 th:text="${postInfo.getTitle()}">标题</h1></div>
         <div>[(${postInfo.getHtmlContent()})]</div>
+        <div class="w3-text-grey w3-medium w3-right">
+            <p><i class="fa fa-calendar"></i> 最后更新日期：<span th:text="${postInfo.getUpdated().substring(0,10)}"></span> | <a th:href="${postInfo.getGithubPath()}"><i class="fa fa-pencil"></i> 编辑此页面</a> </p>
+        </div>
+
         <br/> <br/>
     </div>
     <div class="w3-container w3-padding-large w3-border-right byte-post-content "><div id="vssue"></div></div>

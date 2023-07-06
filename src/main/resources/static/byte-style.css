@@ -1,7 +1,7 @@
 .w3-theme {
     color: #fff !important;
-    /*background-color: #4CAF50 !important;*/
-    background-color: #63b175 !important;
+    background-color: #4CAF50 !important;
+    /*background-color: #63b175 !important;*/
 }
 
 #mySidebar {
@@ -80,7 +80,7 @@
 }
 
 .byte-post-content h1{
-    font-size: 32px;
+    font-size: 30px;
     /*font-weight: 700;*/
 }
 .byte-post-content h2{
