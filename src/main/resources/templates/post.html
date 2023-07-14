@@ -65,7 +65,7 @@
     <div id="menuTut" class="w3-bar-block myMenu">
         <div th:each="menu:${menuNode.getChildren()}" class="w3-container">
             <h3 th:text="${menu.getName()}">Tutorials</h3>
-            <div th:each="subMenu:${menu.getChildren()}"><a class="w3-bar-item w3-button byte-sidebar-link w3-hover-green" th:href="${subMenu.getData().getPermalink()}" th:text="${subMenu.getData().getTitle()}">Learn</a></div>
+            <div th:each="subMenu:${menu.getChildren()}"><a th:if="${subMenu.getData().getTitle().equals(postInfo.getTitle())}" class="w3-bar-item w3-button byte-sidebar-link w3-green w3-hover-green" th:href="${subMenu.getData().getPermalink()}" th:text="${subMenu.getData().getTitle()}">Learn</a><a th:unless="${subMenu.getData().getTitle().equals(postInfo.getTitle())}" class="w3-bar-item w3-button byte-sidebar-link w3-hover-green" th:href="${subMenu.getData().getPermalink()}" th:text="${subMenu.getData().getTitle()}">Learn</a></div>
         </div>
     </div>
 </div>
@@ -90,7 +90,10 @@
     <!-- END MAIN -->
     <div th:include="footer::common_footer"></div>
 </div>
-<button onclick="topFunction()" id="myBtn" title="Go to top">顶部</button>
+<div id="myBtn">
+    <p><a target="_blank" href="/static/wechat.html" ><i class="fa fa-wechat w3-button w3-green w3-hover-green" style="font-size: 18px;line-height: 32px;border-radius: 25px;"></i></a></p>
+    <p><i  onclick="topFunction()" class="w3-button fa fa-arrow-up w3-button w3-hover-green" style="font-size: 20px;height: 50px;line-height: 30px;border-radius: 25px;"></i></p>
+</div>
 <script>
     // Script to open and close the sidebar
     function w3_open() {

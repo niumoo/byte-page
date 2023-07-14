@@ -199,19 +199,8 @@
     display: none;
     position: fixed;
     bottom: 30px;
-    right: 20px;
+    right: 30px;
     z-index: 99;
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background-color: #63b175;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 4px;
-}
-#myBtn:hover {
-    background-color: green;
 }
 
 @media screen and (max-width: 992px) {
