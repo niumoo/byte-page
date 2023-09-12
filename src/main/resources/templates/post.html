@@ -77,7 +77,7 @@
         <div class="w3-center w3-margin-bottom"><b>目录</b> <a href="#" id="toc-hidden">[隐藏]</a></div>
         <div th:each="tocInfo:${tocInfoList}"><a th:style="'margin: ' + ${tocInfo.getLeft()} + 'px;'" th:href="${'#'+tocInfo.getMiddle()}" th:text="${tocInfo.getRight()}"></a></div>
     </div>
-    <div class="w3-container w3-padding-large w3-border-right byte-post-content ">
+    <div class="w3-container w3-padding-large byte-post-content ">
         <div><h1 th:text="${postInfo.getTitle()}">标题</h1></div>
         <div>[(${postInfo.getHtmlContent()})]</div>
         <div class="w3-text-grey w3-medium w3-right">
@@ -86,7 +86,7 @@
 
         <br/> <br/>
     </div>
-    <div class="w3-container w3-padding-large w3-border-right byte-post-content "><div id="vssue"></div></div>
+    <div class="w3-container w3-padding-large byte-post-content "><div id="vssue"></div></div>
     <!-- END MAIN -->
     <div th:include="footer::common_footer"></div>
 </div>

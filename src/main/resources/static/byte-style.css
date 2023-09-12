@@ -1,3 +1,6 @@
+body{
+    background-color: #f0f0f0;
+}
 .w3-theme {
     color: #fff !important;
     background-color: #4CAF50 !important;
@@ -26,9 +29,10 @@
 }
 
 .byte-post-content{
-    max-width: 1100px;
+    max-width: 1000px;
     line-height: 1.8;
     color: #262626;
+    background-color: white;
     font-size: 16px;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
     word-wrap: break-word;
@@ -76,7 +80,8 @@
     margin: 0;
     word-break: normal;
     background-color: #eaecf0;
-    border-radius: .25rem
+    border-radius: .25rem;
+    font-font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
 }
 
 .byte-post-content pre{
@@ -206,5 +211,16 @@
 @media screen and (max-width: 992px) {
     .footer-a {
         font-size:50px;
+    }
+}
+/* 小于 1600 时，不显示*/
+@media (max-width:1600px) and (min-width:993px) {
+    .byte-post-content {
+        margin-left: 20px;
+    }
+}
+@media (min-width:1601px) {
+    .byte-post-content {
+       margin-left: 80px;
     }
 }
