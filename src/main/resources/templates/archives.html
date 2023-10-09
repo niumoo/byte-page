@@ -38,7 +38,7 @@
     <div class="w3-content">
         <div class="w3-twothird">
             <h1>文章归档</h1>
-            <input oninput="w3.filterHTML('#id01', 'li', this.value)" placeholder="搜索文章标题..." class="w3-input w3-border" type="text">
+            <input oninput="w3.filterHTML('#id01', 'li', this.value)" placeholder="搜索文章标题..." class="w3-input w3-border w3-round" type="text">
             <ul class="w3-ul" id="id01">
                 <li th:each="postInfo:${postInfoList}">
                     <a th:href="${postInfo.getPermalink()}" style="font-size: 16px;text-decoration: none" th:text="${postInfo.getTitle()}">文章标题</a>
