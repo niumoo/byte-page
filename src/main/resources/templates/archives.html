@@ -9,6 +9,7 @@
     <meta name="keywords" content="Java, Java 开发, Java 教程, Java 新特性, Spring Boot">
     <link rel="icon" href="/static/fav.png">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/w3-css/4.1.0/w3.min.css">
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
@@ -37,7 +38,8 @@
     <div class="w3-content">
         <div class="w3-twothird">
             <h1>文章归档</h1>
-            <ul class="w3-ul">
+            <input oninput="w3.filterHTML('#id01', 'li', this.value)" placeholder="搜索文章标题..." class="w3-input w3-border" type="text">
+            <ul class="w3-ul" id="id01">
                 <li th:each="postInfo:${postInfoList}">
                     <a th:href="${postInfo.getPermalink()}" style="font-size: 16px;text-decoration: none" th:text="${postInfo.getTitle()}">文章标题</a>
                 </li>
