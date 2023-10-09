@@ -50,7 +50,7 @@ public class DocPage {
         generatorArchivesHtml();
         generatorSitemapXml();
         generatorLimit5Url();
-        //copyStaticFile();
+        copyStaticFile();
     }
 
     private static void initRootNode() throws IOException {
@@ -112,7 +112,7 @@ public class DocPage {
         // 文章目录
         context.setVariable("tocInfoList", HtmlParser.getHeadList(postContent));
         // 输出到流（文件）
-        ThymeleafUtil.processHtmlWriteFile(saveFilePath, "post", context);
+        ThymeleafUtil.processHtmlWriteFile(saveFilePath, "blog", context);
         //System.out.println("生成文章详情：" + treeNode.getData().getTitle());
     }
 
