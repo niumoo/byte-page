@@ -918,7 +918,7 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     color: #348637;
 }
 
-.byte-post-content p code, .byte-post-content li p code {
+.byte-post-content p code, .byte-post-content li>code {
     color: #202020;
     font-size: 1em;
     /*padding: .2em .4em;*/

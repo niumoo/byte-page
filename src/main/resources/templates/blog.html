@@ -329,7 +329,7 @@
         <div class="column is-2 is-hidden-mobile w3-border-left">
             <div class="is-3">目录</div>
             <ul class="menu-list" th:each="tocInfo:${tocInfoList}">
-                <li><a th:href="${'#'+tocInfo.getMiddle()}" th:text="${tocInfo.getRight()}"></a></li>
+                <li><a th:style="'margin-left: ' + ${tocInfo.getLeft()} + 'px;'" th:href="${'#'+tocInfo.getMiddle()}" th:text="${tocInfo.getRight()}"></a></li>
             </ul>
         </div>
     </div>
