@@ -1,4 +1,21 @@
 /*替换 bulma*/
+.menu-list a{
+    overflow: hidden!important;
+    text-overflow: ellipsis!important;
+    white-space: nowrap!important;
+}
+.menu-list a:hover {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.menu-list a.is-active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
 /*ul, ol {*/
 /*  margin-block-start: 1em;*/
 /*  margin-block-end: 1em;*/
@@ -11,7 +28,10 @@
 /*}*/
 /* w3 css */
 body{
-    background-color: #eeeeee47;
+    background-color: #eee;
+}
+.w3-border{
+    border: 1px solid #eee !important;
 }
 .w3-border-bottom {
     border-bottom: 1px solid #eee !important
@@ -873,8 +893,12 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     padding-bottom: 5rem;
     line-height: 1.8;
     background-color: white;
+    color: #262626;
     /*font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;*/
     word-wrap: break-word;
+}
+.byte-post-content p a,.byte-post-content li a,.byte-post-content table tr td a,.byte-post-content table tr th a {
+    color: #0645ad !important;
 }
 .byte-post-content p a:hover,.byte-post-content li a:hover,.byte-post-content table tr td a:hover,.byte-post-content table tr th a:hover {
     text-decoration:underline;
@@ -890,10 +914,15 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     max-width: 95%;
 }
 
+.byte-post-content p strong, .byte-post-content li strong {
+    color: #348637;
+}
+
 .byte-post-content p code, .byte-post-content li p code {
     color: #202020;
-    padding: .2em .4em;
-    margin: 0;
+    font-size: 1em;
+    /*padding: .2em .4em;*/
+    /*margin: 0;*/
     word-break: normal;
     background-color: #eaecf0;
     border-radius: .25rem;
@@ -951,3 +980,7 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
 /*  padding: 0.2em 0.4em;*/
 /*}*/
 /* 文章正文结束*/
+
+footer{
+    margin-top: 30px;
+}
