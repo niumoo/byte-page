@@ -16,302 +16,8 @@
     <script src="/static/w3.js"></script>
 </head>
 <body>
-
 <!-- Navbar -->
-<nav id="navbar" class="bd-navbar navbar w3-border-bottom">
-    <div class="navbar-brand">
-        <a class="navbar-item"href="/">
-            <img src="/static/fav.png" alt="未读代码" style="width: 50px;max-height:none;"/>
-            <h1 style="font-size: 1.4em;font-weight: 500;color: green;background: linear-gradient(126deg, #22a68a 0%, #e93226 58%, #fed111 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text;text-fill-color: transparent;">未读代码</h1>
-        </a>
-        <!--        <a class="navbar-item" href="https://bulma.io">-->
-        <!--            <img src="https://bulma.io/images/bulma-logo.png"-->
-        <!--                 alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">-->
-        <!--        </a>-->
-        <button id="navbarBurger" class="navbar-burger" data-target="navMenuVideos">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-
-    <div id="navMenuVideos" class="navbar-menu">
-        <div id="navbarStartOriginal" class="navbar-start bd-navbar-start bd-is-original">
-            <a class="navbar-item bd-navbar-item  bd-navbar-item-documentation" href="/java/jdk-jre-jvm/">
-                <span class="icon has-text-primary"><i class="fas fa-coffee"></i></span>
-                <span>Java 基础</span>
-            </a>
-            <a class=" navbar-item bd-navbar-item bd-navbar-item-videos " href="/java-feature/">
-                    <span class="icon has-text-success">
-                        <i class="fas fa-flask"></i>
-                    </span>
-                <span>Java 新特性</span>
-            </a>
-            <a class="navbar-item bd-navbar-item bd-navbar-item-love " href="/java/devtool/">
-                    <span class="icon has-text-love">
-                        <i class="fas fa-heart"></i>
-                    </span>
-                <span>开发工具</span>
-            </a>
-            <a class=" navbar-item bd-navbar-item bd-navbar-item-expo  " href="/java/index/">
-                    <span class="icon has-text-expo">
-                        <i class="fas fa-rocket"></i>
-                    </span>
-                <span>Java 开发</span>
-            </a>
-            <a class="navbar-item bd-navbar-item bd-navbar-item-backers  bd-is-visible" href="/2020/03/jdk/hashmap/">
-                    <span class="icon has-text-patreon">
-                        <i class="fab fa-patreon"></i>
-                    </span>
-                <span>Java 进阶</span>
-            </a>
-            <a class="navbar-item bd-navbar-item bd-navbar-item-extensions  bd-is-visible" href="/java/performance/">
-                    <span class="icon has-text-extensions">
-                        <i class="fas fa-plug"></i>
-                    </span>
-                <span>性能分析</span>
-            </a>
-            <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-book  bd-is-visible" href="/2019/01/springboot/springboot01-quick-start/">
-                    <span class="icon has-text-bleeding">
-                        <i class="fas fa-leaf"></i>
-                    </span>
-                <span>SpringBoot</span>
-            </a>
-
-            <a class="navbar-item bd-navbar-item bd-navbar-item-brand bd-navbar-item-more" href="/2021/01/2020-end/">
-                    <span class="icon has-text-primary">
-                        <i class="fas fa-medal"></i>
-                    </span>
-                <span>其他记录</span>
-            </a>
-            <!--/**
-            <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-book bd-navbar-item-more"
-               href="https://bulma.io/the-official-bulma-book/">
-                    <span class="icon has-text-bleeding">
-                        <i class="fas fa-bookmark"></i>
-                    </span>
-                <span>Java 开发</span>
-            </a>
-            <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-start bd-navbar-item-more"
-               href="https://bulma.io/bulma-start/">
-                    <span class="icon has-text-patreon">
-                        <i class="fas fa-rocket"></i>
-                    </span>
-                <span>Start</span>
-            </a>
-            <a class="navbar-item bd-navbar-item bd-navbar-item-made-with-bulma bd-navbar-item-more"
-               href="https://bulma.io/made-with-bulma/">
-                    <span class="icon has-text-warning">
-                        <i class="fas fa-certificate"></i>
-                    </span>
-                <span>Badge</span>
-            </a>
-
-            <div class="navbar-item bd-navbar-item bd-navbar-item-base has-dropdown is-hoverable">
-                <a class="navbar-link bd-navbar-ellipsis" href="https://bulma.io/more/">
-                        <span class="icon">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </span>
-                </a>
-                <div class="navbar-dropdown bd-navbar-dropdown is-boxed">
-                    <a class="navbar-item bd-is-hidden" data-route="the-official-bulma-book" href="https://bulma.io/love/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-love">
-                                        <i class="fas fa-heart"></i>
-                                    </span>
-                                <span>
-                                        <strong>Love</strong>
-                                    </span>
-                            </div>
-                            Fans of Bulma around the world
-                        </div>
-                    </a>
-                    <hr class="navbar-divider ">
-                    <a class="navbar-item bd-is-hidden" data-route="the-official-bulma-book"
-                       href="https://bulma.io/backers/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-patreon">
-                                        <i class="fab fa-patreon"></i>
-                                    </span>
-                                <span>
-                                        <strong>Backers</strong>
-                                    </span>
-                            </div>
-                            Everyone who is supporting Bulma via Patreon and GitHub
-                        </div>
-                    </a>
-                    <hr class="navbar-divider ">
-                    <a class="navbar-item" data-route="the-official-bulma-book" href="https://bulma.io/extensions/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-extensions">
-                                        <i class="fas fa-plug"></i>
-                                    </span>
-                                <span>
-                                        <strong>Bulma extensions</strong>
-                                    </span>
-                            </div>
-                            Side projects to enhance Bulma
-                        </div>
-                    </a>
-                    <hr class="navbar-divider ">
-                    <a class="navbar-item" data-route="the-official-bulma-book"
-                       href="https://bulma.io/the-official-bulma-book/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-bleeding">
-                                        <i class="fas fa-bookmark"></i>
-                                    </span>
-                                <span>
-                                        <strong>The official Bulma book</strong>
-                                    </span>
-                            </div>
-                            A step-by-step guide that teaches you how to build a web interface from scratch using
-                            Bulma
-                        </div>
-                    </a>
-                    <hr class="navbar-divider ">
-                    <a class="navbar-item" data-route="the-official-bulma-book" href="https://bulma.io/blog/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-rss">
-                                        <i class="fas fa-rss"></i>
-                                    </span>
-                                <span>
-                                        <strong>Blog</strong>
-                                    </span>
-                            </div>
-                            Stay updated with new features
-                        </div>
-                    </a>
-                    <hr class="navbar-divider ">
-                    <a class="navbar-item" data-route="the-official-bulma-book" href="https://bulma.io/brand/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-primary">
-                                        <i class="fas fa-medal"></i>
-                                    </span>
-                                <span>
-                                        <strong>Brand</strong>
-                                    </span>
-                            </div>
-                            The official Bulma logos
-                        </div>
-                    </a>
-                    <hr class="navbar-divider ">
-                    <a class="navbar-item" data-route="the-official-bulma-book"
-                       href="https://bulma.io/bulma-start/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-success">
-                                        <i class="fas fa-rocket"></i>
-                                    </span>
-                                <span>
-                                        <strong>Bulma start</strong>
-                                    </span>
-                            </div>
-                            A tiny npm package to get started
-                        </div>
-                    </a>
-                    <hr class="navbar-divider ">
-                    <a class="navbar-item" data-route="the-official-bulma-book"
-                       href="https://bulma.io/made-with-bulma/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-warning">
-                                        <i class="fas fa-certificate"></i>
-                                    </span>
-                                <span>
-                                        <strong>Made with Bulma</strong>
-                                    </span>
-                            </div>
-                            The official community badge
-                        </div>
-                    </a>
-                    <hr class="navbar-divider ">
-                    <a class="navbar-item" data-route="the-official-bulma-book"
-                       href="https://bulma.io/alternative-to-bootstrap/">
-                        <div>
-                            <div class="icon-text">
-                                    <span class="icon has-text-bootstrap">
-                                        <i class="fas fa-exchange-alt"></i>
-                                    </span>
-                                <span>
-                                        <strong>Coming from Bootstrap</strong>
-                                    </span>
-                            </div>
-                            See how Bulma is an alternative to Bootstrap
-                        </div>
-                    </a>
-                </div>
-            </div>
-              **/-->
-        </div>
-
-        <div class="navbar-end">
-            <!--/**
-                        <a class="bd-navbar-icon navbar-item" href="https://bing.wdbyte.com" target="_blank">
-                                <span class="icon" style="color: var(--github);">
-                                    <i class="fas fa-image"></i>
-                                </span>
-                        </a>**/-->
-
-            <a class="bd-navbar-icon navbar-item" href="https://github.com/niumoo/JavaNotes" target="_blank">
-                    <span class="icon" style="color: var(--github);">
-                        <i class="fab fa-lg fa-github-alt"></i>
-                    </span>
-            </a>
-
-            <a class="bd-navbar-icon navbar-item" href="/static/wechat.html" target="_blank">
-                    <span class="icon" style="color: var(--weixin);">
-                        <i class="fab fa-lg fa-weixin"></i>
-                    </span>
-            </a>
-
-            <div class="navbar-item bd-navbar-sponsor-button is-hidden-desktop">
-                <a class="button is-sponsor is-light">
-                        <span class="icon is-small">
-                            <i class="fas fa-thumbs-up"></i>
-                        </span>
-                </a>
-            </div>
-
-            <div class="navbar-item bd-navbar-download-button is-hidden-touch">
-                <a class="button is-primary mr-3"
-                   href="https://debug.group">
-                        <span class="icon is-hidden-touch is-hidden-desktop-only">
-                            <i class="fas fa-tools"></i>
-                        </span>
-                    <span>Debug</span>
-                </a>
-
-                <a class="button is-sponsor is-light" id = "sponsor">
-                        <span class="icon is-small is-hidden-touch is-hidden-desktop-only">
-                            <i class="fas fa-thumbs-up"></i>
-                        </span>
-                    <span>
-                            Follow
-                    </span>
-                </a>
-                <a class="button is-success ml-3" href="/archives/">
-                        <span class="icon is-small is-hidden-touch is-hidden-desktop-only">
-                            <i class="fas fa-lg fa-search"></i>
-                        </span>
-                </a>
-            </div>
-<!--            <div class="navbar-item bd-navbar-download-button is-hidden-touch">-->
-<!--                <p class="control has-icons-left has-icons-right">-->
-<!--                    <input class="input is-rounded byte-search" type="input" placeholder="Search">-->
-<!--                    <span class="icon is-small is-left ">-->
-<!--                        <i class="fas fa-lg fa-search" style="color: green"></i>-->
-<!--                    </span>-->
-<!--                </p>-->
-<!--            </div>-->
-        </div>
-    </div>
-</nav>
+<div th:include="menu::common_menu"></div>
 
 <!-- First Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
@@ -351,4 +57,34 @@
     <!-- End Google Analytics -->
 </script>
 </body>
+<script>
+    // 获取需要添加悬浮效果的元素
+    var hoverElement = document.getElementById('sponsor');
+    // 创建鼠标移入事件监听器
+    hoverElement.addEventListener('mouseenter', function() {
+        showNotification(hoverElement);
+    });
+    // 创建鼠标移出事件监听器
+    hoverElement.addEventListener('mouseleave', function() {
+        // 获取hoverElement下面的<img>元素
+        var imgDiv = document.getElementById('notification');
+        // 移除<img>元素
+        imgDiv.remove();
+    });
+
+    function showNotification(ref) {
+        // 创建新的<img>元素
+        var node = document.createElement('img');
+        // 设置图片URL
+        node.src = 'https://jsd.cdn.zzko.cn/gh/niumoo/wdbyte-img/git/webinfo/wp.png';
+        // 将<img>元素添加到hoverElement下面
+        node.className = "notification";
+        node.id = "notification";
+        let coords = ref.getBoundingClientRect();
+        node.style.right = "20px";
+        node.style.top = coords.bottom + 5 + "px";
+        node.style.width = "250px";
+        document.body.appendChild(node);
+    }
+</script>
 </html>
