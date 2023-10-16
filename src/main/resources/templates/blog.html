@@ -14,6 +14,7 @@
     <!-- <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css"> -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.min.css">
     <link rel="stylesheet" href="/static/tool.css">
 </head>
 <script>
@@ -58,6 +59,7 @@
         <div class="column is-8 is-primary is-full-mobile byte-post-content w3-border">
             <div class="byte-post-title"><h1 class="title is-3" th:text="${postInfo.getTitle()}">标题</h1></div>
             <div class="content">[(${postInfo.getHtmlContent()})]</div>
+            <div id="vssue" class="mt-6"></div>
         </div>
         <div class="column is-2 is-hidden-mobile w3-border-left">
             <div class="is-3">目录</div>
@@ -148,4 +150,7 @@
 
 </script>
 <script src="/static/prism.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.runtime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.github-v4.min.js"></script>
+<script src="/static/vssue.js"></script>
 </html>
