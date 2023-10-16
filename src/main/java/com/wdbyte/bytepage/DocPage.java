@@ -129,7 +129,7 @@ public class DocPage {
             .collect(Collectors.toList());
         context.setVariable("postInfoList", postInfoList);
         // 输出到流（文件）
-        ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
+        ThymeleafUtil.processHtmlWriteFile("dist/index.html", "blog_index", context);
     }
 
     private static void generatorSitemapXml() throws IOException {
@@ -179,7 +179,7 @@ public class DocPage {
             file.mkdirs();
         }
         // 输出到流（文件）
-        ThymeleafUtil.processHtmlWriteFile("dist/archives/index.html", "archives", context);
+        ThymeleafUtil.processHtmlWriteFile("dist/archives/index.html", "blog_archives", context);
     }
 
     public static String generatorSavePath(String currentFilePath) {

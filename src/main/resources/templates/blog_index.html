@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>未读代码</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="网站提供 Java 相关教程，Java 进阶知识，以及 Java 相关的其他知识，如数据结构，算法，计算机组成原理，操作系统等。让编程简单有趣">
+    <meta name="keywords" content="Java, Java 开发, Java 教程, Java 新特性, Spring Boot">
+    <link rel="icon" href="/static/fav.png">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/w3-css/4.1.0/w3.min.css">
+    <link rel="stylesheet" href="/static/bulma.min.css" />
+    <link rel="stylesheet" href="/static/tool.css">
+    <style>
+        .fa-anchor,.w3-center .fa-coffee {font-size:200px}
+        /* this button is inspired from this -- https://www.newline.co/pricing */
+        #xuancai-button {
+            --width: 150px;
+            --timing: 2s;
+            border: 0;
+            width: var(--width);
+            padding-block: 1em;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1em;
+            background: black;
+            transition: all 0.2s;
+            border-radius: 3px;
+        }
+
+        #xuancai-button:hover {
+            background-image: linear-gradient(
+                    to right,
+                    rgb(250, 82, 82),
+                    rgb(250, 82, 82) 16.65%,
+                    rgb(190, 75, 219) 16.65%,
+                    rgb(190, 75, 219) 33.3%,
+                    rgb(76, 110, 245) 33.3%,
+                    rgb(76, 110, 245) 49.95%,
+                    rgb(64, 192, 87) 49.95%,
+                    rgb(64, 192, 87) 66.6%,
+                    rgb(250, 176, 5) 66.6%,
+                    rgb(250, 176, 5) 83.25%,
+                    rgb(253, 126, 20) 83.25%,
+                    rgb(253, 126, 20) 100%,
+                    rgb(250, 82, 82) 100%
+            );
+            animation: var(--timing) linear dance6123 infinite;
+            transform: scale(1.1) translateY(-1px);
+            color: #fff;
+        }
+
+        @keyframes dance6123 {
+            to {
+                background-position: var(--width);
+            }
+        }
+    </style>
+    <script>
+        <!-- baidu-->
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?95fc5fbbc05e1ddccdeb992adfe12ded";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        <!-- end baidu-->
+        <!-- Google Analytics -->
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-130656610-2', 'auto');
+        ga('send', 'pageview');
+        <!-- End Google Analytics -->
+    </script>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav id="navbar" class="bd-navbar navbar w3-border-bottom">
+        <div class="navbar-brand">
+            <a class="navbar-item"href="/">
+                <img src="/static/fav.png" alt="未读代码" style="width: 50px;max-height:none;"/>
+                <h1 style="font-size: 1.4em;font-weight: 500;color: green;background: linear-gradient(126deg, #22a68a 0%, #e93226 58%, #fed111 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text;text-fill-color: transparent;">未读代码</h1>
+            </a>
+            <!--        <a class="navbar-item" href="https://bulma.io">-->
+            <!--            <img src="https://bulma.io/images/bulma-logo.png"-->
+            <!--                 alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">-->
+            <!--        </a>-->
+            <button id="navbarBurger" class="navbar-burger" data-target="navMenuVideos">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <div id="navMenuVideos" class="navbar-menu">
+            <div id="navbarStartOriginal" class="navbar-start bd-navbar-start bd-is-original">
+                <a class="navbar-item bd-navbar-item  bd-navbar-item-documentation" href="/java/jdk-jre-jvm/">
+                    <span class="icon has-text-primary"><i class="fas fa-coffee"></i></span>
+                    <span>Java 基础</span>
+                </a>
+                <a class=" navbar-item bd-navbar-item bd-navbar-item-videos " href="/java-feature/">
+                    <span class="icon has-text-success">
+                        <i class="fas fa-flask"></i>
+                    </span>
+                    <span>Java 新特性</span>
+                </a>
+                <a class="navbar-item bd-navbar-item bd-navbar-item-love " href="/java/devtool/">
+                    <span class="icon has-text-love">
+                        <i class="fas fa-heart"></i>
+                    </span>
+                    <span>开发工具</span>
+                </a>
+                <a class=" navbar-item bd-navbar-item bd-navbar-item-expo  " href="/java/index/">
+                    <span class="icon has-text-expo">
+                        <i class="fas fa-rocket"></i>
+                    </span>
+                    <span>Java 开发</span>
+                </a>
+                <a class="navbar-item bd-navbar-item bd-navbar-item-backers  bd-is-visible" href="/2020/03/jdk/hashmap/">
+                    <span class="icon has-text-patreon">
+                        <i class="fab fa-patreon"></i>
+                    </span>
+                    <span>Java 进阶</span>
+                </a>
+                <a class="navbar-item bd-navbar-item bd-navbar-item-extensions  bd-is-visible" href="/java/performance/">
+                    <span class="icon has-text-extensions">
+                        <i class="fas fa-plug"></i>
+                    </span>
+                    <span>性能分析</span>
+                </a>
+                <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-book  bd-is-visible" href="/2019/01/springboot/springboot01-quick-start/">
+                    <span class="icon has-text-bleeding">
+                        <i class="fas fa-leaf"></i>
+                    </span>
+                    <span>SpringBoot</span>
+                </a>
+
+                <a class="navbar-item bd-navbar-item bd-navbar-item-brand bd-navbar-item-more" href="/2021/01/2020-end/">
+                    <span class="icon has-text-primary">
+                        <i class="fas fa-medal"></i>
+                    </span>
+                    <span>其他记录</span>
+                </a>
+                <!--/**
+                <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-book bd-navbar-item-more"
+                   href="https://bulma.io/the-official-bulma-book/">
+                        <span class="icon has-text-bleeding">
+                            <i class="fas fa-bookmark"></i>
+                        </span>
+                    <span>Java 开发</span>
+                </a>
+                <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-start bd-navbar-item-more"
+                   href="https://bulma.io/bulma-start/">
+                        <span class="icon has-text-patreon">
+                            <i class="fas fa-rocket"></i>
+                        </span>
+                    <span>Start</span>
+                </a>
+                <a class="navbar-item bd-navbar-item bd-navbar-item-made-with-bulma bd-navbar-item-more"
+                   href="https://bulma.io/made-with-bulma/">
+                        <span class="icon has-text-warning">
+                            <i class="fas fa-certificate"></i>
+                        </span>
+                    <span>Badge</span>
+                </a>
+
+                <div class="navbar-item bd-navbar-item bd-navbar-item-base has-dropdown is-hoverable">
+                    <a class="navbar-link bd-navbar-ellipsis" href="https://bulma.io/more/">
+                            <span class="icon">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </span>
+                    </a>
+                    <div class="navbar-dropdown bd-navbar-dropdown is-boxed">
+                        <a class="navbar-item bd-is-hidden" data-route="the-official-bulma-book" href="https://bulma.io/love/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-love">
+                                            <i class="fas fa-heart"></i>
+                                        </span>
+                                    <span>
+                                            <strong>Love</strong>
+                                        </span>
+                                </div>
+                                Fans of Bulma around the world
+                            </div>
+                        </a>
+                        <hr class="navbar-divider ">
+                        <a class="navbar-item bd-is-hidden" data-route="the-official-bulma-book"
+                           href="https://bulma.io/backers/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-patreon">
+                                            <i class="fab fa-patreon"></i>
+                                        </span>
+                                    <span>
+                                            <strong>Backers</strong>
+                                        </span>
+                                </div>
+                                Everyone who is supporting Bulma via Patreon and GitHub
+                            </div>
+                        </a>
+                        <hr class="navbar-divider ">
+                        <a class="navbar-item" data-route="the-official-bulma-book" href="https://bulma.io/extensions/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-extensions">
+                                            <i class="fas fa-plug"></i>
+                                        </span>
+                                    <span>
+                                            <strong>Bulma extensions</strong>
+                                        </span>
+                                </div>
+                                Side projects to enhance Bulma
+                            </div>
+                        </a>
+                        <hr class="navbar-divider ">
+                        <a class="navbar-item" data-route="the-official-bulma-book"
+                           href="https://bulma.io/the-official-bulma-book/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-bleeding">
+                                            <i class="fas fa-bookmark"></i>
+                                        </span>
+                                    <span>
+                                            <strong>The official Bulma book</strong>
+                                        </span>
+                                </div>
+                                A step-by-step guide that teaches you how to build a web interface from scratch using
+                                Bulma
+                            </div>
+                        </a>
+                        <hr class="navbar-divider ">
+                        <a class="navbar-item" data-route="the-official-bulma-book" href="https://bulma.io/blog/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-rss">
+                                            <i class="fas fa-rss"></i>
+                                        </span>
+                                    <span>
+                                            <strong>Blog</strong>
+                                        </span>
+                                </div>
+                                Stay updated with new features
+                            </div>
+                        </a>
+                        <hr class="navbar-divider ">
+                        <a class="navbar-item" data-route="the-official-bulma-book" href="https://bulma.io/brand/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-primary">
+                                            <i class="fas fa-medal"></i>
+                                        </span>
+                                    <span>
+                                            <strong>Brand</strong>
+                                        </span>
+                                </div>
+                                The official Bulma logos
+                            </div>
+                        </a>
+                        <hr class="navbar-divider ">
+                        <a class="navbar-item" data-route="the-official-bulma-book"
+                           href="https://bulma.io/bulma-start/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-success">
+                                            <i class="fas fa-rocket"></i>
+                                        </span>
+                                    <span>
+                                            <strong>Bulma start</strong>
+                                        </span>
+                                </div>
+                                A tiny npm package to get started
+                            </div>
+                        </a>
+                        <hr class="navbar-divider ">
+                        <a class="navbar-item" data-route="the-official-bulma-book"
+                           href="https://bulma.io/made-with-bulma/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-warning">
+                                            <i class="fas fa-certificate"></i>
+                                        </span>
+                                    <span>
+                                            <strong>Made with Bulma</strong>
+                                        </span>
+                                </div>
+                                The official community badge
+                            </div>
+                        </a>
+                        <hr class="navbar-divider ">
+                        <a class="navbar-item" data-route="the-official-bulma-book"
+                           href="https://bulma.io/alternative-to-bootstrap/">
+                            <div>
+                                <div class="icon-text">
+                                        <span class="icon has-text-bootstrap">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </span>
+                                    <span>
+                                            <strong>Coming from Bootstrap</strong>
+                                        </span>
+                                </div>
+                                See how Bulma is an alternative to Bootstrap
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                  **/-->
+            </div>
+
+            <div class="navbar-end">
+                <!--/**
+                            <a class="bd-navbar-icon navbar-item" href="https://bing.wdbyte.com" target="_blank">
+                                    <span class="icon" style="color: var(--github);">
+                                        <i class="fas fa-image"></i>
+                                    </span>
+                            </a>**/-->
+
+                <a class="bd-navbar-icon navbar-item" href="https://github.com/niumoo/JavaNotes" target="_blank">
+                    <span class="icon" style="color: var(--github);">
+                        <i class="fab fa-lg fa-github-alt"></i>
+                    </span>
+                </a>
+
+                <a class="bd-navbar-icon navbar-item" href="/static/wechat.html" target="_blank">
+                    <span class="icon" style="color: var(--weixin);">
+                        <i class="fab fa-lg fa-weixin"></i>
+                    </span>
+                </a>
+
+                <div class="navbar-item bd-navbar-sponsor-button is-hidden-desktop">
+                    <a class="button is-sponsor is-light">
+                        <span class="icon is-small">
+                            <i class="fas fa-thumbs-up"></i>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="navbar-item bd-navbar-download-button is-hidden-touch">
+                    <a class="button is-primary mr-3"
+                       href="https://debug.group">
+                        <span class="icon is-hidden-touch is-hidden-desktop-only">
+                            <i class="fas fa-tools"></i>
+                        </span>
+                        <span>Debug</span>
+                    </a>
+
+                    <a class="button is-sponsor is-light" id = "sponsor">
+                        <span class="icon is-small is-hidden-touch is-hidden-desktop-only">
+                            <i class="fas fa-thumbs-up"></i>
+                        </span>
+                        <span>
+                            Sponsor
+                    </span>
+                    </a>
+                    <a class="button is-success ml-3" href="/archives/">
+                        <span class="icon is-small is-hidden-touch is-hidden-desktop-only">
+                            <i class="fas fa-lg fa-search"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<!-- Header -->
+<header class="w3-container w3-green w3-center" style="padding:128px 16px">
+    <h1 class="w3-margin w3-jumbo">未读代码</h1>
+    <p class="w3-xlarge">结构化 Java 系列文档，再来点数据结构与算法！</p>
+    <button id="xuancai-button" class="w3-padding-large w3-margin-top w3-black"><a href="/java-notes/" style="text-decoration: none;" class="w3-text-white">开始浏览</a></button>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+        <div class="w3-twothird">
+            <h1>最新文章</h1>
+            <ul class="w3-ul">
+                <li th:each="postInfo:${postInfoList}"><a th:href="${postInfo.getPermalink()}" style="font-size: 16px;text-decoration: none;color: black" th:text="${postInfo.getTitle()}">文章标题</a></li>
+            </ul>
+        </div>
+
+        <div class="w3-third w3-center">
+            <i class="fa fa-coffee w3-padding-64 w3-text-green"></i>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<div th:include="footer::common_footer"></div>
+</body>
+</html>
