@@ -46,8 +46,10 @@ body{
 }
 
 /* Bulma Helpers */
-.menu-label{
-    font-size: 1em !important;
+.menu-label {
+    font-size: 1em!important;
+    margin-bottom: .1em !important;
+    margin-top: .2em;
 }
 .bd-navbar .button.is-sponsor.is-light {
     color: var(--sponsor)
