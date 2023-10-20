@@ -1,4 +1,8 @@
 /*替换 bulma*/
+.content pre {
+    padding: .7em 1em !important;
+}
+
 .menu-list a{
     overflow: hidden!important;
     text-overflow: ellipsis!important;
