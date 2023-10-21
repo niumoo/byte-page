@@ -156,7 +156,7 @@ public class DocPage {
             .map(postInfo -> {
                 String htmlContent = postInfo.getHtmlContent();
                 String top2Content = HtmlParser.getTop2Content(htmlContent,postInfo.getPermalink());
-                top2Content = "为了更好的阅读体验，<a href=\\\"https://www.wdbyte.com\" + url + \"\\\">可以点击跳转到网页继续阅读.....</a></b>";
+                top2Content = "为了更好的阅读体验，<a href=\"https://www.wdbyte.com"+postInfo.getPermalink()+"\">可以点击跳转到网页继续阅读.....</a></b>";
                 postInfo.setTop2HtmlContent(top2Content);
                 return postInfo;
             })
