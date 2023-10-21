@@ -17,7 +17,7 @@
             <name>程序猿阿朗</name>
             <uri>https://www.wdbyte.com</uri>
         </author>
-        <content type="html" xml:lang="en" xml:base="https://www.wdbyte.com/" th:inline="text" th:utext="${'<![CDATA['+postInfo.getTop2HtmlContent()}+']]>'">
+        <content type="html" xml:lang="en" xml:base="https://www.wdbyte.com/" th:inline="text" th:utext="${'<![CDATA['+postInfo.getTop2HtmlContent()+postInfo.getHtmlContent()}+']]>'">
         </content>
     </entry>
 </feed>
