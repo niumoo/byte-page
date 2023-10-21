@@ -155,7 +155,7 @@ public class DocPage {
             .sorted(Comparator.comparing(PostInfo::getDateUtc).reversed())
             .map(postInfo -> {
                 String htmlContent = postInfo.getHtmlContent();
-                String top2Content = HtmlParser.getTop2Content(htmlContent);
+                String top2Content = HtmlParser.getTop2Content(htmlContent,postInfo.getPermalink());
                 postInfo.setTop2HtmlContent(top2Content);
                 return postInfo;
             })
