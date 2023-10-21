@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>未读代码 Feed</title>
+    <link rel="alternate" type="text/html" href="https://www.wdbyte.com/"/>
+    <link rel="self" type="application/atom+xml" href="https://www.wdbyte.com/atom.xml"/>
+    <id>tag:www.wdbyte.com,/</id>
+    <updated th:text="${currentDate}">2023-10-20T12:09:12Z</updated>
+    <subtitle>程序猿阿朗</subtitle>
+    <entry th:each="postInfo:${postInfoList}">
+        <title th:text="${postInfo.getTitle()}"></title>
+        <link rel="alternate" type="text/html" th:href="${'https://www.wdbyte.com'+postInfo.getPermalink()}"  href="http://www.ruanyifeng.com/blog/2023/10/weekly-issue-274.html"/>
+        <id th:text="${'tag:www.wdbyte.com,'+postInfo.getPermalink()}">tag:www.wdbyte.com,/java/list/</id>
+        <published th:text="${postInfo.getDateUtc()}">2023-10-20T00:15:40Z</published>
+        <updated th:text="${postInfo.getUpdatedUtc()}">2023-10-20T12:09:12Z</updated>
+        <summary th:text="${postInfo.getDescription()}"></summary>
+        <author>
+            <name>程序猿阿朗</name>
+            <uri>https://www.wdbyte.com</uri>
+        </author>
+        <content type="html" xml:lang="en" xml:base="https://www.wdbyte.com/" th:inline="text" th:utext="${'<![CDATA['+postInfo.getTop2HtmlContent()}+']]>'">
+        </content>
+    </entry>
+</feed>

@@ -43,7 +43,7 @@
 
 <div class="mr-5 ml-5 mt-5">
     <div class="columns">
-        <div class="column is-2 is-3-touch is-hidden-mobile">
+        <div class="column is-2 is-3-tablet is-2-desktop is-hidden-mobile">
             <aside class="menu">
                 <div th:each="menu:${menuNode.getChildren()}" class="w3-container">
                     <p th:text="${menu.getName()}" class="menu-label">General</p>
@@ -57,7 +57,7 @@
 
             </aside>
         </div>
-        <div class="column is-8 is-9-touch is-primary is-full-mobile byte-post-content w3-border">
+        <div class="column is-8  is-9-tablet is-8-desktop is-primary is-full-mobile byte-post-content w3-border">
             <div class="byte-post-title"><h1 class="title is-3" th:text="${postInfo.getTitle()}">标题</h1></div>
             <div class="content">[(${postInfo.getHtmlContent()})]</div>
             <div id="vssue" class="mt-6"></div>

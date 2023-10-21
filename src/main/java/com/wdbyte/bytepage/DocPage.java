@@ -49,6 +49,7 @@ public class DocPage {
         generatorIndexHtml();
         generatorArchivesHtml();
         generatorSitemapXml();
+        generatorFeedXml();
         generatorLimit5Url();
         copyStaticFile();
     }
@@ -145,6 +146,27 @@ public class DocPage {
         context.setVariable("currentDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         // 输出到流（文件）
         ThymeleafUtil.processXmlWriteFile("dist/sitemap.xml", "sitemap", context);
+    }
+
+    private static void generatorFeedXml() throws IOException {
+        // 用于文章列表
+        List<PostInfo> postInfoList = postInfoMap.values().stream()
+            .map(TreeNode::getData)
+            .sorted(Comparator.comparing(PostInfo::getDateUtc).reversed())
+            .map(postInfo -> {
+                String htmlContent = postInfo.getHtmlContent();
+                String top2Content = HtmlParser.getTop2Content(htmlContent);
+                postInfo.setTop2HtmlContent(top2Content);
+                return postInfo;
+            })
+            .limit(3)
+            .collect(Collectors.toList());
+        // 定义数据模型
+        Context context = new Context();
+        context.setVariable("postInfoList", postInfoList);
+        context.setVariable("currentDate", postInfoList.get(0).getDateUtc());
+        // 输出到流（文件）
+        ThymeleafUtil.processXmlWriteFile("dist/feed.xml", "feed", context);
     }
 
     private static void generatorLimit5Url() throws IOException {

@@ -3,6 +3,7 @@ package com.wdbyte.bytepage.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,5 +36,11 @@ public class HtmlParser {
             tocList.add(Triple.of(margin, id, value));
         }
         return tocList;
+    }
+
+    public static String getTop2Content(String html) {
+        int indexOf = html.indexOf("<h2");
+        return StringUtils.substring(html, 0, StringUtils.indexOf(html, "<h2", indexOf + 1))+
+            "<b>完整内容请到网页阅读.....</b>";
     }
 }

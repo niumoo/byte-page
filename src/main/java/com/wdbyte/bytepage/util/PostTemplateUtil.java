@@ -3,6 +3,8 @@ package com.wdbyte.bytepage.util;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -44,6 +46,7 @@ public class PostTemplateUtil {
             link = link + "/";
         }
         postInfo.setPermalink(link);
+        // keyword 和 description
         List<LinkedHashMap<String, String>> metaList = postInfo.getMeta();
         if (CollectionUtils.isNotEmpty(metaList)) {
             for (LinkedHashMap<String, String> metaMap : metaList) {
@@ -58,7 +61,21 @@ public class PostTemplateUtil {
         if (postInfo.getUpdated() == null) {
             postInfo.setUpdated(postInfo.getDate());
         }
+        // 添加 UTC 时间
+        DateTimeFormatter patternFrom = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter patternTo = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        if (postInfo.getDate() != null){
+            LocalDateTime time = LocalDateTime.parse(postInfo.getDate(), patternFrom);
+            time = time.minusHours(8);
+            // 格式化
+            postInfo.setDateUtc(patternTo.format(time));
+        }
+        if (postInfo.getUpdated() != null) {
+            LocalDateTime time = LocalDateTime.parse(postInfo.getUpdated(), patternFrom);
+            time = time.minusHours(8);
+            // 格式化
+            postInfo.setUpdatedUtc(patternTo.format(time));
+        }
         return postInfo;
     }
-
 }

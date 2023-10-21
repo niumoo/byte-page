@@ -12,6 +12,8 @@ public class PostInfo {
     private String title;
     private String date;
     private String updated;
+    private String dateUtc;
+    private String updatedUtc;
     private String permalink;
     private List<String> categories;
     private List<String> tags;
@@ -23,6 +25,7 @@ public class PostInfo {
     private String keywords;
     private String description;
     private String htmlContent;
+    private String top2HtmlContent;
     private String markdownContent;
 
     public String getTitle() {
@@ -145,11 +148,38 @@ public class PostInfo {
         this.githubPath = githubPath;
     }
 
+    public String getDateUtc() {
+        return dateUtc;
+    }
+
+    public void setDateUtc(String dateUtc) {
+        this.dateUtc = dateUtc;
+    }
+
+    public String getUpdatedUtc() {
+        return updatedUtc;
+    }
+
+    public void setUpdatedUtc(String updatedUtc) {
+        this.updatedUtc = updatedUtc;
+    }
+
+    public String getTop2HtmlContent() {
+        return top2HtmlContent;
+    }
+
+    public void setTop2HtmlContent(String top2HtmlContent) {
+        this.top2HtmlContent = top2HtmlContent;
+    }
+
     @Override
     public String toString() {
         return "PostInfo{" +
             "title='" + title + '\'' +
             ", date='" + date + '\'' +
+            ", updated='" + updated + '\'' +
+            ", dateUtc='" + dateUtc + '\'' +
+            ", updatedUtc='" + updatedUtc + '\'' +
             ", permalink='" + permalink + '\'' +
             ", categories=" + categories +
             ", tags=" + tags +
@@ -157,10 +187,11 @@ public class PostInfo {
             ", feed=" + feed +
             ", filePath=" + filePath +
             ", filePathString='" + filePathString + '\'' +
-            ", updated='" + updated + '\'' +
+            ", githubPath='" + githubPath + '\'' +
             ", keywords='" + keywords + '\'' +
             ", description='" + description + '\'' +
             ", htmlContent='" + htmlContent + '\'' +
+            ", top2HtmlContent='" + top2HtmlContent + '\'' +
             ", markdownContent='" + markdownContent + '\'' +
             '}';
     }
