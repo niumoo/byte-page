@@ -119,7 +119,6 @@
         document.documentElement.scrollTop = 0;
     }
 
-
     // 获取需要添加悬浮效果的元素
     var hoverElement = document.getElementById('sponsor');
     // 创建鼠标移入事件监听器
@@ -148,9 +147,18 @@
         node.style.width = "250px";
         document.body.appendChild(node);
     }
-
 </script>
 <script src="/static/prism.js"></script>
+<script>
+    function pvGet() {
+        let request = new XMLHttpRequest(); // 新建XMLHttpRequest对象
+        request.open('GET', 'https://debug.group/api/pv?url=' + btoa(location.pathname), true);
+        request.setRequestHeader("Content-Type", "text/plain");
+        // 发送请求
+        request.send();
+    }
+    pvGet();
+</script>
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.runtime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.github-v4.min.js"></script>
 <script src="/static/vssue.js"></script>
