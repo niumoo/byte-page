@@ -51,7 +51,7 @@ public class DocPage {
         generatorSitemapXml();
         generatorFeedXml();
         generatorLimit5Url();
-        //copyStaticFile();
+        copyStaticFile();
     }
 
     private static void initRootNode() throws IOException {
