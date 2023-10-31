@@ -20,6 +20,9 @@
     color: white;
     border-radius: 5px;
 }
+code,pre{
+    font-family: Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace,'Microsoft YaHei' !important;
+}
 /*ul, ol {*/
 /*  margin-block-start: 1em;*/
 /*  margin-block-end: 1em;*/
