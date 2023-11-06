@@ -1,7 +1,14 @@
+/*替换高亮*/
+pre code.hljs{
+    padding: .5em .8em !important;
+}
 /*替换 bulma*/
 .content pre {
     padding: 0px !important;
     border: 1px solid #b8b8b8;
+}
+pre code{
+    font-size: 1.1em !important;
 }
 
 .menu-list a{
