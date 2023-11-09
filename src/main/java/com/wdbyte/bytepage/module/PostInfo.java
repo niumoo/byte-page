@@ -4,6 +4,8 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 /**
  * @author niulang
  * @date 2023/03/31
@@ -27,6 +29,7 @@ public class PostInfo {
     private String htmlContent;
     private String top2HtmlContent;
     private String markdownContent;
+    private List<Triple<Integer, String, String>> menuList;
 
     public String getTitle() {
         return title;
@@ -170,6 +173,15 @@ public class PostInfo {
 
     public void setTop2HtmlContent(String top2HtmlContent) {
         this.top2HtmlContent = top2HtmlContent;
+    }
+
+    public List<Triple<Integer, String, String>> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(
+        List<Triple<Integer, String, String>> menuList) {
+        this.menuList = menuList;
     }
 
     @Override

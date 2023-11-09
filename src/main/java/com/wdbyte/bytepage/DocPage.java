@@ -48,10 +48,11 @@ public class DocPage {
         generatorPostHtmlForEach();
         generatorIndexHtml();
         generatorArchivesHtml();
+        generatorSearchHtml();
         generatorSitemapXml();
         generatorFeedXml();
         generatorLimit5Url();
-        copyStaticFile();
+        //copyStaticFile();
     }
 
     private static void initRootNode() throws IOException {
@@ -203,6 +204,28 @@ public class DocPage {
         }
         // 输出到流（文件）
         ThymeleafUtil.processHtmlWriteFile("dist/archives/index.html", "blog_archives", context);
+    }
+
+    private static void generatorSearchHtml() throws IOException {
+        // 定义数据模型
+        Context context = new Context();
+        List<PostInfo> postInfoList = postInfoMap.values().stream()
+            .map(TreeNode::getData)
+            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
+            .collect(Collectors.toList());
+        for (PostInfo postInfo : postInfoList) {
+            postInfo.setMenuList(HtmlParser.getHeadList(postInfo.getHtmlContent()));
+        }
+        // 用于文章列表
+        context.setVariable("postInfoList", postInfoList);
+        // 用于一级菜单
+        context.setVariable("rootNode", rootNode);
+        File file = new File("dist/search/");
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        // 输出到流（文件）
+        ThymeleafUtil.processHtmlWriteFile("dist/search/index.html", "blog_search", context);
     }
 
     public static String generatorSavePath(String currentFilePath) {
