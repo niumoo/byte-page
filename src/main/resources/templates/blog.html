@@ -9,14 +9,14 @@
     <meta name="keywords" th:attr="content=${postInfo.getKeywords()}">
     <link rel="icon" href="/static/fav.png">
     <link rel="stylesheet" href="/static/bulma.min.css" />
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css">
+    <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/brands.min.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.min.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/intellij-light.min.css">
-<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/atom-one-dark.min.css">-->
-<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/routeros.min.css">-->
+    <!--    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/atom-one-dark.min.css">-->
+    <!--    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/routeros.min.css">-->
     <link rel="stylesheet" href="/static/tool.css">
-<!--    <link rel="stylesheet" href="/static/highlightjs-copy.min.css">-->
+    <!--    <link rel="stylesheet" href="/static/highlightjs-copy.min.css">-->
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-452V0ZSNPR"></script>
@@ -24,7 +24,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-452V0ZSNPR');
 </script>
 <script>
@@ -60,7 +59,7 @@
         </div>
         <div class="column is-8  is-9-tablet is-8-desktop is-primary is-full-mobile byte-post-content w3-border">
             <div class="byte-post-title"><h1 class="title is-3" th:text="${postInfo.getTitle()}">标题</h1></div>
-            <div class="content">[(${postInfo.getHtmlContent()})]</div>
+            <div class="content" id="content">[(${postInfo.getHtmlContent()})]</div>
 <!--            <div style="background-color: #00800012;padding: 10px 20px;border-radius: 3px;color: green">-->
 <!--                <div><i class="far fa-calendar-alt" style="color: green;"></i> 更新时间：2023-11-08 </div>-->
 <!--                <div><i class="fas fa-copyright"    style="color: green;"></i> 版权声明：禁止转载 </div>-->
@@ -99,13 +98,11 @@
             });
         });
     });
-
     // 文字格式化
     pangu.spacingElementByClassName('byte-post-content');
     document.addEventListener('DOMContentLoaded', () => {
         pangu.autoSpacingPage();
     });
-
     // 回到顶部
     // Get the button
     let mybutton = document.getElementById("myBtn");
@@ -174,5 +171,11 @@
         request.send();
     }
     pvGet();
+</script>
+<script src="/static/FullscreenImage.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        enableFullscreenForImages('content');
+    });
 </script>
 </html>
