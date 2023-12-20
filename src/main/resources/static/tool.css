@@ -17,19 +17,19 @@ pre code{
     white-space: nowrap!important;
 }
 .menu-list a:hover {
-    background-color: #4CAF50;
+    background-color: var(--theme-a);
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow-x: auto;
 }
 
 .menu-list a.is-active {
-    background-color: #4CAF50;
+    background-color: var(--theme-a);
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 code,pre{
-    font-family: Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace,'Microsoft YaHei';
+    font-family: consolas,Menlo,"PingFang SC","Microsoft YaHei",sans-serif !important;
 }
 /*ul, ol {*/
 /*  margin-block-start: 1em;*/
@@ -44,6 +44,8 @@ code,pre{
 /* w3 css */
 body{
     background-color: #eee;
+    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei" !important;
+    font-size: 16px;
 }
 .w3-border{
     border: 1px solid #eee !important;
@@ -678,10 +680,14 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     color: var(--algolia) !important;
 }
 
+.navbar-item{
+    font-weight: bold !important;
+}
 .bd-navbar-item {
     transition-duration: 86ms;
     transition-property: background-color, box-shadow, color;
     font-size: 1.1em;
+    font-weight: bold !important;
 }
 
 .bd-navbar-item > .icon {
@@ -690,7 +696,7 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
 }
 
 .bd-navbar-item:hover, .bd-navbar-item.is-active {
-    border-radius: 0.375em;
+    border-radius: 16px;
     color: var(--color-dark) !important;
 }
 
@@ -893,7 +899,8 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     --container-width: calc(100vw - 3rem);
     --container-width-desktop: 960px;
     --container-width-widescreen: 1152px;
-    --container-width-fullhd: 1344px
+    --container-width-fullhd: 1344px;
+    --theme-a: #4CAF50;
 }
 
 
@@ -916,9 +923,18 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
 }
 .byte-post-content p a,.byte-post-content li a,.byte-post-content table tr td a,.byte-post-content table tr th a {
     color: #0645ad !important;
+    padding: 0 4px;
+    font-weight: 500;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.3s ease; /* 对所有属性应用过渡效果 */
 }
 .byte-post-content p a:hover,.byte-post-content li a:hover,.byte-post-content table tr td a:hover,.byte-post-content table tr th a:hover {
-    text-decoration:underline;
+    text-decoration: none;
+    background-color: var(--theme-a);
+    border-width: 0;
+    border-radius: 10px;
+    padding: 4px 8px;
+    color: white!important;
 }
 .byte-post-title{
     margin-top: 20px;
@@ -942,7 +958,6 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     background-color: #eaecf0;
     border-radius: .25rem;
     padding: .2em .5em .2em !important;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
 }
 
 .byte-post-content li p {
@@ -955,14 +970,9 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     word-wrap: break-word;
 }
 .byte-post-content blockquote {
-    background-color: #f3f3f3;
-    border-radius: 4px;
-    border-left: 4px solid #4CAF50;
+    border-radius: 10px;
+    border-left: 5px solid var(--theme-a);
     padding:  1em 1.5em !important;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 10px;
-    color: #383838;
 }
 
 /* 回到顶部*/
@@ -976,7 +986,7 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
 /*悬浮窗*/
 .notification {
     position: fixed;
-    border-radius: 3px;
+    border-radius: 10px;
     padding: 5px;
 }
 /* 文章正文结束*/
@@ -987,13 +997,18 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     background-color: white !important;
     padding: 50px 0;
 }
-
 .footer a {
+    padding:2px 4px;
     color: #626262;
+    border-radius:14px;
+    transition: all 0.3s ease; /* 对所有属性应用过渡效果 */
 }
-.footer-a{
-    margin:0 5px;
+.footer a:hover{
+    background-color:var(--theme-a);
+    color:white;
+    font-size: 1.1em;
 }
+
 @media screen and (max-width: 992px) {
     .footer-a {
         font-size:50px;
@@ -1007,4 +1022,12 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
 }
 .byte-search:hover{
     border-color: #8BC34A !important;
+}
+.goto-top {
+    font-size: 3em;
+    border-radius: 25px;
+    color: rgba(76, 175, 80, 0.79);
+}
+.goto-top:hover {
+    color:var(--theme-a);
 }
