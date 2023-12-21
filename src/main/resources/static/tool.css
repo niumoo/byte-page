@@ -1006,7 +1006,6 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
 .footer a:hover{
     background-color:var(--theme-a);
     color:white;
-    font-size: 1.1em;
 }
 
 @media screen and (max-width: 992px) {
