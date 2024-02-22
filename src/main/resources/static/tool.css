@@ -1,6 +1,8 @@
 /*替换高亮*/
 pre code.hljs{
     padding: .5em .8em !important;
+    background-color: #eee;
+    line-height: 1.5;
 }
 /*替换 bulma*/
 .content pre {
