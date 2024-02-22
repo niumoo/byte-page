@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>未读代码</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="网站提供 Java 相关教程，Java 进阶知识，以及 Java 相关的其他知识，如数据结构，算法，计算机组成原理，操作系统等。让编程简单有趣">
+    <meta name="keywords" content="Java, Java 开发, Java 教程, Java 新特性, Spring Boot">
+    <link rel="icon" href="/static/fav.png">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/w3-css/4.1.0/w3.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+        .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+        .fa-anchor,.fa-coffee {font-size:200px}
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-green w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-green" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-white">未读代码</a>
+        <div th:each="child:${rootNode.getChildren()}"><a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" th:text="${child.getName()}">Link 1</a></div>
+    </div>
+
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <div th:each="child:${rootNode.getChildren()}"><a th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" class="w3-bar-item w3-button w3-padding-large" th:text="${child.getName()}">Link 1</a></div>
+    </div>
+</div>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+        <div class="w3-twothird">
+            <h1>文章归档</h1>
+            <ul class="w3-ul">
+                <li th:each="postInfo:${postInfoList}">
+                    <a th:href="${postInfo.getPermalink()}" style="font-size: 16px;text-decoration: none" th:text="${postInfo.getTitle()}">文章标题</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="w3-third w3-center">
+            <i class="fa fa-coffee w3-padding-64 w3-text-green"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:include="footer::common_footer"></div>
+
+<script>
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?95fc5fbbc05e1ddccdeb992adfe12ded";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</body>
+</html>

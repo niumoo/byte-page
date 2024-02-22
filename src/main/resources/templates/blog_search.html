@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>文档归档 | 未读代码</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="网站提供 Java 相关教程，Java 进阶知识，以及 Java 相关的其他知识，如数据结构，算法，计算机组成原理，操作系统等。让编程简单有趣">
+    <meta name="keywords" content="Java, Java 开发, Java 教程, Java 新特性, Spring Boot">
+    <link rel="icon" href="/static/fav.png">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/w3-css/4.1.0/w3.min.css">
+    <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/brands.min.css">
+    <link rel="stylesheet" href="/static/bulma.min.css" />
+    <link rel="stylesheet" href="/static/tool.css">
+    <script src="/static/w3.js"></script>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-452V0ZSNPR"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-452V0ZSNPR');
+</script>
+<script>
+    <!-- baidu-->
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?95fc5fbbc05e1ddccdeb992adfe12ded";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    <!-- end baidu-->
+</script>
+<style>
+    .list1{
+        font-size: 16px;
+        text-decoration: none;
+        color: #262626
+    }
+    .list2{
+        padding: 5px 20px;
+    }
+</style>
+<body>
+<!-- Navbar -->
+<div th:include="menu::common_menu"></div>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+        <div class="w3-twothird">
+            <h1 class="w3-xlarge">内容搜索</h1>
+            <input class="input is-success" type="text" placeholder="Search" oninput="w3.filterHTML('#id01', 'li', this.value)" >
+            <ul class="w3-ul" id="id01">
+                <li th:each="postInfo:${postInfoList}"><a th:href="${postInfo.getPermalink()}" class="list1" th:text="${postInfo.getTitle()}">文章标题</a><ul th:each="tocInfo:${postInfo.getMenuList()}"><li class="list2"><a th:style="'margin-left: ' + ${tocInfo.getLeft()} + 'px;'" th:href="${postInfo.getPermalink()+'#'+tocInfo.getMiddle()}" th:text="${'# '+tocInfo.getRight()}"></a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:include="footer::common_footer"></div>
+</body>
+<script>
+    // 获取需要添加悬浮效果的元素
+    var hoverElement = document.getElementById('sponsor');
+    // 创建鼠标移入事件监听器
+    hoverElement.addEventListener('mouseenter', function() {
+        showNotification(hoverElement);
+    });
+    // 创建鼠标移出事件监听器
+    hoverElement.addEventListener('mouseleave', function() {
+        // 获取hoverElement下面的<img>元素
+        var imgDiv = document.getElementById('notification');
+        // 移除<img>元素
+        imgDiv.remove();
+    });
+
+    function showNotification(ref) {
+        // 创建新的<img>元素
+        var node = document.createElement('img');
+        // 设置图片URL
+        node.src = 'https://cdn.debug.group/git/webinfo/wp.png';
+        // 将<img>元素添加到hoverElement下面
+        node.className = "notification";
+        node.id = "notification";
+        let coords = ref.getBoundingClientRect();
+        node.style.right = "20px";
+        node.style.top = coords.bottom + 5 + "px";
+        node.style.width = "250px";
+        document.body.appendChild(node);
+    }
+</script>
+</html>
