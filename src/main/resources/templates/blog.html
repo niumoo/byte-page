@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="/static/bulma.min.css" />
     <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/brands.min.css">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.min.css">
+<!--    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.min.css">-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/intellij-light.min.css">
     <!--    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/atom-one-dark.min.css">-->
     <!--    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/routeros.min.css">-->
     <link rel="stylesheet" href="/static/tool.css">
     <!--    <link rel="stylesheet" href="/static/highlightjs-copy.min.css">-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/artalk/2.8.2/Artalk.css" >
+    <script src="https://cdn.staticfile.org/artalk/2.8.2/Artalk.js"></script>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-452V0ZSNPR"></script>
@@ -41,7 +43,7 @@
 <!-- Navbar -->
 <div th:include="menu::common_menu"></div>
 
-<div class="mr-5 ml-5 mt-5">
+<div class="mr-5 ml-5 mt-5 byte-post-main">
     <div class="columns">
         <div class="column is-2 is-3-tablet is-2-desktop is-hidden-mobile">
             <aside class="menu">
@@ -64,7 +66,12 @@
 <!--                <div><i class="far fa-calendar-alt" style="color: green;"></i> 更新时间：2023-11-08 </div>-->
 <!--                <div><i class="fas fa-copyright"    style="color: green;"></i> 版权声明：禁止转载 </div>-->
 <!--            </div>-->
-            <div id="vssue" class="mt-6"></div>
+<!--            <div id="vssue" class="mt-6"></div>-->
+            <br/>
+            <comments>
+                <p style="color: var(--theme-a);font-weight: 700;font-size: 1.2em;">评论</p>
+                <div id="Comments"></div>
+            </comments>
         </div>
         <div class="column is-2 is-hidden-touch">
             <div class="is-3">目录</div>
@@ -156,26 +163,31 @@
 <script src="https://cdn.staticfile.org/highlight.js/11.9.0/languages/java.min.js"></script>
 <!--<script src="/static/highlightjs-copy.min.js"></script>-->
 <script>
-        // hljs.addPlugin(new CopyButtonPlugin());
         hljs.highlightAll();
 </script>
-<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.runtime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.github-v4.min.js"></script>
-<script src="/static/vssue.js"></script>
+<!--<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.runtime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+<!--<script src="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.github-v4.min.js"></script>-->
+<!--<script src="/static/vssue.js"></script>-->
 <script>
-    function pvGet() {
-        let request = new XMLHttpRequest(); // 新建XMLHttpRequest对象
-        request.open('GET', 'https://debug.group/api/pv?url=' + btoa(location.pathname), true);
-        request.setRequestHeader("Content-Type", "text/plain");
-        // 发送请求
-        request.send();
-    }
-    pvGet();
+    // function pvGet() {
+    //     let request = new XMLHttpRequest(); // 新建XMLHttpRequest对象
+    //     request.open('GET', 'https://debug.group/api/pv?url=' + btoa(location.pathname), true);
+    //     request.setRequestHeader("Content-Type", "text/plain");
+    //     // 发送请求
+    //     request.send();
+    // }
+    // pvGet();
 </script>
 <script src="/static/FullscreenImage.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         enableFullscreenForImages('content');
     });
+    Artalk.init({
+        el: '#Comments',
+        locale: "auto",
+        server: 'https://debug.group:8398',
+        site: 'wdbyte.com',
+    })
 </script>
 </html>

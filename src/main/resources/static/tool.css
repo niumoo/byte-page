@@ -17,6 +17,7 @@ pre code{
     overflow: hidden!important;
     text-overflow: ellipsis!important;
     white-space: nowrap!important;
+    padding: 0.5em .3em;
 }
 .menu-list a:hover {
     background-color: var(--theme-a);
@@ -69,6 +70,7 @@ body{
     font-size: 1em!important;
     margin-bottom: .1em !important;
     margin-top: .2em;
+    font-weight: 700;
 }
 .bd-navbar .button.is-sponsor.is-light {
     color: var(--sponsor)
@@ -905,8 +907,12 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     --theme-a: #4CAF50;
 }
 
-
 /* 文章正文*/
+.byte-post-main {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 1450px;
+}
 @media screen and (max-width: 768px) {
     .byte-post-content {
         padding-left: 0rem;
@@ -1031,4 +1037,18 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
 }
 .goto-top:hover {
     color:var(--theme-a);
+}
+
+/*评论*/
+.atk-main-editor {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+.atk-header{
+    border-bottom: 1px dashed #ddd !important;
+}
+.atk-main-editor>.atk-bottom .atk-send-btn {
+    background: var(--theme-a) !important;
+    min-width: 5em;
+    border-radius: 5px
 }
