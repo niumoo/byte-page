@@ -65,10 +65,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-452V0ZSNPR');
-</script>
-<script>
     <!-- baidu-->
     var _hmt = _hmt || [];
     (function() {
@@ -124,34 +121,5 @@
             });
         });
     });
-
-    // 获取需要添加悬浮效果的元素
-    var hoverElement = document.getElementById('sponsor');
-    // 创建鼠标移入事件监听器
-    hoverElement.addEventListener('mouseenter', function() {
-        showNotification(hoverElement);
-    });
-    // 创建鼠标移出事件监听器
-    hoverElement.addEventListener('mouseleave', function() {
-        // 获取hoverElement下面的<img>元素
-        var imgDiv = document.getElementById('notification');
-        // 移除<img>元素
-        imgDiv.remove();
-    });
-
-    function showNotification(ref) {
-        // 创建新的<img>元素
-        var node = document.createElement('img');
-        // 设置图片URL
-        node.src = 'https://cdn.debug.group/git/webinfo/wp.png';
-        // 将<img>元素添加到hoverElement下面
-        node.className = "notification";
-        node.id = "notification";
-        let coords = ref.getBoundingClientRect();
-        node.style.right = "20px";
-        node.style.top = coords.bottom + 5 + "px";
-        node.style.width = "250px";
-        document.body.appendChild(node);
-    }
 </script>
 </html>
