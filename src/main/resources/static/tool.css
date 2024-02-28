@@ -3,11 +3,12 @@ pre code.hljs{
     padding: .5em .8em !important;
     background-color: #eee;
     line-height: 1.5;
+    border-radius: 10px;
 }
 /*替换 bulma*/
 .content pre {
     padding: 0px !important;
-    border: 1px solid #b8b8b8;
+    background-color: white;
 }
 pre code{
     font-size: 1.1em !important;
@@ -910,13 +911,13 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
 /* 文章正文*/
 @media screen and (max-width: 768px) {
     .byte-post-content {
-        padding-left: 0rem;
-        padding-right: 0rem;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
     }
 }
 .byte-post-content {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
     padding-bottom: 5rem;
     line-height: 1.8;
     background-color: white;
