@@ -23,14 +23,14 @@ pre code{
 }
 .menu-list a:hover {
     background-color: var(--theme-a);
-    color: white;
+    color: white !important;;
     border-radius: 10px;
     overflow-x: auto;
 }
 
 .menu-list a.is-active {
     background-color: var(--theme-a);
-    color: white;
+    color: white !important;;
     border-radius: 10px;
 }
 code,pre{
