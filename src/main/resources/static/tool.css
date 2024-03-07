@@ -19,7 +19,6 @@ pre code{
     overflow: hidden!important;
     text-overflow: ellipsis!important;
     white-space: nowrap!important;
-    padding: .4em .75em !important;
 }
 .menu-list a:hover {
     background-color: var(--theme-a);
