@@ -977,6 +977,7 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     word-wrap: break-word;
 }
 .byte-post-content blockquote {
+    background-color: #e6f6e6;
     border-radius: 10px;
     border-left: 5px solid var(--theme-a);
     padding:  1em 1.5em !important;
