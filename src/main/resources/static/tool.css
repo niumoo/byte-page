@@ -992,11 +992,11 @@ a.has-text-bootstrap-dark:hover, a.has-text-bootstrap-dark:focus {
     z-index: 99;
 }
 /*悬浮窗*/
-.notification {
-    position: fixed;
-    border-radius: 10px;
-    padding: 5px;
-}
+/*.notification {*/
+/*    position: fixed;*/
+/*    border-radius: 10px;*/
+/*    padding: 5px;*/
+/*}*/
 /* 文章正文结束*/
 .footer {
     margin-top: 30px;

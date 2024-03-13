@@ -5,8 +5,8 @@
     <title>未读代码</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="网站提供 Java 相关教程，Java 进阶知识，以及 Java 相关的其他知识，如数据结构，算法，计算机组成原理，操作系统等。让编程简单有趣">
-    <meta name="keywords" content="Java, Java 开发, Java 教程, Java 新特性, Spring Boot">
+    <meta name="description" content="提供 Java 基础教程,Java 新特性,Java 进阶知识,Spring Boot 教程,Java 开发,数据结构与算法，计算机组成原理等教程。让编程简单有趣！">
+    <meta name="keywords" content="Java 开发, Java 教程, Java 新特性, Spring Boot">
     <link rel="icon" href="/static/fav.png">
     <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/brands.min.css">
@@ -14,48 +14,55 @@
     <link rel="stylesheet" href="/static/bulma.min.css" />
     <link rel="stylesheet" href="/static/tool.css">
     <style>
-        .fa-anchor,.w3-center .fa-coffee {font-size:200px}
-        /* this button is inspired from this -- https://www.newline.co/pricing */
-        #xuancai-button {
-            --width: 150px;
-            --timing: 2s;
-            border: 0;
-            width: var(--width);
-            padding-block: 1em;
-            color: #fff;
-            font-weight: bold;
-            font-size: 1em;
-            background: black;
-            transition: all 0.2s;
-            border-radius: 3px;
+        body{
+            background-color: white;
         }
-
-        #xuancai-button:hover {
-            background-image: linear-gradient(
-                    to right,
-                    rgb(250, 82, 82),
-                    rgb(250, 82, 82) 16.65%,
-                    rgb(190, 75, 219) 16.65%,
-                    rgb(190, 75, 219) 33.3%,
-                    rgb(76, 110, 245) 33.3%,
-                    rgb(76, 110, 245) 49.95%,
-                    rgb(64, 192, 87) 49.95%,
-                    rgb(64, 192, 87) 66.6%,
-                    rgb(250, 176, 5) 66.6%,
-                    rgb(250, 176, 5) 83.25%,
-                    rgb(253, 126, 20) 83.25%,
-                    rgb(253, 126, 20) 100%,
-                    rgb(250, 82, 82) 100%
-            );
-            animation: var(--timing) linear dance6123 infinite;
-            transform: scale(1.1) translateY(-1px);
-            color: #fff;
+        h2{
+            font-size: 1.5em !important;
         }
-
-        @keyframes dance6123 {
-            to {
-                background-position: var(--width);
+        w3-ul{
+            border: none!important;
+        }
+        @media screen and (max-width: 992px) {
+            .masonry{
+                -moz-column-count: 1 !important;
+                -webkit-column-count: 1 !important;
+                column-count: 1 !important;
             }
+        }
+        .masonry {
+            -moz-column-count: 3;
+            -webkit-column-count: 3;
+            column-count: 3;
+            -moz-column-gap: 1em;
+            -webkit-column-gap: 1em;
+            column-gap: 1em;
+            margin: 15px auto;
+            max-width: 1500px;
+        }
+
+        .item {
+            break-inside: avoid-column;
+            margin-bottom: 1em;
+            padding: 1em;
+        }
+        .link{
+            font-size: 16px;
+            text-decoration: none;
+            color: black
+        }
+        .link:hover{
+            color: green;
+            text-decoration:underline;
+            font-weight: bold;
+        }
+        .w3-text-green{
+            color: green !important;
+        }
+        .w3-info {
+            background-color:#D9EEE1;
+            border-left: none;
+            padding:32px;
         }
     </style>
 </head>
@@ -78,28 +85,13 @@
 </script>
 <body>
 <div th:include="menu::common_menu"></div>
-
-<!-- Header -->
-<header class="w3-container w3-green w3-center" style="padding:128px 16px">
-    <h1 class="w3-margin w3-jumbo">未读代码</h1>
-    <p class="w3-xlarge">结构化 Java 系列文档，再来点数据结构与算法！</p>
-    <button id="xuancai-button" class="w3-padding-large w3-margin-top w3-black"><a href="/java-notes/" style="text-decoration: none;" class="w3-text-white">开始浏览</a></button>
-</header>
-
-<!-- First Grid -->
-<div class="w3-row-padding w3-padding-64 w3-container">
-    <div class="w3-content">
-        <div class="w3-twothird">
-            <h1>最新文章</h1>
+<div class="masonry">
+         <div th:each="catNode:${catNodeList}" class="item w3-light-grey w3-round">
+            <h2 th:text="${catNode.getName()}" class="w3-text-green"></h2>
             <ul class="w3-ul">
-                <li th:each="postInfo:${postInfoList}"><a th:href="${postInfo.getPermalink()}" style="font-size: 16px;text-decoration: none;color: black" th:text="${postInfo.getTitle()}">文章标题</a></li>
+                <li th:each="postInfo:${catNode.getChildren()}"><a class="link" target="_blank" th:href="${postInfo.getData().getPermalink()}" th:text="${postInfo.getData().getTitle()}" >文章标题</a></li>
             </ul>
         </div>
-
-        <div class="w3-third w3-center">
-            <i class="fa fa-coffee w3-padding-64 w3-text-green"></i>
-        </div>
-    </div>
 </div>
 <!-- Footer -->
 <div th:include="footer::common_footer"></div>
@@ -117,7 +109,6 @@
                 // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                 el.classList.toggle('is-active');
                 $target.classList.toggle('is-active');
-
             });
         });
     });

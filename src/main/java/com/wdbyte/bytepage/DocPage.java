@@ -123,6 +123,8 @@ public class DocPage {
         Context context = new Context();
         // 用于生成顶部菜单
         context.setVariable("rootNode", rootNode);
+        List<TreeNode<PostInfo>> catNodeList = rootNode.getChildren().stream().flatMap(node -> node.getChildren().stream()).collect(Collectors.toList());
+        context.setVariable("catNodeList",catNodeList);
         // 用于文章列表
         List<PostInfo> postInfoList = postInfoMap.values().stream()
             .map(TreeNode::getData)
