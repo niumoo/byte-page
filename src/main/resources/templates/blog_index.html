@@ -40,11 +40,11 @@
             margin: 15px auto;
             max-width: 1500px;
         }
-
         .item {
             break-inside: avoid-column;
             margin-bottom: 1em;
             padding: 1em;
+            border: 1px solid #dfdfdf;
         }
         .link{
             font-size: 16px;
@@ -63,6 +63,46 @@
             background-color:#D9EEE1;
             border-left: none;
             padding:32px;
+        }
+        #xuancai-button {
+            --width: 150px;
+            --timing: 2s;
+            border: 0;
+            width: var(--width);
+            padding-block: 1em;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1em;
+            background: black;
+            transition: all 0.2s;
+            border-radius: 3px;
+        }
+        #xuancai-button:hover {
+            background-image: linear-gradient(
+                    to right,
+                    rgb(250, 82, 82),
+                    rgb(250, 82, 82) 16.65%,
+                    rgb(190, 75, 219) 16.65%,
+                    rgb(190, 75, 219) 33.3%,
+                    rgb(76, 110, 245) 33.3%,
+                    rgb(76, 110, 245) 49.95%,
+                    rgb(64, 192, 87) 49.95%,
+                    rgb(64, 192, 87) 66.6%,
+                    rgb(250, 176, 5) 66.6%,
+                    rgb(250, 176, 5) 83.25%,
+                    rgb(253, 126, 20) 83.25%,
+                    rgb(253, 126, 20) 100%,
+                    rgb(250, 82, 82) 100%
+            );
+            animation: var(--timing) linear dance6123 infinite;
+            transform: scale(1.1) translateY(-1px);
+            color: #fff;
+        }
+
+        @keyframes dance6123 {
+            to {
+                background-position: var(--width);
+            }
         }
     </style>
 </head>
@@ -85,7 +125,19 @@
 </script>
 <body>
 <div th:include="menu::common_menu"></div>
+<!-- Header -->
+<header class="w3-container w3-green w3-center" style="padding:78px 16px">
+    <h1 class="w3-margin w3-xxxlarge">未读代码</h1>
+    <p class="w3-xlarge">结构化 Java 系列文档，再来点数据结构与算法！</p>
+    <button id="xuancai-button" class="w3-padding-large w3-margin-top w3-black"><a href="/java-notes/" style="text-decoration: none;" class="w3-text-white">开始浏览</a></button>
+</header>
 <div class="masonry">
+        <div class="item w3-light-grey w3-round">
+            <h2 class="w3-text-green">最新文章</h2>
+            <ul class="w3-ul">
+                <li th:each="postInfo:${postInfoList}"><a class="link" target="_blank" th:href="${postInfo.getPermalink}" th:text="${postInfo.getTitle()}" >文章标题</a></li>
+            </ul>
+        </div>
          <div th:each="catNode:${catNodeList}" class="item w3-light-grey w3-round">
             <h2 th:text="${catNode.getName()}" class="w3-text-green"></h2>
             <ul class="w3-ul">
