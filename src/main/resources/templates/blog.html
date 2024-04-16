@@ -79,7 +79,16 @@
 </div>
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/languages/java.min.js"></script>
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/languages/shell.min.js"></script>
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/languages/properties.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.runtime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.github-v4.min.js"></script>
+<script src="/static/tool.js"></script>
 <script>
+    hljs.highlightAll();
+    // 移动端菜单
     document.addEventListener('DOMContentLoaded', () => {
         // Get all "navbar-burger" elements
         const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -95,31 +104,6 @@
 
             });
         });
-    });
-</script>
-<script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdn.staticfile.org/highlight.js/11.9.0/languages/java.min.js"></script>
-<script src="https://cdn.staticfile.org/highlight.js/11.9.0/languages/shell.min.js"></script>
-<script src="https://cdn.staticfile.org/highlight.js/11.9.0/languages/properties.min.js"></script>
-<script>
-    hljs.highlightAll();
-</script>
-<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.runtime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.github-v4.min.js"></script>
-<script src="/static/tool.js"></script>
-<script>
-    function pvGet() {
-        let request = new XMLHttpRequest(); // 新建XMLHttpRequest对象
-        request.open('GET', 'https://debug.group/api/pv?url=' + btoa(location.pathname), true);
-        request.setRequestHeader("Content-Type", "text/plain");
-        // 发送请求
-        request.send();
-    }
-    pvGet();
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        enableFullscreenForImages('content');
     });
 </script>
 </html>
