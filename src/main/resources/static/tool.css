@@ -175,6 +175,11 @@ body{
 .w3-border-left {
     border-left: 1px solid #eee !important
 }
+.navbar-item,.navbar-link {
+    padding-top:0px !important;
+    padding-left:0px !important;
+    padding-bottom:0px !important;
+}
 
 .navbar-item {
     font-size: 1.1em !important;
