@@ -180,6 +180,14 @@ body{
     padding-left:0px !important;
     padding-bottom:0px !important;
 }
+.navbar-link:not(.is-arrowless) {
+    padding-right: 2em !important;
+}
+
+.navbar-link:not(.is-arrowless)::after {
+    border-color: #287b2b !important;
+    right: 1em !important;
+}
 
 .navbar-item {
     font-size: 1.1em !important;
