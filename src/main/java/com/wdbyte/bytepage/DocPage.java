@@ -39,6 +39,7 @@ public class DocPage {
     static TreeNode<PostInfo> rootNode;
 
     public static void main(String[] args) throws IOException {
+        args = new String[] {"/Users/niulang/git/byte-notes/md"};
         if (args == null || args.length == 0) {
             System.out.println("请传入文件夹路径");
             return;
@@ -46,11 +47,12 @@ public class DocPage {
         ROOT_PATH = args[0];
         initRootNode();
         generatorPostHtmlForEach();
-        generatorIndexHtml();
+        //generatorIndexHtml();
+        generatorIndexMd();
         generatorArchivesHtml();
         generatorSitemapXml();
         generatorLimit5Url();
-        //copyStaticFile();
+        copyStaticFile();
     }
 
     private static void initRootNode() throws IOException {
@@ -125,9 +127,27 @@ public class DocPage {
         List<PostInfo> postInfoList = postInfoMap.values().stream()
             .map(TreeNode::getData)
             .sorted(Comparator.comparing(PostInfo::getDate).reversed())
-            .limit(10)
+            .limit(1000)
             .collect(Collectors.toList());
         context.setVariable("postInfoList", postInfoList);
+        // 输出到流（文件）
+        ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
+    }
+
+    private static void generatorIndexMd() throws IOException {
+        // 定义数据模型
+        Context context = new Context();
+        // 用于生成顶部菜单
+        context.setVariable("rootNode", rootNode);
+        // 用于文章列表
+        List<PostInfo> postInfoList = postInfoMap.values().stream()
+            .map(TreeNode::getData)
+            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
+            .limit(1000)
+            .collect(Collectors.toList());
+        PostInfo postInfo = postInfoList.stream().filter(post -> post.getPermalink().equals("/index/")).findFirst().get();
+        context.setVariable("postInfo", postInfo);
+        context.setVariable("postInfoList", postInfoList.stream().limit(10).collect(Collectors.toList()));
         // 输出到流（文件）
         ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
     }
@@ -199,15 +219,67 @@ public class DocPage {
         }
         ClassLoader classLoader = DocPage.class.getClassLoader();
         URL url = classLoader.getResource("static");
-        File sourceFile = new File(url.getFile());
-        for (File source : sourceFile.listFiles()) {
-            File targetFolder = new File("dist/static/");
-            if (!targetFolder.exists()) {
-                targetFolder.mkdirs();
+        File sourceDir = new File(url.getFile());
+        File targetDir = new File("dist/static");
+        try {
+            clearDirectory(targetDir);
+            copyDirectory(sourceDir, targetDir);
+            System.out.println("静态资源拷贝完成！");
+        } catch (IOException e) {
+            System.err.println("文件夹拷贝失败: " + e.getMessage());
+        }
+    }
+
+
+    /**
+     * 递归拷贝文件夹及其内容
+     * @param sourceDir 源文件夹
+     * @param targetDir 目标文件夹
+     * @throws IOException 如果发生I/O错误
+     */
+    public static void copyDirectory(File sourceDir, File targetDir) throws IOException {
+        // 如果目标目录不存在，则创建
+        if (!targetDir.exists()) {
+            targetDir.mkdirs();
+        }
+
+        // 获取源目录下的所有文件和子目录
+        File[] files = sourceDir.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    // 如果是子目录，递归调用
+                    copyDirectory(file, new File(targetDir, file.getName()));
+                } else {
+                    // 如果是文件，直接拷贝并替换
+                    File targetFile = new File(targetDir, file.getName());
+                    Files.copy(file.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
             }
-            File targetFile = new File(targetFolder, source.getName());
-            Files.copy(source.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            System.out.println(String.format("copy static file,src:%s,target:%s", source, targetFile));
+        }
+    }
+
+    /**
+     * 清空目标文件夹中的所有内容
+     * @param directory 要清空的文件夹
+     * @throws IOException 如果发生I/O错误
+     */
+    public static void clearDirectory(File directory) throws IOException {
+        if (directory.exists()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        // 如果是子目录，递归删除
+                        clearDirectory(file);
+                    }
+                    // 删除文件或空目录
+                    Files.delete(file.toPath());
+                }
+            }
+        } else {
+            // 如果目标目录不存在，则创建
+            directory.mkdirs();
         }
     }
 }

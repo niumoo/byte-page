@@ -7,11 +7,7 @@
     <meta name="description" th:attr="content=${postInfo.getDescription()}">
     <meta name="keywords" th:attr="content=${postInfo.getKeywords()}">
     <link rel="icon" href="/static/fav.png">
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/w3-css/4.1.0/w3.min.css">
-    <link rel="stylesheet" href="/static/prism.css" />
-    <link rel="stylesheet" href="/static/byte-style.css" />
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.min.css">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//jsdelivr.wdbyte.com/gh/niumoo/bit.css@265e32f/bit.min.css">
     <script>
         <!-- baidu-->
         var _hmt = _hmt || [];
@@ -21,7 +17,6 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
-        <!-- end baidu-->
         <!-- Google Analytics -->
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -29,98 +24,50 @@
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-130656610-2', 'auto');
         ga('send', 'pageview');
-        <!-- End Google Analytics -->
     </script>
 </head>
+<style>
+    pre code.hljs{
+        background: #eeeeee !important;
+        padding: 0px !important;
+    }
+    .main{
+        padding: .5em;
+    }
+    blockquote {
+        border-left: 3px solid #069706;
+    }
+    .post-toc{
+        background: var(--lesslight);padding: 10px;border: 1px solid #eee; border-radius: 10px;display: none;
+    }
+    /* 回到顶部*/
+    #topBtn {display: none;position: fixed;bottom: 30px;right: 30px;z-index: 99;}
+</style>
 <body>
-<!-- START Top -->
-<!--<div class="w3-top">
-    <div class="w3-bar w3-theme w3-large" style="z-index:4;">
-        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
-        <a class="w3-bar-item w3-button w3-hover-white" style="padding-top: 12px;padding-bottom: 12px;" href="/">未读代码</a>
-        <div th:each="child:${rootNode.getChildren()}"><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-white"style="padding-top: 12px;padding-bottom: 12px;" th:href="${child.getChildren().get(0).getChildren().get(0).getData().getPermalink()}" th:text="${child.getName()}">Learn</a></div>
+<h1> <a class="home" href="/">程序猿阿朗</a> </h1>
+<div class="main">
+    <div class="post-title"><h1 th:text="${postInfo.getTitle()}">标题</h1></div>
+    <div class="post-time" style="font-size: .9em;">
+        <p><i class="fa fa-calendar"></i> 最后更新日期：<span th:text="${postInfo.getUpdated().substring(0,10)}"></span> | <a href="#" onclick="showToc()" id="tocBtn"><i class="fa fa-pencil"></i> 显示目录</a>  </p>
     </div>
-</div>-->
-<div class="w3-top">
-    <div class="w3-bar w3-theme w3-large" style="z-index:4;">
-        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-light-grey w3-large w3-theme" href="javascript:void(0)" onclick="w3_open()">&#9776;</a>
-        <a class="w3-bar-item w3-button w3-hover-light-grey" style="" href="/"><i class="fa fa-fw fa-home"></i> 未读代码</a>
-        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java/jdk-jre-jvm/"><i class="fa fa-coffee"></i> Java 基础</a></div>
-        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java-feature/"><i class="fa fa-flask"></i> Java 新特性</a></div>
-        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java/devtool/"><i class="fa fa-cubes"></i> 开发工具</a></div>
-        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/2020/03/jdk/hashmap/"><i class="fa fa-rocket"></i> Java 进阶</a></div>
-        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java/performance/"><i class="fa fa-line-chart"></i> 性能分析</a></div>
-        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/java/index/"><i class="fa fa-gear"></i> Java 开发</a></div>
-        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/2019/01/springboot/springboot01-quick-start/"><i class="fa fa-leaf"></i> SpringBoot</a></div>
-        <div><a class="w3-bar-item w3-button w3-hide-medium w3-hide-small w3-hover-light-grey" style="" href="/2021/01/2020-end/">其他记录</a></div>
-    </div>
-</div>
-<!-- END Top -->
-<!-- START Sidebar -->
-<div class="w3-sidebar w3-collapse w3-border-right" style="z-index:3;width:300px" id="mySidebar">
-    <div class="w3-bar w3-hide-large w3-large w3-theme">
-        <a href="javascript:void(0)" onclick="w3_show_nav('menuTut')" class="w3-bar-item w3-button w3-hover-white w3-padding" >教程目录</a>
-        <a href="javascript:void(0)" onclick="w3_close()"             class="w3-bar-item w3-button w3-hover-white w3-padding w3-right" title="Close Menu">&times;</a>
-    </div>
-    <div id="menuTut" class="w3-bar-block myMenu">
-        <div th:each="menu:${menuNode.getChildren()}" class="w3-container">
-            <h3 th:text="${menu.getName()}">Tutorials</h3>
-            <div th:each="subMenu:${menu.getChildren()}"><a th:if="${subMenu.getData().getTitle().equals(postInfo.getTitle())}" class="w3-bar-item w3-button byte-sidebar-link w3-green w3-hover-green" th:href="${subMenu.getData().getPermalink()}" th:text="${subMenu.getData().getTitle()}">Learn</a><a th:unless="${subMenu.getData().getTitle().equals(postInfo.getTitle())}" class="w3-bar-item w3-button byte-sidebar-link w3-hover-green" th:href="${subMenu.getData().getPermalink()}" th:text="${subMenu.getData().getTitle()}">Learn</a></div>
-        </div>
-    </div>
-</div>
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-<!-- END Sidebar -->
-<div class="w3-main" style="margin-left:300px;margin-top:44px;">
-    <!-- START MAIN -->
-    <div class="byte-post-toc w3-hide-small w3-hide-medium">
-        <div class="w3-center w3-margin-bottom"><b>目录</b> <a href="#" id="toc-hidden">[隐藏]</a></div>
+    <div class="post-toc" id="toc">
+        <div><b>目录</b></div>
         <div th:each="tocInfo:${tocInfoList}"><a th:style="'margin: ' + ${tocInfo.getLeft()} + 'px;'" th:href="${'#'+tocInfo.getMiddle()}" th:text="${tocInfo.getRight()}"></a></div>
     </div>
-    <div class="w3-container w3-padding-large byte-post-content ">
-        <div><h1 th:text="${postInfo.getTitle()}">标题</h1></div>
-        <div>[(${postInfo.getHtmlContent()})]</div>
-        <div class="w3-text-grey w3-medium w3-right">
-            <p><i class="fa fa-calendar"></i> 最后更新日期：<span th:text="${postInfo.getUpdated().substring(0,10)}"></span> | <a th:href="${postInfo.getGithubPath()}"><i class="fa fa-pencil"></i> 编辑此页面</a> </p>
-        </div>
-
-        <br/> <br/>
-    </div>
-    <div class="w3-container w3-padding-large byte-post-content "><div id="vssue"></div></div>
-    <!-- END MAIN -->
-    <div th:include="footer::common_footer"></div>
+    <div class="post-content">[(${postInfo.getHtmlContent()})]</div>
+    <br/>
 </div>
-<div id="myBtn">
-    <p><a target="_blank" href="/static/wechat.html" ><i class="fa fa-wechat w3-button w3-green w3-hover-green" style="font-size: 18px;line-height: 32px;border-radius: 25px;"></i></a></p>
-    <p><i  onclick="topFunction()" class="w3-button fa fa-arrow-up w3-button w3-hover-green" style="font-size: 20px;height: 50px;line-height: 30px;border-radius: 25px;"></i></p>
-</div>
-<script>
-    // Script to open and close the sidebar
-    function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
-        document.getElementById("myOverlay").style.display = "block";
-    }
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("myOverlay").style.display = "none";
-    }
-    function w3_show_nav(name) {
-        document.getElementById("menuTut").style.display = "none";
-        document.getElementById(name).style.display = "block";
-        w3-open();
-    }
-</script>
-<script src="/static/prism.js"></script>
+<div id="topBtn"><p><a onclick="topFunction()"  style="font-size: 3em; cursor: pointer;"> 🔝</a></p></div>
 <script src="https://cdn.bootcdn.net/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
 <script>
     // 文字格式化
-    pangu.spacingElementByClassName('byte-post-content');
+    pangu.spacingElementByClassName('main');
     document.addEventListener('DOMContentLoaded', () => {
         pangu.autoSpacingPage();
     });
     // 回到顶部
     // Get the button
-    let mybutton = document.getElementById("myBtn");
+    let mybutton = document.getElementById("topBtn");
     // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function() {scrollFunction()};
     function scrollFunction() {
@@ -130,20 +77,23 @@
             mybutton.style.display = "none";
         }
     }
-    // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
-    //  toc hide
-    const toggleSidebarBtn = document.getElementById('toc-hidden');
-    const sidebar = document.querySelector('.byte-post-toc');
-    toggleSidebarBtn.addEventListener('click', function() {
-        sidebar.classList.toggle('w3-hide');
-    });
+
+    // 目录显示
+    let isVisible = false;
+    function showToc() {
+        var div = document.getElementById("toc");
+        var link = document.getElementById("tocBtn");
+        isVisible = !isVisible;
+        div.style.display = isVisible ? "inline-block" : "none";
+        link.innerHTML = isVisible ? '<i class="fa fa-pencil"></i> 隐藏目录' : '<i class="fa fa-pencil"></i> 显示目录';
+    }
 </script>
-<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.runtime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/vssue/1.4.8/vssue.github-v4.min.js"></script>
-<script src="/static/vssue.js"></script>
+<link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/styles/atom-one-light.min.css">
+<script src="/static/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
