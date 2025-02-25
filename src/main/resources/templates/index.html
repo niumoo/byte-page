@@ -8,7 +8,7 @@
     <meta name="description" content="网站提供 Java 相关教程，Java 进阶知识，以及 Java 相关的其他知识，如数据结构，算法，计算机组成原理，操作系统等。让编程简单有趣">
     <meta name="keywords" content="Java, Java 开发, Java 教程, Java 新特性, Spring Boot">
     <link rel="icon" href="/static/fav.png">
-    <link rel="stylesheet" type="text/css" href="//jsdelivr.wdbyte.com/gh/niumoo/bit.css@265e32f/bit.min.css">
+    <link rel="stylesheet" type="text/css" href="https://jsdelivr.wdbyte.com/gh/niumoo/bit.css@265e32f/bit.min.css">
     <script>
         <!-- baidu-->
         var _hmt = _hmt || [];
@@ -40,7 +40,9 @@
     </style>
 </head>
 <body>
-<h1> <a class="home" href="/">程序猿阿朗</a> </h1>
+<div>
+    <h1> <a class="home" href="/">程序猿阿朗</a> </h1>
+</div>
 <div class="main">
     <blockquote>
         <p>Hi there 👋 我是阿朗， 一名 Java 开发者，热衷于分享一些通俗易懂的技术文章。 分享几句鸡汤，长寿在于生活规律；成功在于坚持不懈。 做好的事情，而不是好做的事情。</p>
@@ -52,6 +54,23 @@
             <li th:each="postInfoTemp:${postInfoList}"><a th:href="${postInfoTemp.getPermalink()}" th:text="${postInfoTemp.getTitle()}">文章标题</a></li>
         </ul>
         [(${postInfo.getHtmlContent()})]
+    </div>
+    <div>
+        <a href="/feed.xml">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 viewBox="0 0 455.731 455.731" xml:space="preserve" width="30px">
+            <g><rect x="0" y="0" style="fill:#F78422;" width="455.731" height="455.731"/>
+                <g>
+                <path style="fill:#FFFFFF;" d="M296.208,159.16C234.445,97.397,152.266,63.382,64.81,63.382v64.348
+                    c70.268,0,136.288,27.321,185.898,76.931c49.609,49.61,76.931,115.63,76.931,185.898h64.348
+                    C391.986,303.103,357.971,220.923,296.208,159.16z"/>
+                    <path style="fill:#FFFFFF;" d="M64.143,172.273v64.348c84.881,0,153.938,69.056,153.938,153.939h64.348
+                    C282.429,270.196,184.507,172.273,64.143,172.273z"/>
+                    <circle style="fill:#FFFFFF;" cx="109.833" cy="346.26" r="46.088"/>
+                </g>
+            </g>
+        </svg>
+        </a>
     </div>
 </div>
 <div id="topBtn"><p><a onclick="topFunction()"  style="font-size: 3em; cursor: pointer;"> 🔝</a></p></div>

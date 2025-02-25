@@ -49,8 +49,9 @@ public class DocPage {
         generatorPostHtmlForEach();
         //generatorIndexHtml();
         generatorIndexMd();
-        generatorArchivesHtml();
+        //generatorArchivesHtml();
         generatorSitemapXml();
+        generatorFeedXml();
         generatorLimit5Url();
         copyStaticFile();
     }
@@ -94,6 +95,7 @@ public class DocPage {
                 e.printStackTrace();
             }
         }
+        System.out.println("生成文章详情完成");
     }
 
     private static void generatorPostHtml(String currentFilePath, String saveFilePath)
@@ -150,6 +152,7 @@ public class DocPage {
         context.setVariable("postInfoList", postInfoList.stream().limit(10).collect(Collectors.toList()));
         // 输出到流（文件）
         ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
+        System.out.println("生成首页完成");
     }
 
     private static void generatorSitemapXml() throws IOException {
@@ -165,6 +168,29 @@ public class DocPage {
         context.setVariable("currentDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         // 输出到流（文件）
         ThymeleafUtil.processXmlWriteFile("dist/sitemap.xml", "sitemap", context);
+    }
+
+    private static void generatorFeedXml() throws IOException {
+        // 用于文章列表
+        List<PostInfo> postInfoList = postInfoMap.values().stream()
+            .map(TreeNode::getData)
+            .sorted(Comparator.comparing(PostInfo::getDateUtc).reversed())
+            .map(postInfo -> {
+                String htmlContent = postInfo.getHtmlContent();
+                String top2Content = HtmlParser.getTop2Content(htmlContent,postInfo.getPermalink());
+                top2Content = "为了更好的阅读体验，<a href=\"https://www.wdbyte.com"+postInfo.getPermalink()+"\">可以点击跳转到网页继续阅读.....</a></b>";
+                postInfo.setTop2HtmlContent(top2Content);
+                return postInfo;
+            })
+            .limit(3)
+            .collect(Collectors.toList());
+        // 定义数据模型
+        Context context = new Context();
+        context.setVariable("postInfoList", postInfoList);
+        context.setVariable("currentDate", postInfoList.get(0).getDateUtc());
+        // 输出到流（文件）
+        ThymeleafUtil.processXmlWriteFile("dist/feed.xml", "feed", context);
+        System.out.println("生成feed完成");
     }
 
     private static void generatorLimit5Url() throws IOException {
@@ -200,6 +226,7 @@ public class DocPage {
         }
         // 输出到流（文件）
         ThymeleafUtil.processHtmlWriteFile("dist/archives/index.html", "archives", context);
+        System.out.println("生成归档完成");
     }
 
     public static String generatorSavePath(String currentFilePath) {
