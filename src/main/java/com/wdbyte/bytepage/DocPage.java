@@ -48,7 +48,8 @@ public class DocPage {
         initRootNode();
         generatorPostHtmlForEach();
         //generatorIndexHtml();
-        generatorIndexMd();
+        //generatorIndexMd();
+        generatorIndexPost();
         //generatorArchivesHtml();
         generatorSitemapXml();
         generatorFeedXml();
@@ -150,6 +151,22 @@ public class DocPage {
         PostInfo postInfo = postInfoList.stream().filter(post -> post.getPermalink().equals("/index/")).findFirst().get();
         context.setVariable("postInfo", postInfo);
         context.setVariable("postInfoList", postInfoList.stream().limit(10).collect(Collectors.toList()));
+        // 输出到流（文件）
+        ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
+        System.out.println("生成首页完成");
+    }
+
+    private static void generatorIndexPost() throws IOException {
+        // 定义数据模型
+        Context context = new Context();
+        context.setVariable("catNodeList", rootNode.getChildren());
+        // 用于文章列表
+        List<PostInfo> postInfoList = postInfoMap.values().stream()
+            .map(TreeNode::getData)
+            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
+            .limit(10)
+            .collect(Collectors.toList());
+        context.setVariable("postInfoList", postInfoList);
         // 输出到流（文件）
         ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
         System.out.println("生成首页完成");

@@ -33,12 +33,17 @@
     }
     .main{
         padding: .5em;
+        font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei" !important;
     }
     blockquote {
         border-left: 3px solid #069706;
     }
     .post-toc{
         background: var(--lesslight);padding: 10px;border: 1px solid #eee; border-radius: 10px;display: none;
+    }
+    p strong{
+        color: green;
+        font-weight:500;
     }
     /* 回到顶部*/
     #topBtn {display: none;position: fixed;bottom: 30px;right: 30px;z-index: 99;}
@@ -61,16 +66,10 @@
     </div>
     <div class="post-content">[(${postInfo.getHtmlContent()})]</div>
     <br/>
+    <div style="text-align: center">-- END --</div>
 </div>
 <div id="topBtn"><p><a onclick="topFunction()"  style="font-size: 3em; cursor: pointer;"> 🔝</a></p></div>
-<script src="https://cdn.bootcdn.net/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
 <script>
-    // 文字格式化
-    pangu.spacingElementByClassName('main');
-    document.addEventListener('DOMContentLoaded', () => {
-        pangu.autoSpacingPage();
-    });
-
     // 回到顶部
     // Get the button
     let mybutton = document.getElementById("topBtn");
@@ -113,6 +112,7 @@
         document.querySelector('.post-content').style.fontSize = currentFontSize + 'px';
     }
 </script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/pangu/4.0.7/pangu.min.js" onload="pangu.spacingElementByClassName('main'); pangu.autoSpacingPage();"></script>
 <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/styles/atom-one-light.min.css">
 <script src="/static/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>

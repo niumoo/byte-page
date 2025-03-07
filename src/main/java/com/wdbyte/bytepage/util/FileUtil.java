@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,12 +45,16 @@ public class FileUtil {
         if (!Files.isDirectory(path)) {
             return new ArrayList<>(0);
         }
+
         try (Stream<Path> pathStream = Files.list(path);) {
             List<Path> dirList = pathStream
                 .filter(pathTemp -> Files.isDirectory(pathTemp) || pathTemp.toString().endsWith(endsWith))
-                .sorted(Comparator.comparing(Path::getFileName))
+                .sorted(Comparator.comparingInt(pathTemp -> Integer.parseInt(pathTemp.getFileName().toString().split("\\.")[0])))
                 .collect(Collectors.toList());
             pathStream.close();
+            if (dirList.get(0).getFileName().toString().contains(endsWith)){
+                Collections.reverse(dirList);
+            }
             return dirList;
         }
     }
