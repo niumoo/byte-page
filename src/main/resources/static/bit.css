@@ -4,16 +4,17 @@
 :root {
     color-scheme: light dark;
     --light: #fff;
-    --lesslight: #efefef;
-    --dark: rgb(31, 31, 31);
+    --lesslight: #e9e9e9;
+    --dark: #444;
     --moredark: rgb(30, 30, 30);
     --link: royalblue;
     --border-radius: 8px;
     border-top: 5px solid var(--dark);
     letter-spacing:.04rem;
     line-height: 1.75em;
-    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei" !important;
-    font-size: 16px;
+    font-family: Roboto,Helvetica,Tahoma,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK","WenQuanYi Micro Hei",sans-serif;
+    /*font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", serif !important;*/
+    font-size: 17px;
     color: var(--dark);
     word-wrap: break-word;
     /*word-break: break-all;*/
@@ -28,14 +29,13 @@ body {
     margin-right: auto;
 }
 
-h1 {
-    line-height: 1em;
-    font-size: 1.8em;
-}
-
-h1,h2,h3,h4,h5{
+h1 {font-size: 1.7rem;}
+h2 {font-size: 1.5rem;}
+h3 {font-size: 1.3rem;}
+h4 {font-size: 1.1rem;}
+h1,h2,h3,h4{
     color: var(--moredark);
-    font-family: overpass, sans-serif;
+    font-weight: 500;
 }
 
 li p {
@@ -81,7 +81,12 @@ a {
 }
 
 a:hover {
-    background-color: var(--lesslight);
+    color: var(--moredark);
+    text-decoration-thickness: 2px;  /* 控制线的粗细 */
+}
+
+strong{
+    font-weight: 500;
 }
 
 img {
@@ -89,13 +94,13 @@ img {
     height: auto;
     display: block;
     margin: 0 auto;
-    border-radius: var(--border-radius);;
+    border-radius: var(--border-radius);
 }
 blockquote{
-    padding: .5em;
+    padding: .5rem 1rem;
     margin-inline-start: .2em;
     margin-inline-end: .2em;
-    border-left: 3px solid  var(--dark);
+    border-radius:  var(--border-radius);
     background-color: var(--lesslight);
 }
 blockquote p{
@@ -192,10 +197,10 @@ button + button, .button + .button, input[type=submit] + input[type=submit] {
 /* Dark mode overrides (confusingly inverse) */
 @media (prefers-color-scheme: dark) {
     :root {
-        --light: #363636;
-        --lesslight: #262626;
-        --dark: #eee;
-        --moredark: #fefefe;
+        --light: #444;
+        --lesslight: rgb(30, 30, 30);
+        --dark: #fff;
+        --moredark: #e9e9e9;
     }
     /* This fixes an odd blue then white shadow on FF in dark mode */
     *:focus {

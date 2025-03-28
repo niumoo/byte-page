@@ -28,18 +28,19 @@
 </head>
 <style>
     pre code.hljs{
-        background: #eeeeee !important;
+        background:var(--lesslight) !important;
         padding: 0px !important;
     }
+    @media (prefers-color-scheme: dark) {
+        .hljs {
+            color: rgba(232, 232, 232, 0.94) !important;
+        }
+    }
     .main{
-        padding: .5em;
+        padding: .5em 1em;
     }
     .post-toc{
-        background: var(--lesslight);padding: 10px;border: 1px solid #eee; border-radius: 10px;display: none;
-    }
-    p strong{
-        color: green;
-        font-weight:500;
+        background: var(--lesslight);padding: 10px; border-radius: 10px;display: none;
     }
     .footer{
         text-align: center;
@@ -62,8 +63,8 @@
     <div class="post-title"><h1 th:text="${postInfo.getTitle()}">标题</h1></div>
     <div class="post-time" style="font-size: .9em;">
         <p><i class="fa fa-calendar"></i> 最后更新日期：<span th:text="${postInfo.getUpdated().substring(0,10)}"></span> | <a href="#" onclick="showToc()" id="tocBtn"><i class="fa fa-pencil"></i> 显示目录</a> |
-            字体 <a href="#" onclick="changeFontSize(1)" title="增大字体">➕</a>
-            <a href="#" onclick="changeFontSize(-1)" title="减小字体">➖</a>
+            字体 <a href="#" onclick="changeFontSize(1)" title="增大字体" style="background: white">➕</a>
+            <a href="#" onclick="changeFontSize(-1)" title="减小字体" style="background: white">➖</a>
         </p>
     </div>
     <div class="post-toc" id="toc">
@@ -73,6 +74,7 @@
     <div class="post-content">[(${postInfo.getHtmlContent()})]</div>
     <br/>
     <div style="text-align: center">-- END --</div>
+    <div id="bit-talk"></div>
     <br/>
     <div class="footer">
         <a href="/feed.xml">
@@ -135,5 +137,11 @@
 <link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/styles/atom-one-light.min.css">
 <script src="/static/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
+<!--<script src="http://localhost:8080/js/comment.js"></script>-->
+<!--<script>-->
+<!--    Comment.init({-->
+<!--        apiBaseUrl: 'http://localhost:8080'-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>

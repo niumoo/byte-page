@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,12 +40,18 @@ public class DocPage {
     static TreeNode<PostInfo> rootNode;
 
     public static void main(String[] args) throws IOException {
+        //args = new String[] {"/Users/niulang/git/byte-notes/md"};
+        //if (args == null || args.length == 0) {
+        //    System.out.println("请传入文件夹路径");
+        //    return;
+        //}
         ROOT_PATH = args[0];
         initRootNode();
         generatorPostHtmlForEach();
         //generatorIndexHtml();
         //generatorIndexMd();
         generatorIndexPost();
+        generatorCatPost();
         //generatorArchivesHtml();
         generatorSitemapXml();
         generatorFeedXml();
@@ -165,6 +172,22 @@ public class DocPage {
         // 输出到流（文件）
         ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
         System.out.println("生成首页完成");
+    }
+
+    private static void generatorCatPost() throws IOException {
+        for (TreeNode<PostInfo> catNode : rootNode.getChildren()) {
+            // 定义数据模型
+            Context context = new Context();
+            context.setVariable("catNode", catNode);
+            // 输出到流（文件）
+            String path = "dist/" + Base64.getEncoder().encodeToString(catNode.getName().getBytes());
+            File file = new File(path);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            ThymeleafUtil.processHtmlWriteFile(path+"/index.html", "cat", context);
+            System.out.println("生成" + catNode.getName() + "完成");
+        }
     }
 
     private static void generatorSitemapXml() throws IOException {

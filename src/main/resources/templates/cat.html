@@ -2,7 +2,7 @@
 <html lang="zh-CN" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>未读代码</title>
+    <title>{{catNode.getName()}}|未读代码</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="网站提供 Java 相关教程，Java 进阶知识，以及 Java 相关的其他知识，如数据结构，算法，计算机组成原理，操作系统等。让编程简单有趣">
@@ -28,15 +28,13 @@
         <!-- End Google Analytics -->
     </script>
     <style>
-        @media (prefers-color-scheme: light) {
-            .main{
-                background: white;
-                padding: 1em;
-            }
-            body{
-                background-color: #eee;
-            }
-        }
+        /*.main{*/
+        /*    background: white;*/
+        /*    padding: 1em;*/
+        /*}*/
+        /*body{*/
+        /*    background-color: #eee;*/
+        /*}*/
         .footer{
             text-align: center;
         }
@@ -56,89 +54,9 @@
     <h1> <a class="home" href="/">程序猿阿朗</a> </h1>
 </div>
 <div class="main">
-    <blockquote>
-        <p>Hi there 👋 我是阿朗， 一名 Java 开发者，热衷于分享一些通俗易懂的技术文章。 分享几句鸡汤，长寿在于生活规律；成功在于坚持不懈。 做好的事情，而不是好做的事情。</p>
-    </blockquote>
     <div class="post-list">
         <div>
-            <h2>📅 最近更新</h2>
-            <!--        <p th:each="postInfoTemp:${postInfoList}"><span class="post-list-update" th:text="${postInfoTemp.getDate().substring(0,10)}">12-19</span><a th:href="${postInfoTemp.getPermalink()}" th:text="${postInfoTemp.getTitle()}">文章标题</a></p>-->
-            <ul>
-                <li th:each="postInfoTemp:${postInfoList}"><a th:href="${postInfoTemp.getPermalink()}" th:text="${postInfoTemp.getTitle()}">文章标题</a></li>
-            </ul>
-        </div>
-        <div class="projects">
-            <h2>🚀 一些开源项目</h2>
-            <style>
-                .project-cards {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 10px;
-                    justify-content: space-between;
-                }
-                .project-card {
-                    width: calc(33.33% - 10px);
-                    background: #fff;
-                    border-radius: 8px;
-                    padding: 20px;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                    transition: all 0.3s ease;
-                    cursor: pointer;
-                    text-decoration: none;
-                    color: inherit;
-                    display: block;
-                }
-                .project-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                }
-                .project-icon {
-                    font-size: 2.5em;
-                    margin-bottom: 10px;
-                }
-                .project-title {
-                    font-size: 1.2em;
-                    font-weight: bold;
-                    margin-bottom: 10px;
-                    color: #333;
-                }
-                .project-desc {
-                    color: #666;
-                    font-size: 0.9em;
-                    line-height: 1.5;
-                }
-                .project-card:hover .project-link span:last-child {
-                    transform: translateX(5px);
-                }
-                @media (max-width: 768px) {
-                    .project-card {
-                        width: 100%;
-                    }
-                }
-            </style>
-            <div class="project-cards">
-                <a href="https://bing.wdbyte.com" class="project-card">
-                    <div class="project-icon">📸</div>
-                    <div class="project-title">必应每日壁纸</div>
-                    <div class="project-desc">自动抓取必应每日壁纸，提供实用美观的壁纸客户端。已获 2000+ Star。</div>
-                </a>
-
-                <a href="https://debug.group" class="project-card">
-                    <div class="project-icon">🔨</div>
-                    <div class="project-title">开发者工具箱</div>
-                    <div class="project-desc">为开发人员提常用供在线工具，如 JSON 格式化、时间戳等工具。</div>
-                </a>
-
-                <a href="https://pic.debug.group" class="project-card">
-                    <div class="project-icon">🎇</div>
-                    <div class="project-title">GitHub 在线图床</div>
-                    <div class="project-desc">一个基于 GitHub API 的在线图床服务，自动格式转换压缩大小，支持配置 URL 前缀。</div>
-                </a>
-            </div>
-        </div>
-        <!--/*--> [(${postInfo.getHtmlContent()})] <!--*/-->
-        <div th:each="catNode:${catNodeList}">
-            <h2 th:text="${catNode.getName()}"></h2>
+            <h2 style="text-align: center;font-size: 2em;" th:text="${catNode.getName()}"></h2>
             <ul>
                 <li th:each="postInfo:${catNode.getChildren()}"><a class="link" target="_blank" th:href="${postInfo.getData().getPermalink()}" th:text="${postInfo.getData().getTitle()}" >文章标题</a></li>
             </ul>
