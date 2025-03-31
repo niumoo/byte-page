@@ -5,7 +5,7 @@
     color-scheme: light dark;
     --light: #fff;
     --lesslight: #e9e9e9;
-    --dark: #444;
+    --dark: rgb(29, 29, 31,1);
     --moredark: rgb(30, 30, 30);
     --link: royalblue;
     --border-radius: 8px;
@@ -17,6 +17,8 @@
     font-size: 17px;
     color: var(--dark);
     word-wrap: break-word;
+    -webkit-font-smoothing: antialiased; /*chrome、safari*/
+    -moz-osx-font-smoothing: grayscale;/*firefox*/
     /*word-break: break-all;*/
 }
 
@@ -36,6 +38,8 @@ h4 {font-size: 1.1rem;}
 h1,h2,h3,h4{
     color: var(--moredark);
     font-weight: 500;
+    -webkit-font-smoothing: subpixel-antialiased; /*chrome、safari*/
+    -moz-osx-font-smoothing: auto;
 }
 
 li p {
@@ -70,6 +74,8 @@ pre {
 pre code {
     font-family: consolas,Menlo,"PingFang SC","Microsoft YaHei",sans-serif;
     line-height: 1.6em;
+    -webkit-font-smoothing: subpixel-antialiased; /*chrome、safari*/
+    -moz-osx-font-smoothing: auto;
 }
 
 a {
