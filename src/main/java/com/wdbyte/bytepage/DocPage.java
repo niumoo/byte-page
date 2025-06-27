@@ -40,11 +40,11 @@ public class DocPage {
     static TreeNode<PostInfo> rootNode;
 
     public static void main(String[] args) throws IOException {
-        //args = new String[] {"/Users/niulang/git/byte-notes/md"};
-        //if (args == null || args.length == 0) {
-        //    System.out.println("请传入文件夹路径");
-        //    return;
-        //}
+//        args = new String[] {"/Users/niulang/git/byte-notes/md"};
+//        if (args == null || args.length == 0) {
+//            System.out.println("请传入文件夹路径");
+//            return;
+//        }
         ROOT_PATH = args[0];
         initRootNode();
         generatorPostHtmlForEach();
@@ -56,7 +56,7 @@ public class DocPage {
         generatorSitemapXml();
         generatorFeedXml();
         generatorLimit5Url();
-        //copyStaticFile();
+//        copyStaticFile();
     }
 
     private static void initRootNode() throws IOException {

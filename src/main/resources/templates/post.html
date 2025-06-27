@@ -28,8 +28,11 @@
 </head>
 <style>
     pre code.hljs{
-        background:var(--lesslight) !important;
-        padding: 0px !important;
+        padding: 0em !important;
+        background: rgb(245 245 245) !important;
+    }
+    pre{
+        background: rgb(245 245 245) !important;
     }
     @media (prefers-color-scheme: dark) {
         .hljs {
@@ -40,7 +43,10 @@
         padding: .5em 1em;
     }
     .post-toc{
-        background: var(--lesslight);padding: 10px; border-radius: 10px;display: none;
+        background: rgb(245 245 245) !important;
+        padding: 10px;
+        /*border-radius: 10px;*/
+        display: none;
     }
     .footer{
         text-align: center;
@@ -74,7 +80,11 @@
     <div class="post-content">[(${postInfo.getHtmlContent()})]</div>
     <br/>
     <div style="text-align: center">-- END --</div>
-    <div id="bit-talk"></div>
+<!--    <div id="bit-talk"-->
+<!--            server="http://localhost:8080"-->
+<!--            data-talk-app-id="my_blog_appmy_blog_appmy_blog_a2"-->
+<!--            data-talk-page-id="article_123"-->
+<!--    ></div>-->
     <br/>
     <div class="footer">
         <a href="/feed.xml">
@@ -138,10 +148,5 @@
 <script src="/static/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
 <!--<script src="http://localhost:8080/js/comment.js"></script>-->
-<!--<script>-->
-<!--    Comment.init({-->
-<!--        apiBaseUrl: 'http://localhost:8080'-->
-<!--    });-->
-<!--</script>-->
 </body>
 </html>
