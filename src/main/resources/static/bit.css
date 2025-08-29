@@ -61,6 +61,7 @@ code:not(pre code)  {
     background-color: var(--lesslight);
     padding: .2em .3em;
     border-radius: var(--border-radius);
+    font-family: consolas,Menlo,"PingFang SC","Microsoft YaHei",sans-serif;
 }
 
 pre {
