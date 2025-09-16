@@ -8,7 +8,7 @@
     --dark: rgb(29, 29, 31,1);
     --moredark: rgb(30, 30, 30);
     --link: royalblue;
-    --border-radius: 0px;
+    --border-radius: 8px;
     border-top: 5px solid var(--dark);
     letter-spacing:.03rem;
     line-height: 1.7em;
