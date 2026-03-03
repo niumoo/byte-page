@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import com.wdbyte.bytepage.module.PostInfo;
 import com.wdbyte.bytepage.module.TreeNode;
+import com.wdbyte.bytepage.util.ChineseToPinyinClean;
 import com.wdbyte.bytepage.util.FileUtil;
 import com.wdbyte.bytepage.util.HtmlParser;
 import com.wdbyte.bytepage.util.MarkdownUtil;
@@ -40,11 +41,11 @@ public class DocPage {
     static TreeNode<PostInfo> rootNode;
 
     public static void main(String[] args) throws IOException {
-//        args = new String[] {"/Users/niulang/git/byte-notes/md"};
-//        if (args == null || args.length == 0) {
-//            System.out.println("请传入文件夹路径");
-//            return;
-//        }
+        //args = new String[] {"/Users/xxx/git/byte-notes/md"};
+        //if (args == null || args.length == 0) {
+        //    System.out.println("请传入文件夹路径");
+        //    return;
+        //}
         ROOT_PATH = args[0];
         initRootNode();
         generatorPostHtmlForEach();
@@ -56,7 +57,7 @@ public class DocPage {
         generatorSitemapXml();
         generatorFeedXml();
         generatorLimit5Url();
-//        copyStaticFile();
+        //copyStaticFile();
     }
 
     private static void initRootNode() throws IOException {
@@ -180,7 +181,7 @@ public class DocPage {
             Context context = new Context();
             context.setVariable("catNode", catNode);
             // 输出到流（文件）
-            String path = "dist/" + Base64.getEncoder().encodeToString(catNode.getName().getBytes());
+            String path = "dist/" + ChineseToPinyinClean.toCleanPinyin(catNode.getName());
             File file = new File(path);
             if (!file.exists()) {
                 file.mkdirs();
