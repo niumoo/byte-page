@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,23 +40,21 @@ public class DocPage {
     static TreeNode<PostInfo> rootNode;
 
     public static void main(String[] args) throws IOException {
-        //args = new String[] {"/Users/xxx/git/byte-notes/md"};
-        //if (args == null || args.length == 0) {
-        //    System.out.println("请传入文件夹路径");
-        //    return;
-        //}
+        args = new String[] {"/Users/niulang/git/byte-notes/md"};
+        if (args == null || args.length == 0) {
+            System.out.println("请传入文件夹路径");
+            return;
+        }
         ROOT_PATH = args[0];
         initRootNode();
         generatorPostHtmlForEach();
-        //generatorIndexHtml();
-        //generatorIndexMd();
         generatorIndexPost();
         generatorCatPost();
         //generatorArchivesHtml();
         generatorSitemapXml();
         generatorFeedXml();
         generatorLimit5Url();
-        //copyStaticFile();
+        copyStaticFile();
     }
 
     private static void initRootNode() throws IOException {
@@ -121,44 +118,7 @@ public class DocPage {
         context.setVariable("tocInfoList", HtmlParser.getHeadList(postContent));
         // 输出到流（文件）
         ThymeleafUtil.processHtmlWriteFile(saveFilePath, "post", context);
-        //System.out.println("生成文章详情：" + treeNode.getData().getTitle());
     }
-
-    private static void generatorIndexHtml() throws IOException {
-        // 定义数据模型
-        Context context = new Context();
-        // 用于生成顶部菜单
-        context.setVariable("rootNode", rootNode);
-        // 用于文章列表
-        List<PostInfo> postInfoList = postInfoMap.values().stream()
-            .map(TreeNode::getData)
-            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
-            .limit(1000)
-            .collect(Collectors.toList());
-        context.setVariable("postInfoList", postInfoList);
-        // 输出到流（文件）
-        ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
-    }
-
-    private static void generatorIndexMd() throws IOException {
-        // 定义数据模型
-        Context context = new Context();
-        // 用于生成顶部菜单
-        context.setVariable("rootNode", rootNode);
-        // 用于文章列表
-        List<PostInfo> postInfoList = postInfoMap.values().stream()
-            .map(TreeNode::getData)
-            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
-            .limit(1000)
-            .collect(Collectors.toList());
-        PostInfo postInfo = postInfoList.stream().filter(post -> post.getPermalink().equals("/index/")).findFirst().get();
-        context.setVariable("postInfo", postInfo);
-        context.setVariable("postInfoList", postInfoList.stream().limit(10).collect(Collectors.toList()));
-        // 输出到流（文件）
-        ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
-        System.out.println("生成首页完成");
-    }
-
     private static void generatorIndexPost() throws IOException {
         // 定义数据模型
         Context context = new Context();
