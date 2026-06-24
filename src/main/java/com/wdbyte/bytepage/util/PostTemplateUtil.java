@@ -1,6 +1,7 @@
 package com.wdbyte.bytepage.util;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -19,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 public class PostTemplateUtil {
 
     public static PostInfo convert2PostInfo(Path path) throws IOException {
-        String post = new String(Files.readAllBytes(path));
+        String post = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
         post = post.trim();
         int endOf = post.indexOf("---", 3);
         String yaml = post.substring(4, endOf);
@@ -50,10 +51,10 @@ public class PostTemplateUtil {
         List<LinkedHashMap<String, String>> metaList = postInfo.getMeta();
         if (CollectionUtils.isNotEmpty(metaList)) {
             for (LinkedHashMap<String, String> metaMap : metaList) {
-                if (metaMap.get("name").equals("description")) {
+                if ("description".equals(metaMap.get("name"))) {
                     postInfo.setDescription(metaMap.get("content"));
                 }
-                if (metaMap.get("name").equals("keywords")) {
+                if ("keywords".equals(metaMap.get("name"))) {
                     postInfo.setKeywords(metaMap.get("content"));
                 }
             }

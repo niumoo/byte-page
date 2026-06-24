@@ -38,9 +38,9 @@ public class HtmlParser {
         return tocList;
     }
 
-    public static String getTop2Content(String html,String url) {
+    public static String getTop2Content(String html, String siteBase, String permalink) {
         int indexOf = html.indexOf("<h2");
-        return StringUtils.substring(html, 0, StringUtils.indexOf(html, "<h2", indexOf + 1))+
-            "<b>未完...为了更好的阅读体验，<a href=\"https://www.wdbyte.com" + url + "\">可以点击跳转到网页继续阅读.....</a></b>";
+        return StringUtils.substring(html, 0, StringUtils.indexOf(html, "<h2", indexOf + 1)) +
+            "<b>未完...为了更好的阅读体验，<a href=\"" + siteBase + permalink + "\">可以点击跳转到网页继续阅读.....</a></b>";
     }
 }

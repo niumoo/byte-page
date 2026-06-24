@@ -18,6 +18,22 @@ import java.util.stream.Stream;
 public class FileUtil {
 
     /**
+     * 与历史逻辑一致：取文件名第一个 {@code .} 前的数字作为排序键；无法解析时靠后。
+     */
+    private static int numericPrefixOrder(Path pathTemp) {
+        String name = pathTemp.getFileName().toString();
+        int dot = name.indexOf('.');
+        if (dot <= 0) {
+            return Integer.MAX_VALUE;
+        }
+        try {
+            return Integer.parseInt(name.substring(0, dot));
+        } catch (NumberFormatException e) {
+            return Integer.MAX_VALUE;
+        }
+    }
+
+    /**
      * 列出指定后缀的文件
      *
      * @param path
@@ -46,13 +62,15 @@ public class FileUtil {
             return new ArrayList<>(0);
         }
 
-        try (Stream<Path> pathStream = Files.list(path);) {
+        try (Stream<Path> pathStream = Files.list(path)) {
             List<Path> dirList = pathStream
                 .filter(pathTemp -> Files.isDirectory(pathTemp) || pathTemp.toString().endsWith(endsWith))
-                .sorted(Comparator.comparingInt(pathTemp -> Integer.parseInt(pathTemp.getFileName().toString().split("\\.")[0])))
+                .sorted(Comparator.comparingInt(FileUtil::numericPrefixOrder))
                 .collect(Collectors.toList());
-            pathStream.close();
-            if (dirList.get(0).getFileName().toString().contains(endsWith)){
+            if (dirList.isEmpty()) {
+                return dirList;
+            }
+            if (dirList.get(0).getFileName().toString().contains(endsWith)) {
                 Collections.reverse(dirList);
             }
             return dirList;

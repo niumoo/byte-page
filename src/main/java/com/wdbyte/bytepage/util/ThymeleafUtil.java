@@ -1,9 +1,12 @@
 package com.wdbyte.bytepage.util;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -59,10 +62,12 @@ public class ThymeleafUtil {
      * @throws IOException
      */
     public static String processHtmlWriteFile(String path, String templateName, Context context) throws IOException {
-        File file = new File(path);
-        Writer write = new FileWriter(file);
-        templateEngine.process(templateName, context, write);
-        return file.getAbsolutePath();
+        Path filePath = Paths.get(path);
+        try (Writer writer = Files.newBufferedWriter(filePath, StandardCharsets.UTF_8,
+            StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            templateEngine.process(templateName, context, writer);
+        }
+        return filePath.toAbsolutePath().toString();
     }
 
     /**
@@ -75,10 +80,12 @@ public class ThymeleafUtil {
      * @throws IOException
      */
     public static String processXmlWriteFile(String path, String templateName, Context context) throws IOException {
-        File file = new File(path);
-        Writer write = new FileWriter(file);
-        xmlTemplateEngine.process(templateName, context, write);
-        return file.getAbsolutePath();
+        Path filePath = Paths.get(path);
+        try (Writer writer = Files.newBufferedWriter(filePath, StandardCharsets.UTF_8,
+            StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            xmlTemplateEngine.process(templateName, context, writer);
+        }
+        return filePath.toAbsolutePath().toString();
     }
 
 }

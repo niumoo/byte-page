@@ -3,6 +3,7 @@ package com.wdbyte.bytepage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,7 +34,10 @@ import org.thymeleaf.context.Context;
 public class DocPage {
     static String ROOT_PATH = null;
 
-    private static String WEBSITE = "https://www.wdbyte.com";
+    /** 站点根 URL（与 permalink 拼接为完整文章链接） */
+    private static final String SITE_BASE = "https://www.wdbyte.com";
+
+    private static final String DIST_DIR = "dist";
 
     static Map<String, TreeNode<PostInfo>> postInfoMap = new HashMap<>();
 
@@ -80,10 +84,17 @@ public class DocPage {
         }
         TreeNode<PostInfo> subNode = new TreeNode<>(pathName, null, treeNode);
         treeNode.addChild(subNode);
-        List<Path> pathList = FileUtil.listDirAndMdFile(path,".md");
+        List<Path> pathList = FileUtil.listDirAndMdFile(path, ".md");
         for (Path pathTemp : pathList) {
             toFileTree(subNode, pathTemp);
         }
+    }
+
+    private static List<PostInfo> allPostsSortedByDateDescending() {
+        return postInfoMap.values().stream()
+            .map(TreeNode::getData)
+            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
+            .collect(Collectors.toList());
     }
 
     private static void generatorPostHtmlForEach() throws IOException {
@@ -92,7 +103,7 @@ public class DocPage {
             try {
                 generatorPostHtml(path.toString(), generatorSavePath(path.toString()));
             } catch (Exception e) {
-                System.out.printf(String.format("文章生成失败,path:%s,msg:%s", path.toString(), e.getMessage()));
+                System.err.printf("文章生成失败, path: %s, msg: %s%n", path.toString(), e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -119,19 +130,18 @@ public class DocPage {
         // 输出到流（文件）
         ThymeleafUtil.processHtmlWriteFile(saveFilePath, "post", context);
     }
+
     private static void generatorIndexPost() throws IOException {
         // 定义数据模型
         Context context = new Context();
         context.setVariable("catNodeList", rootNode.getChildren());
         // 用于文章列表
-        List<PostInfo> postInfoList = postInfoMap.values().stream()
-            .map(TreeNode::getData)
-            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
+        List<PostInfo> postInfoList = allPostsSortedByDateDescending().stream()
             .limit(10)
             .collect(Collectors.toList());
         context.setVariable("postInfoList", postInfoList);
         // 输出到流（文件）
-        ThymeleafUtil.processHtmlWriteFile("dist/index.html", "index", context);
+        ThymeleafUtil.processHtmlWriteFile(DIST_DIR + "/index.html", "index", context);
         System.out.println("生成首页完成");
     }
 
@@ -141,12 +151,12 @@ public class DocPage {
             Context context = new Context();
             context.setVariable("catNode", catNode);
             // 输出到流（文件）
-            String path = "dist/" + ChineseToPinyinClean.toCleanPinyin(catNode.getName());
+            String path = DIST_DIR + "/" + ChineseToPinyinClean.toCleanPinyin(catNode.getName());
             File file = new File(path);
             if (!file.exists()) {
                 file.mkdirs();
             }
-            ThymeleafUtil.processHtmlWriteFile(path+"/index.html", "cat", context);
+            ThymeleafUtil.processHtmlWriteFile(path + "/index.html", "cat", context);
             System.out.println("生成" + catNode.getName() + "完成");
         }
     }
@@ -156,14 +166,11 @@ public class DocPage {
         Context context = new Context();
         context.setVariable("rootNode", rootNode);
         // 用于文章列表
-        List<PostInfo> postInfoList = postInfoMap.values().stream()
-            .map(TreeNode::getData)
-            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
-            .collect(Collectors.toList());
+        List<PostInfo> postInfoList = allPostsSortedByDateDescending();
         context.setVariable("postInfoList", postInfoList);
         context.setVariable("currentDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         // 输出到流（文件）
-        ThymeleafUtil.processXmlWriteFile("dist/sitemap.xml", "sitemap", context);
+        ThymeleafUtil.processXmlWriteFile(DIST_DIR + "/sitemap.xml", "sitemap", context);
     }
 
     private static void generatorFeedXml() throws IOException {
@@ -172,9 +179,8 @@ public class DocPage {
             .map(TreeNode::getData)
             .sorted(Comparator.comparing(PostInfo::getDateUtc).reversed())
             .map(postInfo -> {
-                String htmlContent = postInfo.getHtmlContent();
-                String top2Content = HtmlParser.getTop2Content(htmlContent,postInfo.getPermalink());
-                top2Content = "为了更好的阅读体验，<a href=\"https://www.wdbyte.com"+postInfo.getPermalink()+"\">可以点击跳转到网页继续阅读.....</a></b>";
+                String top2Content = "为了更好的阅读体验，<a href=\"" + SITE_BASE + postInfo.getPermalink()
+                    + "\">可以点击跳转到网页继续阅读.....</a></b>";
                 postInfo.setTop2HtmlContent(top2Content);
                 return postInfo;
             })
@@ -185,7 +191,7 @@ public class DocPage {
         context.setVariable("postInfoList", postInfoList);
         context.setVariable("currentDate", postInfoList.get(0).getDateUtc());
         // 输出到流（文件）
-        ThymeleafUtil.processXmlWriteFile("dist/feed.xml", "feed", context);
+        ThymeleafUtil.processXmlWriteFile(DIST_DIR + "/feed.xml", "feed", context);
         System.out.println("生成feed完成");
     }
 
@@ -194,40 +200,37 @@ public class DocPage {
         List<String> postUrlList = postInfoMap.values().stream()
             .map(TreeNode::getData)
             .sorted(Comparator.comparing(PostInfo::getUpdated).reversed())
-            .map(postInfo -> "https://www.wdbyte.com" + postInfo.getPermalink())
+            .map(postInfo -> SITE_BASE + postInfo.getPermalink())
             .limit(5).collect(Collectors.toList());
         // 百度提交 URL 格式
-        Files.write(Paths.get("urls.txt"), postUrlList);
+        Files.write(Paths.get("urls.txt"), postUrlList, StandardCharsets.UTF_8);
         // Bing 提交 URL 格式
         String urls = postUrlList.stream().collect(Collectors.joining("\",\""));
         urls = "\"" + urls + "\"";
-        urls = "{\"siteUrl\":\"" + WEBSITE + "\", \"urlList\":[" + urls + "]}";
-        Files.write(Paths.get("urls_bing.txt"), urls.getBytes());
+        urls = "{\"siteUrl\":\"" + SITE_BASE + "\", \"urlList\":[" + urls + "]}";
+        Files.write(Paths.get("urls_bing.txt"), urls.getBytes(StandardCharsets.UTF_8));
     }
 
     private static void generatorArchivesHtml() throws IOException {
         // 定义数据模型
         Context context = new Context();
-        List<PostInfo> postInfoList = postInfoMap.values().stream()
-            .map(TreeNode::getData)
-            .sorted(Comparator.comparing(PostInfo::getDate).reversed())
-            .collect(Collectors.toList());
+        List<PostInfo> postInfoList = allPostsSortedByDateDescending();
         // 用于文章列表
         context.setVariable("postInfoList", postInfoList);
         // 用于一级菜单
         context.setVariable("rootNode", rootNode);
-        File file = new File("dist/archives/");
+        File file = new File(DIST_DIR + "/archives/");
         if (!file.exists()) {
             file.mkdirs();
         }
         // 输出到流（文件）
-        ThymeleafUtil.processHtmlWriteFile("dist/archives/index.html", "archives", context);
+        ThymeleafUtil.processHtmlWriteFile(DIST_DIR + "/archives/index.html", "archives", context);
         System.out.println("生成归档完成");
     }
 
     public static String generatorSavePath(String currentFilePath) {
         TreeNode<PostInfo> treeNode = postInfoMap.get(currentFilePath);
-        String saveFilePath = String.format("dist%s", treeNode.getData().getPermalink());
+        String saveFilePath = String.format("%s%s", DIST_DIR, treeNode.getData().getPermalink());
         File file = new File(saveFilePath);
         if (!file.exists()) {
             file.mkdirs();
@@ -236,14 +239,14 @@ public class DocPage {
     }
 
     public static void copyStaticFile() throws IOException {
-        File file = new File("dist/static");
+        File file = new File(DIST_DIR + "/static");
         if (!file.exists()) {
             file.mkdirs();
         }
         ClassLoader classLoader = DocPage.class.getClassLoader();
         URL url = classLoader.getResource("static");
         File sourceDir = new File(url.getFile());
-        File targetDir = new File("dist/static");
+        File targetDir = new File(DIST_DIR + "/static");
         try {
             clearDirectory(targetDir);
             copyDirectory(sourceDir, targetDir);
@@ -269,14 +272,14 @@ public class DocPage {
         // 获取源目录下的所有文件和子目录
         File[] files = sourceDir.listFiles();
         if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
+            for (File f : files) {
+                if (f.isDirectory()) {
                     // 如果是子目录，递归调用
-                    copyDirectory(file, new File(targetDir, file.getName()));
+                    copyDirectory(f, new File(targetDir, f.getName()));
                 } else {
                     // 如果是文件，直接拷贝并替换
-                    File targetFile = new File(targetDir, file.getName());
-                    Files.copy(file.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    File targetFile = new File(targetDir, f.getName());
+                    Files.copy(f.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 }
             }
         }
@@ -291,13 +294,13 @@ public class DocPage {
         if (directory.exists()) {
             File[] files = directory.listFiles();
             if (files != null) {
-                for (File file : files) {
-                    if (file.isDirectory()) {
+                for (File f : files) {
+                    if (f.isDirectory()) {
                         // 如果是子目录，递归删除
-                        clearDirectory(file);
+                        clearDirectory(f);
                     }
                     // 删除文件或空目录
-                    Files.delete(file.toPath());
+                    Files.delete(f.toPath());
                 }
             }
         } else {

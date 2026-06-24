@@ -8,7 +8,6 @@ import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TableBlock;
 import org.commonmark.ext.gfm.tables.TablesExtension;
 import org.commonmark.ext.heading.anchor.HeadingAnchorExtension;
-import org.commonmark.node.Heading;
 import org.commonmark.node.Link;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -22,6 +21,23 @@ import org.commonmark.renderer.html.HtmlRenderer;
  * @date 2023/03/31
  */
 public class MarkdownUtil {
+
+    private static final List<Extension> EXTENSIONS =
+        Arrays.asList(TablesExtension.create(), HeadingAnchorExtension.create());
+
+    private static final Parser MARKDOWN_PARSER = Parser.builder()
+        .extensions(EXTENSIONS)
+        .build();
+
+    private static final HtmlRenderer MARKDOWN_RENDERER = HtmlRenderer.builder()
+        .extensions(EXTENSIONS)
+        .attributeProviderFactory(new AttributeProviderFactory() {
+            @Override
+            public AttributeProvider create(AttributeProviderContext context) {
+                return new MarkdownUtil.CustomAttributeProvider();
+            }
+        })
+        .build();
 
     /**
      * markdown格式转换成HTML格式
@@ -44,23 +60,8 @@ public class MarkdownUtil {
      * @return
      */
     public static String markdownToHtmlExtensions(String markdown) {
-        //h标题生成id
-        //转换table的HTML
-        List<Extension> tableExtension = Arrays.asList(TablesExtension.create(), HeadingAnchorExtension.create());
-        Parser parser = Parser.builder()
-            .extensions(tableExtension)
-            .build();
-        Node document = parser.parse(markdown);
-        HtmlRenderer renderer = HtmlRenderer.builder()
-            //.extensions(headingAnchorExtensions)
-            .extensions(tableExtension)
-            .attributeProviderFactory(new AttributeProviderFactory() {
-                public AttributeProvider create(AttributeProviderContext context) {
-                    return new MarkdownUtil.CustomAttributeProvider();
-                }
-            })
-            .build();
-        return renderer.render(document);
+        Node document = MARKDOWN_PARSER.parse(markdown);
+        return MARKDOWN_RENDERER.render(document);
     }
 
     /**
@@ -75,8 +76,6 @@ public class MarkdownUtil {
             }
             if (node instanceof TableBlock) {
                 attributes.put("class", "ui celled table");
-            }
-            if (node instanceof Heading) {
             }
         }
     }
