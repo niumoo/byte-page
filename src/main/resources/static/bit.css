@@ -9,44 +9,39 @@
     --moredark: rgb(30, 30, 30);
     --link: royalblue;
     --border-radius: 8px;
-    border-top: 5px solid var(--dark);
     line-height: 28px;
-    font-family: "system-ui,ui-sans-serif,-apple-system,BlinkMacSystemFont,sans-serif,Inter,NotoSansHans",-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+    font-family: system-ui, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif, Inter, NotoSansHans;
     font-size: 17px;
-    color: var(--dark);
+    color: var(--moredark);
     word-wrap: break-word;
     font-weight: 400;
-    -webkit-font-smoothing:antialiased; /*chrome、safari*/
+    -webkit-font-smoothing: antialiased; /* chrome、safari */
 }
 
 body {
-    background-color: var(--light);
     margin: 0;
-    max-width: 950px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    background-color: var(--lesslight);
 }
 
-h1 {font-size: 1.6rem;}
-h2 {font-size: 1.4rem;}
-h3 {font-size: 1.2rem;}
-h4 {font-size: 1.1rem;}
-h1,h2,h3,h4{
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.1rem; }
+h1, h2, h3, h4 {
     color: var(--dark);
-    font-weight: 450;
+    font-weight: 500;
     -moz-osx-font-smoothing: auto;
     margin-top: 1.3em;
 }
-h3,h4{
-    -webkit-font-smoothing: antialiased; /*chrome、safari*/
-}
-
 li p {
-    margin-top: 0em;
+    margin-top: 0;
     margin-bottom: .3em;
 }
 button, input {
-    font-size: 1em; /* Override browser default font shrinking*/
+    font-size: 1em; /* Override browser default font shrinking */
 }
 
 input {
@@ -56,11 +51,11 @@ input {
     padding: .5em;
 }
 
-code:not(pre code)  {
+code:not(pre code) {
     background-color: var(--lesslight);
     padding: .2em .3em;
     border-radius: var(--border-radius);
-    font-family: consolas,Menlo,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-family: Consolas, Menlo, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 pre {
@@ -70,9 +65,9 @@ pre {
     border-radius: var(--border-radius);
 }
 pre code {
-    font-family: consolas,Menlo,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-family: Consolas, Menlo, "PingFang SC", "Microsoft YaHei", sans-serif;
     line-height: 1.6em;
-    -webkit-font-smoothing: subpixel-antialiased; /*chrome、safari*/
+    -webkit-font-smoothing: subpixel-antialiased; /* chrome、safari */
     -moz-osx-font-smoothing: auto;
 }
 
@@ -81,15 +76,15 @@ a {
     color: var(--dark);
     text-decoration-skip-ink: auto;
     text-underline-offset: .3em;
-    text-decoration-thickness: 1px;  /* 控制线的粗细 */
+    text-decoration-thickness: 1px; /* 控制线的粗细 */
 }
 
 a:hover {
     background-color: var(--lesslight);
 }
 
-strong{
-    font-weight: 450;
+strong {
+    font-weight: 500;
 }
 
 img {
@@ -100,18 +95,15 @@ img {
     border-radius: var(--border-radius);
 }
 
-blockquote{
+blockquote {
     padding: .5rem 1rem;
-    margin-inline-start: .2em;
-    margin-inline-end: .2em;
-    border-radius:  var(--border-radius);
+    margin: 0 .2em;
     background-color: var(--lesslight);
     border-left: 3px solid var(--dark);
     font-style: italic;
 }
-blockquote p{
-    margin-block-start: 0;
-    margin-block-end: 0;
+blockquote p {
+    margin-block: 0;
 }
 button, .button, input[type=submit] {
     display: inline-block;
@@ -162,18 +154,14 @@ button + button, .button + .button, input[type=submit] + input[type=submit] {
     border: 3px solid;
 }
 
-.main{
+.main {
     background-color: var(--light);
     padding: 1em 2em;
-    border-radius: var(--border-radius);
 }
 .main::selection {
-    background-color: rgba(255, 247, 0, 0.88);
+    background-color: var(--dark);
+    color: var(--lesslight);
 }
-body{
-    background-color: var(--lesslight);
-}
-
 .home {
     display: inline-block;
     background-color: var(--dark);
@@ -183,13 +171,13 @@ body{
     font-weight: bold;
     border-radius: 10px;
 }
-.home a{
+.home a {
     color: var(--light);
     text-decoration: none;
 }
 
-.home a:hover{
-    background-color: rgba(255, 255, 255, 0);
+.home a:hover {
+    background-color: transparent;
 }
 
 /* Desktop sizes */
