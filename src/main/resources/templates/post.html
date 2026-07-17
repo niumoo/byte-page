@@ -26,23 +26,31 @@
     </script>
 </head>
 <body>
-    <div class="article-header">
-        <div class="breadcrumb">
-            <a href="/" class="site-title">/ 程序猿阿朗</a>
-            <span class="article-title" th:text="' / ' + ${postInfo.getTitle()}">/ 文章标题</span>
-        </div>
-        <div class="header-right">
-            <span class="mtime" th:text="${postInfo.getUpdated() != null ? postInfo.getUpdated().substring(0,10) : (postInfo.getDate() != null ? postInfo.getDate().substring(0,10) : '')}">2024-01-01</span>
-            <span class="toc-btn" onclick="document.getElementById('toc-panel').classList.toggle('show')">目录 ▾</span>
-        </div>
-        <div class="toc-panel" id="toc-panel">
-            <div th:each="tocInfo:${tocInfoList}">
-                <a th:style="'margin-left: ' + ${tocInfo.getLeft()} + 'px;'" th:href="${'#'+tocInfo.getMiddle()}" th:text="${tocInfo.getRight()}"></a>
+    <div class="container">
+        <div class="article-header">
+            <div class="breadcrumb">
+                <a href="/" class="site-title">/ 程序猿阿朗</a>
+                <span class="article-title" th:text="' / ' + ${postInfo.getTitle()}">/ 文章标题</span>
+            </div>
+            <div class="header-right">
+                <span class="mtime" th:text="${postInfo.getUpdated() != null ? postInfo.getUpdated().substring(0,10) : (postInfo.getDate() != null ? postInfo.getDate().substring(0,10) : '')}">2024-01-01</span>
+                <span class="toc-btn" onclick="document.getElementById('toc-panel').classList.toggle('show')">目录 ▾</span>
+            </div>
+            <div class="toc-panel" id="toc-panel">
+                <div th:each="tocInfo:${tocInfoList}">
+                    <a th:style="'margin-left: ' + ${tocInfo.getLeft()} + 'px;'" th:href="${'#'+tocInfo.getMiddle()}" th:text="${tocInfo.getRight()}"></a>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="post-content">[(${postInfo.getHtmlContent()})]
 
-    <div class="post-content">[(${postInfo.getHtmlContent()})]</div>
+            <div id="bit-talk"
+                 server="http://localhost:2195"
+                 data-talk-app-id="00000000000000000000000000000000"
+            ></div>
+            <script src="http://localhost:2195/js/comment.js"></script>
+        </div>
+    </div>
 
     <footer class="footer">
         <p>-- END --</p>

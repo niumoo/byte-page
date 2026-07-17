@@ -53,9 +53,16 @@ footer {
 }
 
 .index-header .meta {
-    color: #666;
-    margin: 0;
+    color: #888;
+    margin: 0 0 12px;
     line-height: 1.6;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+.index-header .meta::before {
+    content: "# ";
+    color: #999;
 }
 
 .table-header {
