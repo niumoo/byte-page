@@ -27,14 +27,19 @@
     </script>
 </head>
 <style>
+    body {
+        background-color: rgba(255, 255, 255, 0);
+    }
     .post-title h1{
-        margin-top: .5em !important;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(152deg, rgb(67 82 167) 0%, #4CAF50 41%, rgb(14 48 232) 75%, rgb(19 76 132) 99%);
+        margin-top: .5em;
+        text-align: center;
+    }
+    .post-time{
+        font-size: .9em;
+        text-align: center;
     }
     pre code.hljs{
-        padding: 0em !important;
+        padding: .5em !important;
         background: rgb(245 245 245) !important;
         font-size: .95em !important;
     }
@@ -68,6 +73,21 @@
     }
     /* 回到顶部*/
     #topBtn {display: none;position: fixed;bottom: 30px;right: 30px;z-index: 99;}
+    /* 图片点击放大 */
+    .post-content img{cursor: zoom-in;}
+    #img-lightbox{display: none;position: fixed;z-index: 1000;left: 0;top: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,0.85);justify-content: center;align-items: center;cursor: zoom-out;}
+    #img-lightbox.active{display: flex;}
+    #img-lightbox img{max-width: 90%;max-height: 90%;object-fit: contain;}
+    /* 代码块复制按钮 */
+    .post-content pre{position: relative;}
+    .copy-code-btn{position: absolute;top: 8px;right: 8px;padding: 4px 10px;font-size: 12px;line-height: 1.4;color: #666;background-color: rgba(255,255,255,0.9);border: 1px solid #ddd;border-radius: 4px;cursor: pointer;opacity: 0.6;transition: opacity 0.2s;}
+    .copy-code-btn:hover{opacity: 1;background-color: #f0f0f0;color: #666}
+    .copy-code-btn.copied{color: #2e7d32;border-color: #2e7d32;}
+    @media (prefers-color-scheme: dark) {
+        .copy-code-btn{color: #ccc;background-color: rgba(50,50,50,0.9);border-color: #555;}
+        .copy-code-btn:hover{background-color: #444;}
+        .copy-code-btn.copied{color: #81c784;border-color: #81c784;}
+    }
 </style>
 <body>
 <!--<div>-->
@@ -78,7 +98,7 @@
         <h1 style="font-size: 16px;margin: 0;padding: 0;"> <a href="/" style="color: #5c5b5b">📚 程序猿阿朗</a> </h1>
     </div>
     <div class="post-title"><h1 th:text="${postInfo.getTitle()}">标题</h1></div>
-    <div class="post-time" style="font-size: .9em;">
+    <div class="post-time">
         <p><i class="fa fa-calendar"></i> 最后更新日期：<span th:text="${postInfo.getUpdated().substring(0,10)}"></span> | <a href="#" onclick="showToc()" id="tocBtn"><i class="fa fa-pencil"></i> 显示目录</a> |
             字体 <a href="#" onclick="changeFontSize(1)" title="增大字体" style="background: white">➕</a>
             <a href="#" onclick="changeFontSize(-1)" title="减小字体" style="background: white">➖</a>
@@ -107,6 +127,7 @@
     </div>
 </div>
 <div id="topBtn"><p><a onclick="topFunction()"  style="font-size: 3em; cursor: pointer;"> 🔝</a></p></div>
+<div id="img-lightbox" onclick="closeImgLightbox()"><img src="" alt="放大图片" id="img-lightbox-img"></div>
 <script>
     // 回到顶部
     // Get the button
@@ -149,11 +170,84 @@
         if (currentFontSize > 24) currentFontSize = 24;
         document.querySelector('.post-content').style.fontSize = currentFontSize + 'px';
     }
+
+    // 图片点击放大
+    function openImgLightbox(src) {
+        var box = document.getElementById('img-lightbox');
+        var img = document.getElementById('img-lightbox-img');
+        img.src = src;
+        box.classList.add('active');
+    }
+
+    function closeImgLightbox() {
+        var box = document.getElementById('img-lightbox');
+        box.classList.remove('active');
+    }
+
+    // 代码块复制
+    function copyCode(btn) {
+        var pre = btn.parentElement;
+        var code = pre.querySelector('code');
+        var text = code ? code.innerText : pre.innerText;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+                showCopied(btn);
+            }).catch(function(err) {
+                fallbackCopy(text, btn);
+            });
+        } else {
+            fallbackCopy(text, btn);
+        }
+    }
+
+    function fallbackCopy(text, btn) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showCopied(btn);
+        } catch (err) {
+            console.error('复制失败', err);
+        }
+        document.body.removeChild(textarea);
+    }
+
+    function showCopied(btn) {
+        var original = btn.innerText;
+        btn.innerText = '已复制';
+        btn.classList.add('copied');
+        setTimeout(function() {
+            btn.innerText = original;
+            btn.classList.remove('copied');
+        }, 2000);
+    }
+
+    function initPostFeatures() {
+        var images = document.querySelectorAll('.post-content img');
+        images.forEach(function(img) {
+            img.addEventListener('click', function() {
+                openImgLightbox(this.src);
+            });
+        });
+        var pres = document.querySelectorAll('.post-content pre');
+        pres.forEach(function(pre) {
+            var btn = document.createElement('button');
+            btn.className = 'copy-code-btn';
+            btn.innerText = 'copy';
+            btn.setAttribute('type', 'button');
+            btn.onclick = function() { copyCode(this); };
+            pre.appendChild(btn);
+        });
+    }
 </script>
 <script defer src="https://cdn.bootcdn.net/ajax/libs/pangu/4.0.7/pangu.min.js" onload="pangu.spacingElementByClassName('main'); pangu.autoSpacingPage();"></script>
 <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.11.1/styles/atom-one-light.min.css" rel="stylesheet">
 <script src="/static/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+<script>hljs.highlightAll(); initPostFeatures();</script>
 <!--<script src="http://localhost:8080/js/comment.js"></script>-->
 </body>
 </html>
